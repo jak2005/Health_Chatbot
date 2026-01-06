@@ -23,7 +23,10 @@ import utils
 utils.load_css()
 
 # Constants - Use Streamlit secrets for production, fallback to env/localhost for development
-API_URL = st.secrets.get("API_URL", os.environ.get('API_URL', 'http://localhost:8080'))
+try:
+    API_URL = st.secrets["API_URL"]
+except (KeyError, FileNotFoundError):
+    API_URL = os.environ.get('API_URL', 'http://localhost:8080')
 
 # Ensure API_URL has proper protocol
 if API_URL and not API_URL.startswith('http'):
