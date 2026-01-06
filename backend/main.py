@@ -62,10 +62,11 @@ if not ai_client and GEMINI_API_KEY:
         # Use google-generativeai (compatible with pydantic v1)
         import google.generativeai as genai
         genai.configure(api_key=GEMINI_API_KEY)
-        gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+        model_name = os.getenv("MODEL_NAME", "gemini-pro")
+        gemini_model = genai.GenerativeModel(model_name)
         ai_client = gemini_model
         ai_provider = "gemini"
-        logger.info("Using Gemini API (google-generativeai)")
+        logger.info(f"Using Gemini API with model: {model_name}")
     except Exception as e:
         logger.warning(f"Failed to initialize Gemini: {e}")
 
