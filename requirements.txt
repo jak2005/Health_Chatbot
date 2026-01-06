@@ -1,0 +1,19 @@
+# HealthLink AI - Requirements
+gunicorn
+
+# FastAPI Backend
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0
+sqlalchemy
+
+# AI Providers
+groq
+google-generativeai
+
+# Frontend
+streamlit
+requests
+
+# Utilities
+python-dotenv

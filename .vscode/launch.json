@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Streamlit App",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${workspaceFolder}/frontend/streamlit_app.py",
+                "--server.port=8503",
+                "--server.address=localhost"
+            ],
+            "cwd": "${workspaceFolder}",
+            "python": "${workspaceFolder}/venv/Scripts/python.exe",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Run FastAPI Backend",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/main.py",
+            "cwd": "${workspaceFolder}/backend",
+            "python": "${workspaceFolder}/venv/Scripts/python.exe",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Run Full App (One Click)",
+            "configurations": [
+                "Run FastAPI Backend",
+                "Run Streamlit App"
+            ]
+        }
+    ]
+}

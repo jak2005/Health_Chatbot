@@ -1,0 +1,432 @@
+"""
+HealthLink AI Backend - FastAPI Server with RAG
+Supports both Gemini and Groq APIs
+Enhanced version with improved error handling, logging, and features
+Compatible with Pydantic v1 and ChromaDB v0.3.x
+"""
+
+import os
+import logging
+from pathlib import Path
+from typing import List, Optional, Any, Dict
+from contextlib import asynccontextmanager
+from datetime import datetime
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from dotenv import load_dotenv
+
+# Import persistence helpers
+from persistence import _save_feedback, _load_feedback, _save_history, _get_history
+
+# Pydantic v1 compatible imports
+try:
+    from pydantic import BaseModel, Field
+except ImportError:
+    from pydantic.v1 import BaseModel, Field
+
+from rag_service import get_rag_service
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Load environment variables
+load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env.local")
+load_dotenv(dotenv_path=Path(__file__).parent / ".env")
+
+# API Keys
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", os.getenv("GOOGLE_API_KEY", ""))
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+
+# Initialize AI client
+ai_client = None
+ai_provider = None
+gemini_model = None
+
+# Try Groq first (more generous free tier), then Gemini
+if GROQ_API_KEY:
+    try:
+        from groq import Groq
+        ai_client = Groq(api_key=GROQ_API_KEY)
+        ai_provider = "groq"
+        logger.info("Using Groq API")
+    except Exception as e:
+        logger.warning(f"Failed to initialize Groq: {e}")
+
+if not ai_client and GEMINI_API_KEY:
+    try:
+        # Use google-generativeai (compatible with pydantic v1)
+        import google.generativeai as genai
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+        ai_client = gemini_model
+        ai_provider = "gemini"
+        logger.info("Using Gemini API (google-generativeai)")
+    except Exception as e:
+        logger.warning(f"Failed to initialize Gemini: {e}")
+
+SYSTEM_INSTRUCTION = """
+You are HealthLink AI (Project T86O979), a professional and empathetic healthcare assistant.
+
+Your goals are:
+1. Provide accurate medical information based on the provided context and general knowledge.
+2. Always include a medical disclaimer reminding users to consult healthcare professionals.
+3. Help users navigate healthcare resources and schedule appointments.
+4. Maintain a secure, helpful, and concise tone.
+5. If you suspect an emergency, advise the user to call emergency services (911/112) immediately.
+6. Do not prescribe specific medications; suggest over-the-counter options only where appropriate or advise seeing a doctor.
+
+IMPORTANT: Base your answers primarily on the provided context from our healthcare knowledge base. If the context is relevant, cite it. If the context doesn't cover the question, use general medical knowledge but be clear about this.
+"""
+
+
+# ============= Request/Response Models =============
+
+class ChatMessage(BaseModel):
+    role: str
+    text: str
+
+class ChatRequest(BaseModel):
+    message: str
+    history: Optional[List[ChatMessage]] = []
+    user_id: Optional[str] = "default_user"
+
+class ChatResponse(BaseModel):
+    text: str
+    sources: List[Dict[str, Any]] = []
+    function_calls: Optional[List[Dict[str, Any]]] = None
+    timestamp: Optional[str] = None
+    
+    class Config:
+        # For Pydantic v1 compatibility
+        arbitrary_types_allowed = True
+
+class DocumentRequest(BaseModel):
+    id: str
+    content: str
+    category: str = "general"
+
+class FeedbackRequest(BaseModel):
+    user_id: str = "default_user"
+    rating: int
+    comment: Optional[str] = ""
+    message_id: Optional[str] = None
+
+class HealthResponse(BaseModel):
+    status: str
+    ai_provider: Optional[str]
+    ai_configured: bool
+    rag_stats: Dict[str, Any]
+    timestamp: Optional[str] = None
+    
+    class Config:
+        arbitrary_types_allowed = True
+
+
+# ============= AI Chat Functions =============
+
+async def chat_with_groq(message: str, context: str, history: List[ChatMessage]) -> str:
+    """Chat using Groq API"""
+    messages = [{"role": "system", "content": SYSTEM_INSTRUCTION}]
+    
+    # Add history
+    for msg in history:
+        role = "assistant" if msg.role == "model" else msg.role
+        messages.append({"role": role, "content": msg.text})
+    
+    # Build augmented message
+    if context:
+        augmented_message = f"""RELEVANT HEALTHCARE INFORMATION:
+{context}
+
+USER QUESTION: {message}
+
+Please answer the user's question using the relevant healthcare information provided above. If the information is helpful, incorporate it into your response. Always include appropriate medical disclaimers."""
+    else:
+        augmented_message = message
+    
+    messages.append({"role": "user", "content": augmented_message})
+    
+    response = ai_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages,
+        max_tokens=1024,
+        temperature=0.7,
+    )
+    
+    return response.choices[0].message.content
+
+
+async def chat_with_gemini(message: str, context: str, history: List[ChatMessage]) -> str:
+    """Chat using Gemini API (google-generativeai)"""
+    # Build the full prompt with system instruction and context
+    full_prompt = SYSTEM_INSTRUCTION + "\n\n"
+    
+    # Add conversation history
+    for msg in history:
+        role_label = "User" if msg.role == "user" else "Assistant"
+        full_prompt += f"{role_label}: {msg.text}\n\n"
+    
+    # Build augmented message
+    if context:
+        full_prompt += f"""RELEVANT HEALTHCARE INFORMATION:
+{context}
+
+USER QUESTION: {message}
+
+Please answer the user's question using the relevant healthcare information provided above. If the information is helpful, incorporate it into your response. Always include appropriate medical disclaimers."""
+    else:
+        full_prompt += f"User: {message}"
+    
+    try:
+        response = gemini_model.generate_content(full_prompt)
+        return response.text or "I'm sorry, I couldn't process that. Please try again."
+    except Exception as e:
+        logger.error(f"Gemini API error: {e}")
+        return "I'm experiencing technical difficulties. Please try again."
+
+
+# ============= Application Lifecycle =============
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan event handler for startup and shutdown"""
+    # Startup
+    logger.info("Starting HealthLink AI Backend...")
+    rag_service = get_rag_service()
+    stats = rag_service.get_stats()
+    logger.info(f"RAG Service ready with {stats['total_documents']} documents")
+    
+    if not ai_client:
+        logger.warning("No AI API configured. Set GROQ_API_KEY or GEMINI_API_KEY.")
+    else:
+        logger.info(f"AI Provider: {ai_provider}")
+    
+    yield
+    
+    # Shutdown
+    logger.info("Shutting down HealthLink AI Backend...")
+
+
+# ============= FastAPI Application =============
+
+app = FastAPI(
+    title="HealthLink AI Backend",
+    description="RAG-powered healthcare assistant API with Groq and Gemini support",
+    version="2.0.0",
+    lifespan=lifespan
+)
+
+# CORS middleware for frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for development
+    allow_credentials=False,  # Must be False when using wildcard origins
+    allow_methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
+
+
+# ============= Error Handlers =============
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.detail, "status_code": exc.status_code}
+    )
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"error": "Internal server error", "status_code": 500}
+    )
+
+
+# ============= API Endpoints =============
+
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {
+        "message": "HealthLink AI Backend is running",
+        "status": "healthy",
+        "ai_provider": ai_provider or "none",
+        "version": "2.0.0"
+    }
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    rag_service = get_rag_service()
+    return {
+        "status": "healthy",
+        "ai_provider": ai_provider,
+        "ai_configured": bool(ai_client),
+        "rag_stats": rag_service.get_stats(),
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    """Main chat endpoint with RAG"""
+    if not ai_client:
+        raise HTTPException(
+            status_code=500, 
+            detail="No AI API configured. Set GROQ_API_KEY or GEMINI_API_KEY."
+        )
+    
+    logger.info(f"Chat request from user: {request.user_id}")
+    
+    # Save user message
+    _save_history(request.user_id, request.message, "user")
+    
+    rag_service = get_rag_service()
+    
+    # Get relevant context from RAG
+    context = rag_service.get_augmented_context(request.message, n_results=3)
+    retrieved_docs = rag_service.query(request.message, n_results=3)
+    
+    try:
+        # Call appropriate AI API
+        if ai_provider == "groq":
+            response_text = await chat_with_groq(request.message, context, request.history or [])
+        else:
+            response_text = await chat_with_gemini(request.message, context, request.history or [])
+        
+        # Save assistant response
+        _save_history(request.user_id, response_text, "assistant")
+        
+        # Format sources for frontend
+        sources = []
+        for doc in retrieved_docs:
+            source = {
+                "category": doc.get("metadata", {}).get("category", "general"),
+            }
+            if doc.get("distance") is not None:
+                source["relevance"] = round((1 - doc["distance"]) * 100, 1)
+            sources.append(source)
+        
+        logger.info(f"Successfully generated response for user: {request.user_id}")
+        
+        return {
+            "text": response_text,
+            "sources": sources,
+            "function_calls": None,
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"AI API Error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"AI processing error: {str(e)}")
+
+
+@app.post("/embed")
+async def embed_document(request: DocumentRequest):
+    """Add a new document to the knowledge base"""
+    rag_service = get_rag_service()
+    
+    success = rag_service.add_document(
+        doc_id=request.id,
+        content=request.content,
+        category=request.category
+    )
+    
+    if success:
+        logger.info(f"Document {request.id} added successfully")
+        return {"status": "success", "message": f"Document {request.id} added successfully"}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to add document")
+
+
+@app.post("/feedback")
+async def submit_feedback(request: FeedbackRequest):
+    """Submit user feedback"""
+    logger.info(f"Feedback received from {request.user_id}: rating={request.rating}")
+    
+    feedback_data = {
+        "user_id": request.user_id,
+        "rating": request.rating,
+        "comment": request.comment,
+        "timestamp": datetime.now().isoformat()
+    }
+    _save_feedback(feedback_data)
+    
+    return {
+        "status": "success",
+        "message": "Thank you for your feedback!",
+        "rating": request.rating
+    }
+
+
+@app.get("/admin/feedback")
+async def get_admin_feedback():
+    """Get all feedback (Admin)"""
+    return {"feedback": _load_feedback()}
+
+
+@app.get("/stats")
+async def get_stats():
+    """Get knowledge base statistics"""
+    rag_service = get_rag_service()
+    return rag_service.get_stats()
+
+
+@app.post("/clear-context")
+async def clear_context(user_id: str = "default_user"):
+    """Clear user context (for new conversation)"""
+    logger.info(f"Clearing context for user: {user_id}")
+    # Context is managed per-request via history, so this is a no-op
+    # But we keep the endpoint for frontend compatibility
+    return {
+        "status": "success",
+        "message": "Context cleared successfully"
+    }
+
+
+@app.get("/history/recent")
+async def get_recent_history(user_id: str = "default_user"):
+    """Get recent chat history"""
+    history = _get_history(user_id)
+    
+    # Format for frontend
+    formatted_history = []
+    # Identify pairs of user/assistant messages
+    # This is a simple approximation
+    for i in range(len(history)):
+        msg = history[i]
+        if msg['role'] == 'user':
+            user_msg = msg['message']
+            bot_msg = ""
+            # Try to find next assistant message
+            if i + 1 < len(history) and history[i+1]['role'] == 'assistant':
+                bot_msg = history[i+1]['message']
+            
+            if bot_msg: # Only add if we have a pair (implied) or just show user
+                formatted_history.append({
+                    "id": f"hist_{i}",
+                    "user_message": user_msg,
+                    "bot_message": bot_msg,
+                    "timestamp": msg.get('timestamp')
+                })
+    
+    return {
+        "status": "success",
+        "history": formatted_history,
+        "messages": history
+    }
+
+
+# ============= Main Entry Point =============
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)

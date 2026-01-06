@@ -1,0 +1,1803 @@
+{
+  "documents": [
+    {
+      "id": "hcgov_glossary_affordability-exemption",
+      "content": "Affordability Exemption: An exemption that’s needed when applying for Catastrophic coverage for people 30 years or older whose coverage is unaffordable. Affordability exemptions are ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/affordability-exemption/"
+    },
+    {
+      "id": "hcgov_glossary_individual-coverage-hra",
+      "content": "Individual Coverage Health Reimbursement Arrangement: A type of Health Reimbursement Arrangement that reimburses medical expenses, like monthly premiums, and requires eligible employees and dependents to have in...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/individual-coverage-hra/"
+    },
+    {
+      "id": "hcgov_glossary_cafeteria-plan",
+      "content": "Cafeteria Plan: A cafeteria plan is a separate written plan maintained by an employer for employees that meets the specific requirements and regulations of Section 125 of th...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/cafeteria-plan/"
+    },
+    {
+      "id": "hcgov_glossary_urban-indian-programs",
+      "content": "Urban Indian programs: Health programs available to American Indians and Alaska Natives living in urban areas.Urban health programs serve:Members or descendants of federally r...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/urban-indian-programs/"
+    },
+    {
+      "id": "hcgov_glossary_qsehra",
+      "content": "QSEHRA: Small employers who don't offer group health coverage to their employees can help employees pay for medical expenses through a Qualified Small Employer Healt...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/qsehra/"
+    },
+    {
+      "id": "hcgov_glossary_abortion-services",
+      "content": "Abortion services: Federal law prohibits federal funds, including Marketplace premium tax credits, from being used for abortion services except in the limited cases of rape, in...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/abortion-services/"
+    },
+    {
+      "id": "hcgov_glossary_shop-small-business-health-options-program",
+      "content": "Small Business Health Options Program (SHOP): The Small Business Health Options Program (SHOP) helps small business owners provide medical and/or dental insurance to their employees. Some smaller employe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/shop-small-business-health-options-program/"
+    },
+    {
+      "id": "hcgov_glossary_tax-filing-requirement-dependents",
+      "content": "Tax filing requirement (for dependents): The minimum income requiring a dependent to file a federal tax return. 2021 filing requirements for dependents under 65: Earned income of at least $12,550, o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/tax-filing-requirement-dependents/"
+    },
+    {
+      "id": "hcgov_glossary_quality-ratings",
+      "content": "Quality Ratings (or 'star' ratings): Ratings of health plan quality used in the Health Insurance Marketplace®, shown as 1 to 5 stars on plan information pages.Each health plan has an “Overall”...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/quality-ratings/"
+    },
+    {
+      "id": "hcgov_glossary_grace-period",
+      "content": "Grace Period: A short period — usually 90 days — after your monthly health insurance payment is due. If you haven't made your payment, you may do so during the grace perio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/grace-period/"
+    },
+    {
+      "id": "hcgov_glossary_adjusted-gross-income-agi",
+      "content": "Adjusted Gross Income (AGI): Your total (or “gross”) income for the tax year, minus certain adjustments you’re allowed to take. Adjustments include deductions for conventional IRA contri...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/adjusted-gross-income-agi/"
+    },
+    {
+      "id": "hcgov_glossary_tax-filing-requirement",
+      "content": "Tax filing requirement: The minimum amount (or threshold) of income requiring you to file a federal tax return. 2021 filing requirements for most taxpayers: Gross income of at least...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/tax-filing-requirement/"
+    },
+    {
+      "id": "hcgov_glossary_qualifying-health-coverage",
+      "content": "Qualifying Health Coverage: Any health insurance that meets the Affordable Care Act requirement for coverage. The fee for not having health insurance no longer applies. This means you n...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/qualifying-health-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_inconsistency",
+      "content": "Inconsistency (Data Matching Issue): A difference between some information you put on your Marketplace application and information we have from other trusted data sources.If this happens, the ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/inconsistency/"
+    },
+    {
+      "id": "hcgov_glossary_data-matching-issue",
+      "content": "Data Matching Issue (Inconsistency): A difference between some information you put on your Marketplace health insurance application and information we have from other trusted data sources.If t...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/data-matching-issue/"
+    },
+    {
+      "id": "hcgov_glossary_same-sex-marriage",
+      "content": "Same-Sex Marriage: Lawful marriage between spouses of the same sex. Same-sex marriage is legal and recognized in every U.S. state and the District of Columbia.As long as a sa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/same-sex-marriage/"
+    },
+    {
+      "id": "hcgov_glossary_transgender-people",
+      "content": "Transgender People: A transgender person’s assigned sex at birth doesn’t match their gender identity, expression, or behavior.Transgender people have important details to cons...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/transgender-people/"
+    },
+    {
+      "id": "hcgov_glossary_exemption",
+      "content": "Exemption: If you’re 30 and older and want Catastrophic coverage, you must qualify for a \"hardship\" or \"affordability\" exemption.For plan years 2018 and earlier, othe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/exemption/"
+    },
+    {
+      "id": "hcgov_glossary_stand-alone-dental-plan",
+      "content": "Stand-alone Dental Plan: A type of dental plan offered through the Marketplace that’s not included as part of a health plan. You may want this if the health coverage you choose doesn...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/stand-alone-dental-plan/"
+    },
+    {
+      "id": "hcgov_glossary_spousal-abandonment",
+      "content": "Spousal Abandonment: When an individual can’t locate their spouse after making a reasonable attempt to find them. Also known as desertion. If you’re a victim of spousal abandonme...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/spousal-abandonment/"
+    },
+    {
+      "id": "hcgov_glossary_exemption-certificate-number-ecn",
+      "content": "Exemption Certificate Number (ECN): A number the Marketplace provides when you qualify for a health insurance exemption. When you fill out an exemption application, the Marketplace will review ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/exemption-certificate-number-ecn/"
+    },
+    {
+      "id": "hcgov_glossary_second-lowest-cost-silver-plan-slcsp",
+      "content": "Second lowest cost Silver plan (SLCSP): The second-lowest priced Marketplace health insurance plan in the Silver category that applies to you. It may not be the plan you enrolled in. You need to kn...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/second-lowest-cost-silver-plan-slcsp/"
+    },
+    {
+      "id": "hcgov_glossary_plan-id",
+      "content": "Plan ID: Each Marketplace health plan has a unique 14-character identifier that's a combination of numbers and/or letters.You can find a plan's ID below the plan na...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/plan-id/"
+    },
+    {
+      "id": "hcgov_glossary_application-id",
+      "content": "Application ID: Each Marketplace application has a unique identification number, or Application ID. After you apply for Marketplace coverage, you’ll get a notice with your e...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/application-id/"
+    },
+    {
+      "id": "hcgov_glossary_multi-state-plan",
+      "content": "Multi-State Plan: A type of plan offered in the Health Insurance Marketplace®. Despite the name, “multi-state plans” don’t necessarily have network providers or cover services...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/multi-state-plan/"
+    },
+    {
+      "id": "hcgov_glossary_modified-adjusted-gross-income-magi",
+      "content": "Modified Adjusted Gross Income (MAGI): The figure used to determine eligibility for premium tax credits and other savings for Marketplace health insurance plans and for Medicaid and the Children's...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/modified-adjusted-gross-income-magi/"
+    },
+    {
+      "id": "hcgov_glossary_referral",
+      "content": "Referral: A written order from your primary care doctor for you to see a specialist or get certain medical services. In many Health Maintenance Organizations (HMOs), y...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/referral/"
+    },
+    {
+      "id": "hcgov_glossary_penalty",
+      "content": "Penalty: A payment (\"fee,\" \"fine,\" \"individual mandate\") you made when you filed taxes if you didn't have health insurance that counted as qualifying health coverage ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/penalty/"
+    },
+    {
+      "id": "hcgov_glossary_out-of-pocket-maximum-limit",
+      "content": "Out-of-pocket maximum/limit: The most you have to pay for covered services in a plan year. After you spend this amount on deductibles, copayments, and coinsurance for in-network care and...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/out-of-pocket-maximum-limit/"
+    },
+    {
+      "id": "hcgov_glossary_out-of-pocket-estimate",
+      "content": "Out-of-Pocket Estimate: An estimate of the amount that you may have to pay on your own for health care or prescription drug costs. The estimate is made before your health plan has p...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/out-of-pocket-estimate/"
+    },
+    {
+      "id": "hcgov_glossary_out-of-network-copayment",
+      "content": "Out-of-Network Copayment: A fixed amount (for example, $30) you pay for covered health care services from providers who don't contract with your health insurance or plan. Out-of-netwo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/out-of-network-copayment/"
+    },
+    {
+      "id": "hcgov_glossary_out-of-network-coinsurance",
+      "content": "Out-of-Network Coinsurance: The percentage (for example, 40%) you pay of the allowed amount for covered health care services to providers who don't contract with your health insurance o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/out-of-network-coinsurance/"
+    },
+    {
+      "id": "hcgov_glossary_original-medicare",
+      "content": "Original Medicare: Original Medicare is a fee-for-service health plan that has two parts: Part A (Hospital Insurance) and Part B (Medical Insurance). After you pay a deductible...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/original-medicare/"
+    },
+    {
+      "id": "hcgov_glossary_not-yet-accredited-health-plan",
+      "content": "Not Yet Accredited (Health Plan): A plan that hasn't been given a \"seal of approval\" by an independent company to show it meets national quality standards for health plans. There are many rea...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/not-yet-accredited-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_network-plan",
+      "content": "Network Plan: A health plan that contracts with doctors, hospitals, pharmacies, and other health care providers to provide members of the plan with services and supplies a...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/network-plan/"
+    },
+    {
+      "id": "hcgov_glossary_net-rental-income",
+      "content": "Net Rental Income: The amount someone pays you to use your property, after you subtract the expenses you have for the property. Royalty income includes any payments you get fro...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/net-rental-income/"
+    },
+    {
+      "id": "hcgov_glossary_workers-compensation",
+      "content": "Worker's Compensation: An insurance plan that employers are required to have to cover employees who get sick or injured on the job.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/workers-compensation/"
+    },
+    {
+      "id": "hcgov_glossary_vision-or-vision-coverage",
+      "content": "Vision Coverage: A health benefit that at least partially covers vision care, like eye exams and glasses. All plans in the Health Insurance Marketplace® include vision covera...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/vision-or-vision-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_tty",
+      "content": "TTY: A TTY (teletypewriter) is a communication device used by people who are deaf, hard-of-hearing, or have severe speech impairment. People who don't have a TTY ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/tty/"
+    },
+    {
+      "id": "hcgov_glossary_tricare",
+      "content": "TRICARE: A health care program for active-duty and retired uniformed services members and their families.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/tricare/"
+    },
+    {
+      "id": "hcgov_glossary_total-cost-estimate",
+      "content": "Total Cost Estimate (for health coverage): The total amount you may have to pay for health plan coverage, which is estimated before you actually have the coverage and have health expenses under the co...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/total-cost-estimate/"
+    },
+    {
+      "id": "hcgov_glossary_tax-household",
+      "content": "Tax Household: The taxpayer(s) and any individuals who are claimed as dependents on one federal income tax return. A tax household may include a spouse and/or dependents....",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/tax-household/"
+    },
+    {
+      "id": "hcgov_glossary_supplemental-security-income",
+      "content": "Supplemental Security Income (SSI): A monthly benefit paid by Social Security to people with limited income and resources who are disabled, blind, or 65 or older. SSI benefits aren't the same a...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/supplemental-security-income/"
+    },
+    {
+      "id": "hcgov_glossary_summary-of-benefits-and-coverage",
+      "content": "Summary of Benefits and Coverage (SBC): An easy-to-read summary that lets you make apples-to-apples comparisons of costs and coverage between health plans. You can compare options based on price, b...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/summary-of-benefits-and-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_subsidized-coverage",
+      "content": "Subsidized Coverage: Health coverage available at reduced or no cost for people with incomes below certain levels.Examples of subsidized coverage include Medicaid and the Child...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/subsidized-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_state-medical-assistance-office",
+      "content": "State Medical Assistance Office: A state agency in charge of the state's Medicaid program and can give information about programs in its state that help pay medical bills for people with lim...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/state-medical-assistance-office/"
+    },
+    {
+      "id": "hcgov_glossary_state-insurance-department",
+      "content": "State Insurance Department: A state agency that regulates insurance and can provide information about health coverage in its state.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/state-insurance-department/"
+    },
+    {
+      "id": "hcgov_glossary_state-health-insurance-assistance-program",
+      "content": "State Health Insurance Assistance Program (SHIP): A state program that gets funding from the federal government to provide free local health coverage counseling to people with Medicare.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/state-health-insurance-assistance-program/"
+    },
+    {
+      "id": "hcgov_glossary_social-security",
+      "content": "Social Security: A system that distributes financial benefits to retired or disabled people, their spouses, and their dependent children based on their reported earnings. Whi...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/social-security/"
+    },
+    {
+      "id": "hcgov_glossary_social-security-survivors-benefits",
+      "content": "Social Security Survivors Benefits: Social Security benefits based on your record (if you should die) that are paid to your:Widow/widower age 60 or older, 50 or older if disabled, or any age...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/social-security-survivors-benefits/"
+    },
+    {
+      "id": "hcgov_glossary_social-security-benefits",
+      "content": "Social Security Benefits: The amount you get from Social Security Disability, Retirement (including Railroad retirement), or Survivor's Benefits each month.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/social-security-benefits/"
+    },
+    {
+      "id": "hcgov_glossary_silver-health-plan",
+      "content": "Silver Health Plan: One of 4 categories of Health Insurance Marketplace® plans (sometimes called “metal levels”). Silver plans fall about in the middle: You pay moderate monthly...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/silver-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_service-area",
+      "content": "Service Area: A geographic area where a health insurance plan accepts members if it limits membership based on where people live. For plans that limit which doctors and ho...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/service-area/"
+    },
+    {
+      "id": "hcgov_glossary_self-employment-income",
+      "content": "Self-Employment Income: The net income you earn from your own trade or business. For example, any net income (profit) you earn from goods you sell or services you provide to others ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/self-employment-income/"
+    },
+    {
+      "id": "hcgov_glossary_retirement-benefit",
+      "content": "Retirement Benefit (Pension): A payment or series of payments made to you after you retire from work. Generally, the amount of your income from a pension or retirement account distributio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/retirement-benefit/"
+    },
+    {
+      "id": "hcgov_glossary_rental-or-royalty-income",
+      "content": "Rental or Royalty Income: The amount someone pays you to use your property, after you subtract the expenses you have for the property. Royalty income includes any payments you get fro...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/rental-or-royalty-income/"
+    },
+    {
+      "id": "hcgov_glossary_qualifying-life-event",
+      "content": "Qualifying Life Event (QLE): A change in your situation — like getting married, having a baby, or losing health coverage — that can make you eligible for a Special Enrollment Period, all...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/qualifying-life-event/"
+    },
+    {
+      "id": "hcgov_glossary_prior-authorization",
+      "content": "Prior Authorization: Approval from a health plan that may be required before you get a service or fill a prescription in order for the service or prescription to be covered by yo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/prior-authorization/"
+    },
+    {
+      "id": "hcgov_glossary_premium-tax-credit",
+      "content": "Premium Tax Credit: A tax credit you can use to lower your monthly insurance payment (called your “premium”) when you enroll in a plan through the Health Insurance Marketplace®....",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/premium-tax-credit/"
+    },
+    {
+      "id": "hcgov_glossary_platinum-health-plan",
+      "content": "Platinum Health Plan: One of 4 categories (or “metal levels”) of Health Insurance Marketplace® plans. Platinum plans usually have the highest monthly premiums of any plan category...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/platinum-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_pension-retirement-benefit",
+      "content": "Pension (Retirement Benefit): A payment or series of payments made to you after you retire from work. Generally, the amount of your income from a pension or retirement account distributio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pension-retirement-benefit/"
+    },
+    {
+      "id": "hcgov_glossary_notice",
+      "content": "Notice: An official form of communication that informs individuals about the status of their applications, their eligibility for programs, or other important informa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/notice/"
+    },
+    {
+      "id": "hcgov_glossary_net-capital-gains",
+      "content": "Net Capital Gains: The amount by which your total long-term capital gain for the year is more than your short-term capital loss for the year.For more information, visit http:...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/net-capital-gains/"
+    },
+    {
+      "id": "hcgov_glossary_navigator",
+      "content": "Navigator: An individual or organization that's trained and able to help consumers, small businesses, and their employees as they look for health coverage options throu...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/navigator/"
+    },
+    {
+      "id": "hcgov_glossary_multi-employer-plan",
+      "content": "Multi-Employer Plan: In general, a group health plan that's sponsored jointly by 2 or more employers.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/multi-employer-plan/"
+    },
+    {
+      "id": "hcgov_glossary_member-survey-results",
+      "content": "Member Survey Results: A survey conducted by the Consumer Assessment of Healthcare Providers and Systems (CAHPS) which asks health plan members to rate the care their experiences w...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/member-survey-results/"
+    },
+    {
+      "id": "hcgov_glossary_marketplace",
+      "content": "Marketplace: Shorthand for the “Health Insurance Marketplace®,” a shopping and enrollment service for medical insurance created by the Affordable Care Act in 2010.In mo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/marketplace/"
+    },
+    {
+      "id": "hcgov_glossary_large-group-health-plan",
+      "content": "Large Group Health Plan: In general, a group health plan that covers employees of an employer that has 51 or more employees. In some states large groups are defined as 101 or more.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/large-group-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_investment-income",
+      "content": "Investment Income: The income you get from an investment, like interest you get from a bank or dividends you get from a stock you own.For more information, see IRS Publicatio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/investment-income/"
+    },
+    {
+      "id": "hcgov_glossary_interest",
+      "content": "Interest: The charge for the use of borrowed money.Interest you get from a bank or dividends from a stock you own are examples of investment income, which you should...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/interest/"
+    },
+    {
+      "id": "hcgov_glossary_inpatient-care",
+      "content": "Inpatient Care: Health care that you get when you're admitted as an inpatient to a health care facility, like a hospital or skilled nursing facility.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/inpatient-care/"
+    },
+    {
+      "id": "hcgov_glossary_in-person-assistance-personnel-program",
+      "content": "In Person Assistance Personnel Program: Individuals or organizations that are trained and able to provide help to consumers, small businesses, and their employees as they look for health coverage o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/in-person-assistance-personnel-program/"
+    },
+    {
+      "id": "hcgov_glossary_health-plan-categories",
+      "content": "Health Plan Categories: Levels of plans in the Health Insurance Marketplace®: Bronze, Silver, Gold, and Platinum. Categories (sometimes called “metal levels”) are based on how you a...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-plan-categories/"
+    },
+    {
+      "id": "hcgov_glossary_health-coverage",
+      "content": "Health Coverage: Legal entitlement to payment or reimbursement for your health care costs, generally under a contract with a health insurance company, a group health plan off...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_hardship-exemption",
+      "content": "Hardship Exemption: An exemption that’s needed when applying for Catastrophic coverage for people 30 and older who faced a \"hardship\" that prevented them from getting insurance....",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hardship-exemption/"
+    },
+    {
+      "id": "hcgov_glossary_group-health-plan",
+      "content": "Group Health Plan: In general, a health plan offered by an employer or employee organization that provides health coverage to employees and their families.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/group-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_gold-health-plan",
+      "content": "Gold Health Plan: One of 4 health plan categories (or “metal levels”) in the Health Insurance Marketplace®. Gold plans usually have higher monthly premiums but lower costs whe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/gold-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_generic-drugs",
+      "content": "Generic Drugs: A prescription drug that has the same active-ingredient formula as a brand-name drug. Generic drugs usually cost less than brand-name drugs. The Food and Dru...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/generic-drugs/"
+    },
+    {
+      "id": "hcgov_glossary_full-time-employee",
+      "content": "Full-Time Employee (FTE): Any employee who works an average of at least 30 hours per week for more than 120 days in a year. Part-time employees work an average of less than 30 hours p...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/full-time-employee/"
+    },
+    {
+      "id": "hcgov_glossary_fee",
+      "content": "Fee: A payment (\"penalty,\" \"fine,\" \"individual mandate\") you made when you filed federal taxes if you didn't have health insurance that counted as qualifying heal...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/fee/"
+    },
+    {
+      "id": "hcgov_glossary_fee-for-service",
+      "content": "Fee for Service: A method in which doctors and other health care providers are paid for each service performed. Examples of services include tests and office visits.Related...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/fee-for-service/"
+    },
+    {
+      "id": "hcgov_glossary_federally-recognized-tribe",
+      "content": "Federally Recognized Tribe: Any Indian or Alaska Native tribe, Alaska Native Claims Settlement Act (ANCSA) Corporation (regional or village), band, nation, pueblo, village, rancheria, o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/federally-recognized-tribe/"
+    },
+    {
+      "id": "hcgov_glossary_external-review",
+      "content": "External Review: A review of a plan's decision to deny coverage for or payment of a service by an independent third-party not related to the plan. If the plan denies an appea...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/external-review/"
+    },
+    {
+      "id": "hcgov_glossary_employer-or-union-retiree-plans",
+      "content": "Employer or Union Retiree Plans: Plans that provide health and/or drug coverage to former employees or members, and, in some cases, their families. These plans are offered to people through ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/employer-or-union-retiree-plans/"
+    },
+    {
+      "id": "hcgov_glossary_eligible-immigration-status",
+      "content": "Eligible Immigration Status: An immigration status that's considered eligible for getting health coverage through the Marketplace. The rules for eligible immigration status may be differ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/eligible-immigration-status/"
+    },
+    {
+      "id": "hcgov_glossary_eligibility-assessment",
+      "content": "Eligibility Assessment: In certain states, the Marketplace doesn't provide the final decision on Medicaid eligibility. Instead, the Marketplace conducts an assessment and passes the...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/eligibility-assessment/"
+    },
+    {
+      "id": "hcgov_glossary_drug-list",
+      "content": "Drug List: A list of prescription drugs covered by a prescription drug plan or another insurance plan offering prescription drug benefits. Also called a formulary.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/drug-list/"
+    },
+    {
+      "id": "hcgov_glossary_domestic-partnership",
+      "content": "Domestic Partnership: Two people of the same or opposite sex who live together and share a domestic life, but aren't married or joined by a civil union. In some states, domestic p...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/domestic-partnership/"
+    },
+    {
+      "id": "hcgov_glossary_dividend",
+      "content": "Dividend: A payment made by a for-profit corporation to its shareholders. This payment is a portion of the corporate earnings and may be paid a certain number of times...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/dividend/"
+    },
+    {
+      "id": "hcgov_glossary_dependent",
+      "content": "Dependent: A child or other individual for whom a parent, relative, or other person may claim a personal exemption tax deduction. Under the Affordable Care Act, individ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/dependent/"
+    },
+    {
+      "id": "hcgov_glossary_department-of-health-and-human-services-hhs",
+      "content": "Department of Health and Human Services (HHS): The federal agency that oversees CMS, which administers programs for protecting the health of all Americans, including Medicare, the Marketplace, Medicaid, a...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/department-of-health-and-human-services-hhs/"
+    },
+    {
+      "id": "hcgov_glossary_dental-coverage",
+      "content": "Dental Coverage: Benefits that help pay for the cost of visits to a dentist for basic or preventive services, like teeth cleaning, X-rays, and fillings. In the Marketplace, d...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/dental-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_deductible",
+      "content": "Deductible: The amount you pay for covered health care services before your insurance plan starts to pay. With a $2,000 deductible, for example, you pay the first $2,000...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/deductible/"
+    },
+    {
+      "id": "hcgov_glossary_court-awards",
+      "content": "Court Awards: Money that's due to you as the result of a lawsuit. This money may be taxable. Examples of lawsuit proceeds that aren't taxable are amounts awarded to you fo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/court-awards/"
+    },
+    {
+      "id": "hcgov_glossary_cost-sharing-reduction",
+      "content": "Cost Sharing Reduction (CSR): A discount that lowers the amount you have to pay for deductibles, copayments, and coinsurance. In the Health Insurance Marketplace®, cost-sharing reductions...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/cost-sharing-reduction/"
+    },
+    {
+      "id": "hcgov_glossary_coordination-of-benefits",
+      "content": "Coordination of Benefits: A way to figure out who pays first when 2 or more health insurance plans are responsible for paying the same medical claim.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/coordination-of-benefits/"
+    },
+    {
+      "id": "hcgov_glossary_co-op",
+      "content": "Co-op: A non-profit organization in which the same people who own the company are insured by the company. Cooperatives can be formed at a national, state, or local ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/co-op/"
+    },
+    {
+      "id": "hcgov_glossary_certified-applicant-counselor",
+      "content": "Certified Application Counselor: An individual (affiliated with a designated organization) who is trained and able to help consumers, small businesses, and their employees as they look for h...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/certified-applicant-counselor/"
+    },
+    {
+      "id": "hcgov_glossary_centers-for-medicare-and-medicaid-services",
+      "content": "Centers for Medicare & Medicaid Services (CMS): The federal agency that runs the Medicare, Medicaid, and Children's Health Insurance Programs, and the federally facilitated Marketplace. For more informatio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/centers-for-medicare-and-medicaid-services/"
+    },
+    {
+      "id": "hcgov_glossary_capital-gains",
+      "content": "Capital Gains: A capital gain is the amount you get from selling property, like stock, a house, or a mutual fund. For example, if you buy stock for $1,000 and sell it for $...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/capital-gains/"
+    },
+    {
+      "id": "hcgov_glossary_cancelled-debts",
+      "content": "Canceled Debts: If you incurred a debt from a loan or from buying something on credit and a portion of the amount you owe is discharged or forgiven (\"canceled\"), the amount ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/cancelled-debts/"
+    },
+    {
+      "id": "hcgov_glossary_bronze-health-plan",
+      "content": "Bronze Health Plan: One of 4 plan categories (also known as “metal levels”) in the Health Insurance Marketplace®. Bronze plans usually have the lowest monthly premiums but the h...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/bronze-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_broker",
+      "content": "Broker: An agent or broker is a person or business who can help you apply for help paying for coverage and enroll in a Qualified Health Plan (QHP) through the Market...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/broker/"
+    },
+    {
+      "id": "hcgov_glossary_brand-name-drugs",
+      "content": "Brand Name (Drugs): A drug sold by a drug company under a specific name or trademark and that is protected by a patent. Brand name drugs may be available by prescription or over...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/brand-name-drugs/"
+    },
+    {
+      "id": "hcgov_glossary_authorized-representative",
+      "content": "Authorized Representative: Someone who you choose to act on your behalf with the Marketplace, like a family member or other trusted person. Some authorized representatives may have leg...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/authorized-representative/"
+    },
+    {
+      "id": "hcgov_glossary_attest-attestation",
+      "content": "Attest/Attestation: When you apply for health coverage through the Marketplace, you're required to agree (or \"attest\") to the truth of the information provided by signing the ap...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/attest-attestation/"
+    },
+    {
+      "id": "hcgov_glossary_annual-deductible-combined",
+      "content": "Annual Deductible Combined: Usually in Health Savings Account (HSA) eligible plans, the total amount that family members on a plan must pay out-of-pocket for health care or prescription...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/annual-deductible-combined/"
+    },
+    {
+      "id": "hcgov_glossary_alimony",
+      "content": "Alimony: Alimony is money you get from a spouse with whom you no longer live, or a former spouse, if paid to you as part of a divorce agreement, separation agreement,...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/alimony/"
+    },
+    {
+      "id": "hcgov_glossary_agent",
+      "content": "Agent and Broker (Health Insurance): A trained insurance professional who can help you enroll in a health insurance plan. Agents may work for a single health insurance company; brokers may repre...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/agent/"
+    },
+    {
+      "id": "hcgov_glossary_advanced-premium-tax-credit",
+      "content": "Advance Premium Tax Credit (APTC): A tax credit you can take in advance to lower your monthly health insurance payment (or “premium”). When you apply for coverage in the Health Insurance Marke...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/advanced-premium-tax-credit/"
+    },
+    {
+      "id": "hcgov_glossary_accreditation",
+      "content": "Accreditation: If a Marketplace health plan is approved, this is the “seal of approval” given to the plan by an independent organization to show that the plan meets nationa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/accreditation/"
+    },
+    {
+      "id": "hcgov_glossary_wellness-programs",
+      "content": "Wellness Programs: A program intended to improve and promote health and fitness that's usually offered through the work place, although insurance plans can offer them directly ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/wellness-programs/"
+    },
+    {
+      "id": "hcgov_glossary_well-baby-and-well-child-visits",
+      "content": "Well-baby and Well-child Visits: Routine doctor visits for comprehensive preventive health services that occur when a baby is young and annual visits until a child reaches age 21. Services i...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/well-baby-and-well-child-visits/"
+    },
+    {
+      "id": "hcgov_glossary_waiting-period-job-based-coverage",
+      "content": "Waiting Period (Job-based coverage): The time that must pass before coverage can become effective for an employee or dependent who is otherwise eligible for coverage under a job-based health plan.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/waiting-period-job-based-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_value-based-purchasing-vbp",
+      "content": "Value-Based Purchasing (VBP): Linking provider payments to improved performance by health care providers. This form of payment holds health care providers accountable for both the cost an...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/value-based-purchasing-vbp/"
+    },
+    {
+      "id": "hcgov_glossary_urgent-care",
+      "content": "Urgent Care: Care for an illness, injury or condition serious enough that a reasonable person would seek care right away, but not so severe it requires emergency room care.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/urgent-care/"
+    },
+    {
+      "id": "hcgov_glossary_uncompensated-care",
+      "content": "Uncompensated Care: Health care or services provided by hospitals or health care providers that don't get reimbursed. Often uncompensated care arises when people don't have insu...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/uncompensated-care/"
+    },
+    {
+      "id": "hcgov_glossary_ucr-usual-customary-and-reasonable",
+      "content": "UCR (Usual, Customary, and Reasonable): The amount paid for a medical service in a geographic area based on what providers in the area usually charge for the same or similar medical service. The UC...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/ucr-usual-customary-and-reasonable/"
+    },
+    {
+      "id": "hcgov_glossary_state-continuation-coverage",
+      "content": "State Continuation Coverage: A state-based requirement similar to COBRA that applies to group health insurance policies of employers with fewer than 20 employees. In some states, state c...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/state-continuation-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_specialist",
+      "content": "Specialist: A physician specialist focuses on a specific area of medicine or a group of patients to diagnose, manage, prevent or treat certain types of symptoms and cond...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/specialist/"
+    },
+    {
+      "id": "hcgov_glossary_special-health-care-need",
+      "content": "Special Health Care Need: The health care and related needs of children who have chronic physical, developmental, behavioral or emotional conditions. Such needs are of a type or amoun...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/special-health-care-need/"
+    },
+    {
+      "id": "hcgov_glossary_special-enrollment-period",
+      "content": "Special Enrollment Period (SEP): A time outside the yearly Open Enrollment Period when you can sign up for health insurance. You qualify for a Special Enrollment Period if you’ve had certain...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/special-enrollment-period/"
+    },
+    {
+      "id": "hcgov_glossary_skilled-nursing-facility-care",
+      "content": "Skilled Nursing Facility Care: Skilled nursing care and rehabilitation services provided on a continuous, daily basis in a skilled nursing facility. Examples of skilled nursing facility ca...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/skilled-nursing-facility-care/"
+    },
+    {
+      "id": "hcgov_glossary_skilled-nursing-care",
+      "content": "Skilled Nursing Care: Services from licensed nurses in your own home or in a nursing home. Skilled care services are from technicians and therapists in your own home or in a nursi...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/skilled-nursing-care/"
+    },
+    {
+      "id": "hcgov_glossary_self-insured-plan",
+      "content": "Self-Insured Plan: Type of plan usually present in larger companies where the employer itself collects premiums from enrollees and takes on the responsibility of paying employe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/self-insured-plan/"
+    },
+    {
+      "id": "hcgov_glossary_risk-adjustment",
+      "content": "Risk Adjustment: A statistical process that takes into account the underlying health status and health spending of the enrollees in an insurance plan when looking at their he...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/risk-adjustment/"
+    },
+    {
+      "id": "hcgov_glossary_rider-exclusionary-rider",
+      "content": "Rider (exclusionary rider): A rider is an amendment to an insurance policy. Some riders add coverage (for example, if you buy a maternity rider to add coverage for pregnancy to your pol...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/rider-exclusionary-rider/"
+    },
+    {
+      "id": "hcgov_glossary_rescission",
+      "content": "Rescission: The retroactive cancellation of a health insurance policy. Insurance companies will sometimes retroactively cancel your entire policy if you made a mistake o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/rescission/"
+    },
+    {
+      "id": "hcgov_glossary_reinsurance",
+      "content": "Reinsurance: A reimbursement system that protects insurers from very high claims. It usually involves a third party paying part of an insurance company’s claims once they...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/reinsurance/"
+    },
+    {
+      "id": "hcgov_glossary_rehabilitative-rehabilitation-services",
+      "content": "Rehabilitative/Rehabilitation Services: Health care services that help you keep, get back, or improve skills and functioning for daily living that have been lost or impaired because you were sick, ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/rehabilitative-rehabilitation-services/"
+    },
+    {
+      "id": "hcgov_glossary_reconstructive-surgery",
+      "content": "Reconstructive Surgery: Surgery and follow-up treatment needed to correct or improve a part of the body because of birth defects, accidents, injuries or medical conditions.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/reconstructive-surgery/"
+    },
+    {
+      "id": "hcgov_glossary_rate-review",
+      "content": "Rate Review: A process that allows state insurance departments to review rate increases before insurance companies can apply them to you.Related contentLook up your ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/rate-review/"
+    },
+    {
+      "id": "hcgov_glossary_qualified-health-plan",
+      "content": "Qualified Health Plan: An insurance plan that’s certified by the Health Insurance Marketplace®, provides essential health benefits, follows established limits on cost-sharing (like...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/qualified-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_public-health",
+      "content": "Public Health: A field that seeks to improve lives and the health of communities through the prevention and treatment of disease and the promotion of healthy behaviors such...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/public-health/"
+    },
+    {
+      "id": "hcgov_glossary_primary-care",
+      "content": "Primary Care: Health services that cover a range of prevention, wellness, and treatment for common illnesses. Primary care providers include doctors, nurses, nurse practit...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/primary-care/"
+    },
+    {
+      "id": "hcgov_glossary_primary-care-provider",
+      "content": "Primary Care Provider: A physician (M.D. – Medical Doctor or D.O. – Doctor of Osteopathic Medicine), nurse practitioner, clinical nurse specialist or physician assistant, as allowe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/primary-care-provider/"
+    },
+    {
+      "id": "hcgov_glossary_primary-care-physician",
+      "content": "Primary Care Physician: A physician (M.D. – Medical Doctor or D.O. – Doctor of Osteopathic Medicine) who directly provides or coordinates a range of health care services for a patie...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/primary-care-physician/"
+    },
+    {
+      "id": "hcgov_glossary_preventive-services",
+      "content": "Preventive Services: Routine health care that includes screenings, check-ups, and patient counseling to prevent illnesses, disease, or other health problems.Related contentP...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/preventive-services/"
+    },
+    {
+      "id": "hcgov_glossary_prevention-glossary",
+      "content": "Prevention: Activities to prevent illness such as routine check-ups, immunizations, patient counseling, and screenings.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/prevention-glossary/"
+    },
+    {
+      "id": "hcgov_glossary_prescription-drugs",
+      "content": "Prescription Drugs: Drugs and medications that, by law, require a prescription.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/prescription-drugs/"
+    },
+    {
+      "id": "hcgov_glossary_prescription-drug-coverage",
+      "content": "Prescription Drug Coverage: Health insurance or plan that helps pay for prescription drugs and medications. All Marketplace plans cover prescription drugs.Related contentGetting pr...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/prescription-drug-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_premium",
+      "content": "Premium: The amount you pay for your health insurance every month. In addition to your premium, you usually have to pay other costs for your health care, including a ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/premium/"
+    },
+    {
+      "id": "hcgov_glossary_preferred-provider",
+      "content": "Preferred Provider: A provider who has a contract with your health insurer or plan to provide services to you at a discount. Check your policy to see if you can see all preferre...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/preferred-provider/"
+    },
+    {
+      "id": "hcgov_glossary_preferred-provider-organization-ppo",
+      "content": "Preferred Provider Organization (PPO): A type of health plan that contracts with medical providers, such as hospitals and doctors, to create a network of participating providers. You pay less if y...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/preferred-provider-organization-ppo/"
+    },
+    {
+      "id": "hcgov_glossary_preauthorization",
+      "content": "Preauthorization: A decision by your health insurer or plan that a health care service, treatment plan, prescription drug or durable medical equipment is medically necessary. ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/preauthorization/"
+    },
+    {
+      "id": "hcgov_glossary_pre-existing-condition",
+      "content": "Pre-Existing Condition: A health problem, like asthma, diabetes, or cancer, you had before the date that new health coverage starts. Insurance companies can't refuse to cover treatm...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pre-existing-condition/"
+    },
+    {
+      "id": "hcgov_glossary_pre-existing-condition-job-based-coverage",
+      "content": "Pre-Existing Condition (Job-based Coverage): Any condition (either physical or mental) including a disability for which medical advice, diagnosis, care, or treatment was recommended or received within t...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pre-existing-condition-job-based-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_pre-existing-condition-insurance-plan-pcip",
+      "content": "Pre-existing Condition Insurance Plan (PCIP): A program (that no longer exists) created by the Affordable Care Act to provide a health coverage option if you were uninsured for at least 6 months, had a p...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pre-existing-condition-insurance-plan-pcip/"
+    },
+    {
+      "id": "hcgov_glossary_pre-existing-condition-exclusion-period-job-based-coverage",
+      "content": "Pre-Existing Condition Exclusion Period (Job-based Coverage): The time period during which a health plan won't pay for care relating to a pre-existing condition. Under a job-based plan, this cannot exceed 12 months for ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pre-existing-condition-exclusion-period-job-based-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_pre-existing-condition-exclusion-period-individual-policy",
+      "content": "Pre-Existing Condition Exclusion Period (Individual Policy): The time period during which an individual policy won't pay for care relating to a pre-existing condition. Under an individual policy, conditions may be excl...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/pre-existing-condition-exclusion-period-individual-policy/"
+    },
+    {
+      "id": "hcgov_glossary_policy-year",
+      "content": "Policy Year: A 12-month period of benefits coverage under an individual health insurance plan. This 12-month period may not be the same as the calendar year. To find out ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/policy-year/"
+    },
+    {
+      "id": "hcgov_glossary_point-of-service-plan-pos-plan",
+      "content": "Point of Service (POS) Plans: A type of plan in which you pay less if you use doctors, hospitals, and other health care providers that belong to the plan’s network. POS plans also require...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/point-of-service-plan-pos-plan/"
+    },
+    {
+      "id": "hcgov_glossary_plan",
+      "content": "Plan: A benefit your employer, union or other group sponsor provides to you to pay for your health care services.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/plan/"
+    },
+    {
+      "id": "hcgov_glossary_plan-year",
+      "content": "Plan Year: A 12-month period of benefits coverage under a group health plan. This 12-month period may not be the same as the calendar year. To find out when your plan y...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/plan-year/"
+    },
+    {
+      "id": "hcgov_glossary_physician-services",
+      "content": "Physician Services: Health care services a licensed medical physician (M.D. – Medical Doctor or D.O. – Doctor of Osteopathic Medicine) provides or coordinates.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/physician-services/"
+    },
+    {
+      "id": "hcgov_glossary_payment-bundling",
+      "content": "Payment Bundling: A payment structure in which different health care providers who are treating you for the same or related conditions are paid an overall sum for taking care ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/payment-bundling/"
+    },
+    {
+      "id": "hcgov_glossary_patient-protection-and-affordable-care-act",
+      "content": "Patient Protection and Affordable Care Act: The first part of the comprehensive health care reform law enacted on March 23, 2010.The law was amended by the Health Care and Education Reconciliation Ac...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/patient-protection-and-affordable-care-act/"
+    },
+    {
+      "id": "hcgov_glossary_patient-centered-outcomes-research",
+      "content": "Patient-Centered Outcomes Research: Research that compares different medical treatments and interventions to provide evidence on which strategies are most effective in different populations and...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/patient-centered-outcomes-research/"
+    },
+    {
+      "id": "hcgov_glossary_out-of-pocket-costs",
+      "content": "Out-of-Pocket Costs: Your expenses for medical care that aren't reimbursed by insurance. Out-of-pocket costs include deductibles, coinsurance, and copayments for covered services...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/out-of-pocket-costs/"
+    },
+    {
+      "id": "hcgov_glossary_open-enrollment-period",
+      "content": "Open Enrollment Period: The yearly period in the fall when people can enroll in a health insurance plan for the next calendar year. Open Enrollment for 2022 is over, but you may sti...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/open-enrollment-period/"
+    },
+    {
+      "id": "hcgov_glossary_nondiscrimination",
+      "content": "Nondiscrimination: A requirement that job-based coverage not discriminate based on health status. Coverage under job-based plans cannot be denied or restricted. You also can't ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/nondiscrimination/"
+    },
+    {
+      "id": "hcgov_glossary_non-preferred-provider",
+      "content": "Non-preferred provider: A provider who doesn’t have a contract with your health insurer or plan to provide services to you. You’ll pay more to see a non-preferred provider. Check yo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/non-preferred-provider/"
+    },
+    {
+      "id": "hcgov_glossary_new-plan",
+      "content": "New Plan: As used in connection with the Affordable Care Act: A health plan that is not a grandfathered health plan and therefore subject to all of the reforms in the ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/new-plan/"
+    },
+    {
+      "id": "hcgov_glossary_network",
+      "content": "Network: The facilities, providers and suppliers your health insurer or plan has contracted with to provide health care services.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/network/"
+    },
+    {
+      "id": "hcgov_glossary_minimum-essential-coverage",
+      "content": "Minimum Essential Coverage (MEC): Any insurance plan that meets the Affordable Care Act requirement for having health coverage. To avoid the penalty for not having insurance for plans 2018 an...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/minimum-essential-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_medicare",
+      "content": "Medicare: A federal health insurance program for people 65 and older and certain younger people with disabilities. It also covers people with End-Stage Renal Disease (...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicare/"
+    },
+    {
+      "id": "hcgov_glossary_medicare-prescription-drug-donut-hole",
+      "content": "Medicare Prescription Drug Donut Hole: Most plans with Medicare prescription drug coverage (Part D) have a coverage gap (called a \"donut hole\"). This means that after you and your drug plan have s...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicare-prescription-drug-donut-hole/"
+    },
+    {
+      "id": "hcgov_glossary_medicare-part-d",
+      "content": "Medicare Part D: A program that helps pay for prescription drugs for people with Medicare who join a plan that includes Medicare prescription drug coverage. There are two way...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicare-part-d/"
+    },
+    {
+      "id": "hcgov_glossary_medicare-hospital-insurance-tax",
+      "content": "Medicare Hospital Insurance Tax: A tax under the Federal Insurance Contributions Act (FICA) that is a United States payroll tax imposed by the federal government on both employees and employ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicare-hospital-insurance-tax/"
+    },
+    {
+      "id": "hcgov_glossary_medicare-advantage-medicare-part-c",
+      "content": "Medicare Advantage (Medicare Part C): A type of Medicare health plan offered by a private company that contracts with Medicare to provide you with all your Part A and Part B benefits. Medicare Ad...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicare-advantage-medicare-part-c/"
+    },
+    {
+      "id": "hcgov_glossary_medically-necessary",
+      "content": "Medically Necessary: Health care services or supplies needed to diagnose or treat an illness, injury, condition, disease or its symptoms and that meet accepted standards of medic...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medically-necessary/"
+    },
+    {
+      "id": "hcgov_glossary_medical-underwriting",
+      "content": "Medical Underwriting: A process used by insurance companies to try to figure out your health status when you're applying for health insurance coverage to determine whether to offe...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medical-underwriting/"
+    },
+    {
+      "id": "hcgov_glossary_medical-loss-ratio-mlr",
+      "content": "Medical Loss Ratio (MLR): A basic financial measurement used in the Affordable Care Act to encourage health plans to provide value to enrollees. If an insurer uses 80 cents out of eve...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medical-loss-ratio-mlr/"
+    },
+    {
+      "id": "hcgov_glossary_medicaid",
+      "content": "Medicaid: Insurance program that provides free or low-cost health coverage to some low-income people, families and children, pregnant women, the elderly, and people wi...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/medicaid/"
+    },
+    {
+      "id": "hcgov_glossary_long-term-care",
+      "content": "Long-Term Care: Services that include medical and non-medical care provided to people who are unable to perform basic activities of daily living such as dressing or bathing....",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/long-term-care/"
+    },
+    {
+      "id": "hcgov_glossary_life-time-limit",
+      "content": "Lifetime Limit: A cap on the total lifetime benefits you may get from your insurance company. An insurance company may impose a total lifetime dollar limit on benefits (like...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/life-time-limit/"
+    },
+    {
+      "id": "hcgov_glossary_job-based-health-plan",
+      "content": "Job-based Health Plan: Coverage that is offered to an employee (and often his or her family) by an employer.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/job-based-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_insurance-co-op",
+      "content": "Insurance Co-Op: A non-profit entity in which the same people who own the company are insured by the company. Cooperatives can be formed at a national, state or local level, ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/insurance-co-op/"
+    },
+    {
+      "id": "hcgov_glossary_individual-health-insurance-policy",
+      "content": "Individual Health Insurance Policy: Policies for people that aren't connected to job-based coverage. Individual health insurance policies are regulated under state law.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/individual-health-insurance-policy/"
+    },
+    {
+      "id": "hcgov_glossary_in-network-coinsurance",
+      "content": "In-network Coinsurance: The percent (for example, 20%) you pay of the allowed amount for covered health care services to providers who contract with your health insurance or plan. I...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/in-network-coinsurance/"
+    },
+    {
+      "id": "hcgov_glossary_in-network-co-payment",
+      "content": "In-network Copayment: A fixed amount (for example, $15) you pay for covered health care services to providers who contract with your health insurance or plan. In-network copayment...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/in-network-co-payment/"
+    },
+    {
+      "id": "hcgov_glossary_household",
+      "content": "Household: The Marketplace generally considers your household to be you, your spouse if you’re married, and your tax dependents. Your eligibility for savings is general...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/household/"
+    },
+    {
+      "id": "hcgov_glossary_hospitalization",
+      "content": "Hospitalization: Care in a hospital that requires admission as an inpatient and usually requires an overnight stay. An overnight stay for observation could be outpatient care.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hospitalization/"
+    },
+    {
+      "id": "hcgov_glossary_hospital-readmissions",
+      "content": "Hospital Readmissions: A situation where you were discharged from the hospital and wind up going back in for the same or related care within 30, 60 or 90 days. The number of hospit...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hospital-readmissions/"
+    },
+    {
+      "id": "hcgov_glossary_hospital-outpatient-care",
+      "content": "Hospital Outpatient Care: Care in a hospital that usually doesn’t require an overnight stay.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hospital-outpatient-care/"
+    },
+    {
+      "id": "hcgov_glossary_hospice-services",
+      "content": "Hospice Services: Services to provide comfort and support for persons in the last stages of a terminal illness and their families.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hospice-services/"
+    },
+    {
+      "id": "hcgov_glossary_home-health-care",
+      "content": "Home Health Care: Health care services a person receives at home.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/home-health-care/"
+    },
+    {
+      "id": "hcgov_glossary_home-and-community-based-services-hcbs",
+      "content": "Home and Community-Based Services (HCBS): Services and support provided by most state Medicaid programs in your home or community that gives help with such daily tasks as bathing or dressing. This ca...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/home-and-community-based-services-hcbs/"
+    },
+    {
+      "id": "hcgov_glossary_hipaa-eligible-individual",
+      "content": "HIPAA Eligible Individual: Your status once you have had 18 months of continuous creditable health coverage. To be HIPAA (Health Insurance Portability and Accountability Act) eligible,...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/hipaa-eligible-individual/"
+    },
+    {
+      "id": "hcgov_glossary_high-risk-pool-plan-state",
+      "content": "High-Risk Pool Plan (State): Similar to the Pre-Existing Condition Insurance Plan under the Affordable Care Act, for years many states have offered plans that provide coverage if you hav...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/high-risk-pool-plan-state/"
+    },
+    {
+      "id": "hcgov_glossary_high-deductible-health-plan",
+      "content": "High Deductible Health Plan (HDHP): A plan with a higher deductible than a traditional insurance plan. The monthly premium is usually lower, but you pay more health care costs yourself before t...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/high-deductible-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_high-cost-excise-tax",
+      "content": "High-Cost Excise Tax: Under the Affordable Care Act starting in 2018, a tax on insurance companies that provide high-cost plans. This tax encourages streamlining of health plans t...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/high-cost-excise-tax/"
+    },
+    {
+      "id": "hcgov_glossary_health-status",
+      "content": "Health Status: Refers to your medical conditions (both physical and mental health), claims experience, receipt of health care, medical history, genetic information, evidenc...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-status/"
+    },
+    {
+      "id": "hcgov_glossary_health-savings-account-hsa",
+      "content": "Health Savings Account (HSA): A type of savings account that lets you set aside money on a pre-tax basis to pay for qualified medical expenses. By using untaxed dollars in a Health Saving...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-savings-account-hsa/"
+    },
+    {
+      "id": "hcgov_glossary_health-reimbursement-account-hra",
+      "content": "Health Reimbursement Arrangement (HRA): Health Reimbursement Arrangements (HRAs) are employer-funded group health plans from which employees are reimbursed tax-free for qualified medical expenses u...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-reimbursement-account-hra/"
+    },
+    {
+      "id": "hcgov_glossary_health-maintenance-organization-hmo",
+      "content": "Health Maintenance Organization (HMO): A type of health insurance plan that usually limits coverage to care from doctors who work for or contract with the HMO. It generally won't cover out-of-netw...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-maintenance-organization-hmo/"
+    },
+    {
+      "id": "hcgov_glossary_health-insurance",
+      "content": "Health Insurance: A contract that requires your health insurer to pay some or all of your health care costs in exchange for a premium.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-insurance/"
+    },
+    {
+      "id": "hcgov_glossary_health-insurance-marketplace-glossary",
+      "content": "Health Insurance Marketplace®: A service that helps people shop for and enroll in health insurance. The federal government operates the Health Insurance Marketplace®, available at HealthCa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-insurance-marketplace-glossary/"
+    },
+    {
+      "id": "hcgov_glossary_health-care-workforce-incentive",
+      "content": "Health Care Workforce Incentive: The use of incentives and recruiting to encourage people to enter into health care professions like primary care and to encourage providers to practice in un...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/health-care-workforce-incentive/"
+    },
+    {
+      "id": "hcgov_glossary_habilitative-habilitation-services",
+      "content": "Habilitative/Habilitation Services: Health care services that help you keep, learn, or improve skills and functioning for daily living. Examples include therapy for a child who isn't walking or...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/habilitative-habilitation-services/"
+    },
+    {
+      "id": "hcgov_glossary_guaranteed-renewal",
+      "content": "Guaranteed Renewal: A requirement that your health insurance issuer must offer to renew your policy as long as you continue to pay premiums. Except in some states, guaranteed re...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/guaranteed-renewal/"
+    },
+    {
+      "id": "hcgov_glossary_guaranteed-issue",
+      "content": "Guaranteed Issue: A requirement that health plans must permit you to enroll regardless of health status, age, gender, or other factors that might predict the use of health ser...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/guaranteed-issue/"
+    },
+    {
+      "id": "hcgov_glossary_grievance",
+      "content": "Grievance: A complaint that you communicate to your health insurer or plan.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/grievance/"
+    },
+    {
+      "id": "hcgov_glossary_grandfathered",
+      "content": "Grandfathered: As used in connection with the Affordable Care Act: Exempt from certain provisions of this law.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/grandfathered/"
+    },
+    {
+      "id": "hcgov_glossary_grandfathered-health-plan",
+      "content": "Grandfathered Health Plan: An individual health insurance policy purchased on or before March 23, 2010. These plans weren’t sold through the Marketplace, but by insurance companies, ag...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/grandfathered-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_fully-insured-job-based-plan",
+      "content": "Fully Insured Job-based Plan: A health plan purchased by an employer from an insurance company.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/fully-insured-job-based-plan/"
+    },
+    {
+      "id": "hcgov_glossary_formulary",
+      "content": "Formulary: A list of prescription drugs covered by a prescription drug plan or another insurance plan offering prescription drug benefits. Also called a drug list.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/formulary/"
+    },
+    {
+      "id": "hcgov_glossary_flexible-spending-account-fsa",
+      "content": "Flexible Spending Account (FSA): An arrangement through your employer that lets you pay for many out-of-pocket medical expenses with tax-free dollars. Allowed expenses include insurance copa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/flexible-spending-account-fsa/"
+    },
+    {
+      "id": "hcgov_glossary_flexible-benefits-plan",
+      "content": "Flexible Benefits Plan: A benefit program that offers employees a choice between various benefits including cash, life insurance, health insurance, vacations, retirement plans, and ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/flexible-benefits-plan/"
+    },
+    {
+      "id": "hcgov_glossary_federally-qualified-health-center-fqhc",
+      "content": "Federally Qualified Health Center (FQHC): Federally funded nonprofit health centers or clinics that serve medically underserved areas and populations. Federally qualified health centers provide prima...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/federally-qualified-health-center-fqhc/"
+    },
+    {
+      "id": "hcgov_glossary_federal-poverty-level-fpl",
+      "content": "Federal Poverty Level (FPL): A measure of income issued every year by the Department of Health and Human Services (HHS). Federal poverty levels are used to determine your eligibility for...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/federal-poverty-level-fpl/"
+    },
+    {
+      "id": "hcgov_glossary_family-and-medical-leave-act-fmla",
+      "content": "Family and Medical Leave Act (FMLA): A federal law that guarantees up to 12 weeks of job protected leave for certain employees when they need to take time off due to serious illness or disabilit...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/family-and-medical-leave-act-fmla/"
+    },
+    {
+      "id": "hcgov_glossary_exclusive-provider-organization-epo-plan",
+      "content": "Exclusive Provider Organization (EPO) Plan: A managed care plan where services are covered only if you go to doctors, specialists, or hospitals in the plan’s network (except in an emergency).Related ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/exclusive-provider-organization-epo-plan/"
+    },
+    {
+      "id": "hcgov_glossary_excluded-services",
+      "content": "Excluded Services: Health care services that your health insurance or plan doesn’t pay for or cover.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/excluded-services/"
+    },
+    {
+      "id": "hcgov_glossary_exchange",
+      "content": "Exchange: Another term for the Health Insurance Marketplace®, a service available in every state that helps individuals, families, and small businesses shop for and en...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/exchange/"
+    },
+    {
+      "id": "hcgov_glossary_essential-health-benefits",
+      "content": "Essential Health Benefits: A set of 10 categories of services health insurance plans must cover under the Affordable Care Act. These include doctors’ services, inpatient and outpatient...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/essential-health-benefits/"
+    },
+    {
+      "id": "hcgov_glossary_employer-shared-responsibility-payment",
+      "content": "Employer Shared Responsibility Payment (ESRP): The Affordable Care Act requires certain employers with at least 50 full-time employees (or equivalents) to offer health insurance coverage to its full-time ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/employer-shared-responsibility-payment/"
+    },
+    {
+      "id": "hcgov_glossary_emergency-services",
+      "content": "Emergency Services: Evaluation of an emergency medical condition and treatment to keep the condition from getting worse.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/emergency-services/"
+    },
+    {
+      "id": "hcgov_glossary_emergency-room-care",
+      "content": "Emergency Room Care: Emergency services you get in an emergency room.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/emergency-room-care/"
+    },
+    {
+      "id": "hcgov_glossary_emergency-medical-transportation",
+      "content": "Emergency Medical Transportation: Ambulance services for an emergency medical condition.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/emergency-medical-transportation/"
+    },
+    {
+      "id": "hcgov_glossary_emergency-medical-condition",
+      "content": "Emergency Medical Condition: An illness, injury, symptom or condition so serious that a reasonable person would seek care right away to avoid severe harm.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/emergency-medical-condition/"
+    },
+    {
+      "id": "hcgov_glossary_early-and-periodic-screening-diagnostic-and-treatment-services-epsdt",
+      "content": "Early and Periodic Screening, Diagnostic, and Treatment Services (EPSDT): A term used to refer to the comprehensive set of benefits covered for children in Medicaid.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/early-and-periodic-screening-diagnostic-and-treatment-services-epsdt/"
+    },
+    {
+      "id": "hcgov_glossary_durable-medical-quipment-dme",
+      "content": "Durable Medical Equipment (DME): Equipment and supplies ordered by a health care provider for everyday or extended use. Coverage for DME may include: oxygen equipment, wheelchairs, crutches ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/durable-medical-quipment-dme/"
+    },
+    {
+      "id": "hcgov_glossary_donut-hole-medicare-prescription-drug",
+      "content": "Donut Hole, Medicare Prescription Drug: Most plans with Medicare prescription drug coverage (Part D) have a coverage gap (called a \"donut hole\"). This means that after you and your drug plan have s...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/donut-hole-medicare-prescription-drug/"
+    },
+    {
+      "id": "hcgov_glossary_disability",
+      "content": "Disability: A limit in a range of major life activities. This includes activities like seeing, hearing, walking and tasks like thinking and working. Because different pr...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/disability/"
+    },
+    {
+      "id": "hcgov_glossary_dependent-coverage",
+      "content": "Dependent Coverage: Insurance coverage for family members of the policyholder, such as spouses, children, or partners.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/dependent-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_creditable-coverage",
+      "content": "Creditable Coverage: Health insurance coverage under any of the following: a group health plan; individual health insurance; student health insurance; Medicare; Medicaid; CHAMPUS...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/creditable-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_cost-sharing",
+      "content": "Cost Sharing: The share of costs covered by your insurance that you pay out of your own pocket. This term generally includes deductibles, coinsurance, and copayments, or s...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/cost-sharing/"
+    },
+    {
+      "id": "hcgov_glossary_conversion",
+      "content": "Conversion: The ability, in some states, to switch your job-based coverage to an individual policy when you lose eligibility for job-based coverage. Family members not c...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/conversion/"
+    },
+    {
+      "id": "hcgov_glossary_complications-of-pregnancy",
+      "content": "Complication of Pregnancy: Conditions due to pregnancy, labor and delivery that require medical care to prevent serious harm to the health of the mother or the fetus. Morning sickness ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/complications-of-pregnancy/"
+    },
+    {
+      "id": "hcgov_glossary_competitive-bidding",
+      "content": "Competitive Bidding: Open bidding for federal contracts between independent groups that compete for the contract by providing the best bid.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/competitive-bidding/"
+    },
+    {
+      "id": "hcgov_glossary_community-rating",
+      "content": "Community Rating: A rule that prevents health insurers from varying premiums within a geographic area based on age, gender, health status or other factors.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/community-rating/"
+    },
+    {
+      "id": "hcgov_glossary_cobra",
+      "content": "COBRA: A federal law that may allow you to temporarily keep health coverage after your employment ends, you lose coverage as a dependent of the covered employee, or...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/cobra/"
+    },
+    {
+      "id": "hcgov_glossary_co-payment",
+      "content": "Copayment: A fixed amount ($20, for example) you pay for a covered health care service after you've paid your deductible.Let's say your health insurance plan's allowa...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/co-payment/"
+    },
+    {
+      "id": "hcgov_glossary_co-insurance",
+      "content": "Coinsurance: The percentage of costs of a covered health care service you pay (20%, for example) after you've paid your deductible.Let's say your health insurance plan'...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/co-insurance/"
+    },
+    {
+      "id": "hcgov_glossary_claim",
+      "content": "Claim: A request for payment that you or your health care provider submits to your health insurer when you get items or services you think are covered.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/claim/"
+    },
+    {
+      "id": "hcgov_glossary_chronic-disease-management",
+      "content": "Chronic Disease Management: An integrated care approach to managing illness which includes screenings, check-ups, monitoring and coordinating treatment, and patient education. It can im...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/chronic-disease-management/"
+    },
+    {
+      "id": "hcgov_glossary_childrens-health-insurance-program-chip",
+      "content": "Children's Health Insurance Program (CHIP): Insurance program that provides low-cost health coverage to children in families that earn too much money to qualify for Medicaid but not enough to buy priva...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/childrens-health-insurance-program-chip/"
+    },
+    {
+      "id": "hcgov_glossary_catastrophic-health-plan",
+      "content": "Catastrophic Health Plan: Health plans that meet all of the requirements applicable to other Qualified Health Plans (QHPs) but don't cover any benefits other than 3 primary care visit...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/catastrophic-health-plan/"
+    },
+    {
+      "id": "hcgov_glossary_care-coordination",
+      "content": "Care Coordination: The organization of your treatment across several health care providers. Medical homes and Accountable Care Organizations are two common ways to coordinate c...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/care-coordination/"
+    },
+    {
+      "id": "hcgov_glossary_biosimilar-biological-products",
+      "content": "Biosimilar Biological Products: The generic version of more complicated medications.",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/biosimilar-biological-products/"
+    },
+    {
+      "id": "hcgov_glossary_benefits",
+      "content": "Benefits: The health care items or services covered under a health insurance plan. Covered benefits and excluded services are defined in the health insurance plan's co...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/benefits/"
+    },
+    {
+      "id": "hcgov_glossary_benefit-year",
+      "content": "Benefit Year: A year of benefits coverage under an individual health insurance plan. The benefit year for plans bought inside or outside the Marketplace begins January 1 o...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/benefit-year/"
+    },
+    {
+      "id": "hcgov_glossary_balance-billing",
+      "content": "Balance Billing: When a provider bills you for the difference between the provider’s charge and the allowed amount. For example, if the provider’s charge is $100 and the allo...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/balance-billing/"
+    },
+    {
+      "id": "hcgov_glossary_appeal",
+      "content": "Appeal: A request for your health insurance company or the Health Insurance Marketplace® to review a decision that denies a benefit or payment.If you don't agree ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/appeal/"
+    },
+    {
+      "id": "hcgov_glossary_annual-limit",
+      "content": "Annual Limit: A cap on the benefits your insurance company will pay in a year while you're enrolled in a particular health insurance plan. These caps are sometimes placed ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/annual-limit/"
+    },
+    {
+      "id": "hcgov_glossary_allowed-amount",
+      "content": "Allowed Amount: The maximum amount a plan will pay for a covered health care service. May also be called “eligible expense,” “payment allowance,” or “negotiated rate.”If y...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/allowed-amount/"
+    },
+    {
+      "id": "hcgov_glossary_affordable-coverage",
+      "content": "Affordable coverage: A job-based health plan covering only the employee that costs 9.61% or less of the employee’s household income. If a job-based plan is “affordable,” and meet...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/affordable-coverage/"
+    },
+    {
+      "id": "hcgov_glossary_affordable-care-act",
+      "content": "Affordable Care Act (ACA): The comprehensive health care reform law enacted in March 2010 (sometimes known as ACA, PPACA, or “Obamacare”).The law has 3 primary goals:Make affordab...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/affordable-care-act/"
+    },
+    {
+      "id": "hcgov_glossary_actuarial-value",
+      "content": "Actuarial Value: The percentage of total average costs for covered benefits that a plan will cover. For example, if a plan has an actuarial value of 70%, on average, you woul...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/actuarial-value/"
+    },
+    {
+      "id": "hcgov_glossary_accountable-care-organization",
+      "content": "Accountable Care Organization: A group of health care providers who give coordinated care, chronic disease management, and thereby improve the quality of care patients get. The organizatio...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/accountable-care-organization/"
+    },
+    {
+      "id": "hcgov_glossary_lawfully-present",
+      "content": "Lawfully Present: The term “lawfully present” is used to describe immigrants who have:“Qualified non-citizen” immigration status without a waiting periodHumanitarian statu...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/lawfully-present/"
+    },
+    {
+      "id": "hcgov_glossary_zero-cost-sharing-plan",
+      "content": "Zero Cost Sharing Plan: A plan available to members of federally recognized tribes and Alaska Native Claims Settlement Act (ANCSA) Corporation shareholders whose income is between 1...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/zero-cost-sharing-plan/"
+    },
+    {
+      "id": "hcgov_glossary_self-employment-ledger",
+      "content": "Self-Employment Ledger: Any accurate, detailed record of your self-employment income and expenses. It can be a spreadsheet, a document from an accounting software program, a handwri...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/self-employment-ledger/"
+    },
+    {
+      "id": "hcgov_glossary_reconcile",
+      "content": "Reconcile: How you find out if you used the right amount of premium tax credit during the year. To reconcile, you compare two amounts: the premium tax credit you used i...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/reconcile/"
+    },
+    {
+      "id": "hcgov_glossary_minimum-value",
+      "content": "Minimum Value: A standard of minimum coverage that applies to job-based health plans. If your employer’s plan meets this standard and is considered “affordable,” you won’t ...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/minimum-value/"
+    },
+    {
+      "id": "hcgov_glossary_limited-cost-sharing-plan",
+      "content": "Limited Cost Sharing Plan: A plan available to members of federally recognized tribes and Alaska Native Claims Settlement Act (ANCSA) Corporation shareholders regardless of income or e...",
+      "category": "glossary",
+      "source": "healthcare.gov",
+      "url": "https://www.healthcare.gov/glossary/limited-cost-sharing-plan/"
+    }
+  ]
+}

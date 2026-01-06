@@ -1,0 +1,22 @@
+{
+    "faqs": [
+        {
+            "id": "faq_001",
+            "question": "How can I improve my sleep quality?",
+            "answer": "To improve sleep quality, establish a regular sleep schedule, create a relaxing bedtime routine, avoid caffeine and electronics before bed, and ensure your sleep environment is cool and dark.",
+            "category": "sleep"
+        },
+        {
+            "id": "faq_002",
+            "question": "What is a healthy diet?",
+            "answer": "A healthy diet includes a variety of nutrient-dense foods such as fruits, vegetables, whole grains, lean proteins (like fish, poultry, beans, and nuts), and healthy fats (like olive oil and avocados). It limits processed foods, added sugars, and sodium.",
+            "category": "general_health"
+        },
+        {
+            "id": "faq_003",
+            "question": "How often should I exercise?",
+            "answer": "Most health organizations recommend at least 150 minutes of moderate-intensity aerobic activity or 75 minutes of vigorous-intensity activity per week, along with muscle-strengthening exercises on two or more days a week.",
+            "category": "lifestyle"
+        }
+    ]
+}
