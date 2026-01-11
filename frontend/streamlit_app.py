@@ -35,19 +35,6 @@ if API_URL and not API_URL.startswith('http'):
 # Initialize session state
 if 'messages' not in st.session_state:
     st.session_state.messages = []
-    # Load history from backend
-    try:
-        response = requests.get(f"{API_URL}/history/recent", params={"user_id": st.session_state.user_id}, timeout=2)
-        if response.status_code == 200:
-            data = response.json()
-            raw_msgs = data.get('messages', [])
-            for msg in raw_msgs:
-                st.session_state.messages.append({
-                    "role": msg['role'],
-                    "content": msg['message']
-                })
-    except Exception as e:
-        print(f"Failed to load history: {e}")
 if 'user_id' not in st.session_state:
     st.session_state.user_id = "local_user"
 if 'session_start' not in st.session_state:
@@ -56,6 +43,16 @@ if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'view_mode' not in st.session_state:
     st.session_state.view_mode = 'chat'
+
+# Auth session state
+if 'auth_token' not in st.session_state:
+    st.session_state.auth_token = None
+if 'logged_in_user' not in st.session_state:
+    st.session_state.logged_in_user = None
+if 'is_admin' not in st.session_state:
+    st.session_state.is_admin = False
+if 'auth_mode' not in st.session_state:
+    st.session_state.auth_mode = 'login'  # 'login' or 'register'
 
 
 def check_backend_health():
@@ -170,6 +167,60 @@ def clear_chat_context():
     except Exception as e:
         st.error(f"Error clearing context: {str(e)}")
     return False
+
+
+def register_user(username, password, email=None):
+    """Register a new user"""
+    try:
+        response = requests.post(
+            f"{API_URL}/auth/register",
+            json={"username": username, "password": password, "email": email},
+            timeout=10
+        )
+        if response.status_code == 200:
+            data = response.json()
+            st.session_state.auth_token = data.get('access_token')
+            st.session_state.logged_in_user = data.get('username')
+            st.session_state.is_admin = data.get('is_admin', False)
+            st.session_state.user_id = data.get('username')
+            return True, "Registration successful!"
+        else:
+            error = response.json().get('detail', 'Registration failed')
+            return False, error
+    except Exception as e:
+        return False, str(e)
+
+
+def login_user(username, password):
+    """Login user"""
+    try:
+        response = requests.post(
+            f"{API_URL}/auth/login",
+            json={"username": username, "password": password},
+            timeout=10
+        )
+        if response.status_code == 200:
+            data = response.json()
+            st.session_state.auth_token = data.get('access_token')
+            st.session_state.logged_in_user = data.get('username')
+            st.session_state.is_admin = data.get('is_admin', False)
+            st.session_state.user_id = data.get('username')
+            return True, "Login successful!"
+        else:
+            error = response.json().get('detail', 'Login failed')
+            return False, error
+    except Exception as e:
+        return False, str(e)
+
+
+def logout_user():
+    """Logout user"""
+    st.session_state.auth_token = None
+    st.session_state.logged_in_user = None
+    st.session_state.is_admin = False
+    st.session_state.user_id = "local_user"
+    st.session_state.messages = []
+    st.session_state.view_mode = 'chat'
 
 
 # Sidebar
@@ -304,7 +355,15 @@ else:
             if message.get("sources"):
                 with st.expander("📚 Sources"):
                     for source in message["sources"]:
-                        st.caption(f"Category: {source.get('category', 'N/A')} | Relevance: {source.get('relevance', 'N/A')}%")
+                        url = source.get('url', '')
+                        source_name = source.get('source', 'Healthcare Resource')
+                        category = source.get('category', 'general')
+                        if url:
+                            # Show clickable link with source name
+                            st.markdown(f"🔗 [{source_name} - {category.title()}]({url})")
+                        else:
+                            # Fallback if no URL
+                            st.markdown(f"📄 {source_name} ({category.title()})")
     
     # Chat input
     if prompt := st.chat_input("How can I help you today?"):
@@ -336,7 +395,15 @@ else:
                 if sources:
                     with st.expander("📚 Sources"):
                         for source in sources:
-                            st.caption(f"Category: {source.get('category', 'N/A')} | Relevance: {source.get('relevance', 'N/A')}%")
+                            url = source.get('url', '')
+                            source_name = source.get('source', 'Healthcare Resource')
+                            category = source.get('category', 'general')
+                            if url:
+                                # Show clickable link with source name
+                                st.markdown(f"🔗 [{source_name} - {category.title()}]({url})")
+                            else:
+                                # Fallback if no URL
+                                st.markdown(f"📄 {source_name} ({category.title()})")
             else:
                 error_msg = "I'm having trouble connecting to the server. Please try again."
                 st.session_state.messages.append({"role": "assistant", "content": error_msg})

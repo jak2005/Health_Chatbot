@@ -17,3 +17,7 @@ requests
 
 # Utilities
 python-dotenv
+
+# Authentication
+passlib[bcrypt]
+python-jose[cryptography]

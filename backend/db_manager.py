@@ -36,6 +36,16 @@ class Feedback(Base):
     comment = Column(Text)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True, nullable=True)
+    hashed_password = Column(String)
+    is_admin = Column(Integer, default=0)  # 0 = regular user, 1 = admin
+    created_at = Column(DateTime, default=datetime.utcnow)
+
 # Create tables
 def init_db():
     Base.metadata.create_all(bind=engine)

@@ -137,7 +137,9 @@ class RAGService:
                     self.documents.append({
                         "id": doc_id,
                         "content": content,
-                        "category": category
+                        "category": category,
+                        "url": item.get('url', '') if isinstance(item, dict) else '',
+                        "source": item.get('source', '') if isinstance(item, dict) else ''
                     })
                     
         except Exception as e:
@@ -193,7 +195,11 @@ class RAGService:
             scored_docs.append({
                 "id": doc["id"],
                 "content": doc["content"],
-                "metadata": {"category": doc["category"]},
+                "metadata": {
+                    "category": doc.get("category", "general"),
+                    "url": doc.get("url", ""),
+                    "source": doc.get("source", "")
+                },
                 "distance": 1 - similarity  # Lower distance = more similar
             })
         

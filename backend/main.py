@@ -19,6 +19,12 @@ from dotenv import load_dotenv
 # Import persistence helpers
 from persistence import _save_feedback, _load_feedback, _save_history, _get_history
 
+# Import auth helpers
+from auth import (
+    create_user, authenticate_user, create_access_token,
+    decode_token, get_user_by_username, get_user_by_id
+)
+
 # Pydantic v1 compatible imports
 try:
     from pydantic import BaseModel, Field
@@ -116,6 +122,21 @@ class FeedbackRequest(BaseModel):
     rating: int
     comment: Optional[str] = ""
     message_id: Optional[str] = None
+
+class RegisterRequest(BaseModel):
+    username: str
+    password: str
+    email: Optional[str] = None
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    username: str
+    is_admin: bool = False
 
 class HealthResponse(BaseModel):
     status: str
@@ -309,8 +330,11 @@ async def chat(request: ChatRequest):
         # Format sources for frontend
         sources = []
         for doc in retrieved_docs:
+            metadata = doc.get("metadata", {})
             source = {
-                "category": doc.get("metadata", {}).get("category", "general"),
+                "category": metadata.get("category", "general"),
+                "url": metadata.get("url", ""),
+                "source": metadata.get("source", ""),
             }
             if doc.get("distance") is not None:
                 source["relevance"] = round((1 - doc["distance"]) * 100, 1)
@@ -372,6 +396,68 @@ async def submit_feedback(request: FeedbackRequest):
 async def get_admin_feedback():
     """Get all feedback (Admin)"""
     return {"feedback": _load_feedback()}
+
+
+# ============= Auth Endpoints =============
+
+@app.post("/auth/register")
+async def register(request: RegisterRequest):
+    """Register a new user"""
+    user = create_user(request.username, request.password, request.email)
+    if not user:
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    logger.info(f"New user registered: {request.username}")
+    
+    # Create token for auto-login after registration
+    token = create_access_token({"sub": str(user.id), "username": user.username})
+    
+    return {
+        "status": "success",
+        "message": "Registration successful",
+        "access_token": token,
+        "token_type": "bearer",
+        "username": user.username,
+        "is_admin": bool(user.is_admin)
+    }
+
+
+@app.post("/auth/login")
+async def login(request: LoginRequest):
+    """Login and get access token"""
+    user = authenticate_user(request.username, request.password)
+    if not user:
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    token = create_access_token({"sub": str(user.id), "username": user.username})
+    logger.info(f"User logged in: {request.username}")
+    
+    return {
+        "access_token": token,
+        "token_type": "bearer",
+        "username": user.username,
+        "is_admin": bool(user.is_admin)
+    }
+
+
+@app.get("/auth/me")
+async def get_current_user(token: str):
+    """Get current user info from token"""
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+    
+    user_id = payload.get("sub")
+    user = get_user_by_id(int(user_id))
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return {
+        "id": user.id,
+        "username": user.username,
+        "email": user.email,
+        "is_admin": bool(user.is_admin)
+    }
 
 
 @app.get("/stats")
