@@ -327,18 +327,24 @@ async def chat(request: ChatRequest):
         # Save assistant response
         _save_history(request.user_id, response_text, "assistant")
         
-        # Format sources for frontend
+        # Format sources for frontend - only include relevant ones (>30% relevance)
         sources = []
+        MIN_RELEVANCE = 30  # Only show sources with at least 30% relevance
         for doc in retrieved_docs:
             metadata = doc.get("metadata", {})
-            source = {
-                "category": metadata.get("category", "general"),
-                "url": metadata.get("url", ""),
-                "source": metadata.get("source", ""),
-            }
+            relevance = 0
             if doc.get("distance") is not None:
-                source["relevance"] = round((1 - doc["distance"]) * 100, 1)
-            sources.append(source)
+                relevance = round((1 - doc["distance"]) * 100, 1)
+            
+            # Only include source if relevance is high enough
+            if relevance >= MIN_RELEVANCE:
+                source = {
+                    "category": metadata.get("category", "general"),
+                    "url": metadata.get("url", ""),
+                    "source": metadata.get("source", ""),
+                    "relevance": relevance
+                }
+                sources.append(source)
         
         logger.info(f"Successfully generated response for user: {request.user_id}")
         

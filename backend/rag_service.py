@@ -62,6 +62,9 @@ class RAGService:
         """Load healthcare data from various JSON files"""
         data_dir = Path(__file__).parent.parent / "data"
         
+        # Load health content (symptoms, conditions, tips) - PRIORITY
+        self._load_json_file(data_dir / "health_content.json", "health")
+        
         # Load health tips
         self._load_json_file(data_dir / "health_tips.json", "health_tips")
         

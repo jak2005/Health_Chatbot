@@ -1,0 +1,144 @@
+{
+  "documents": [
+    {
+      "id": "health_leg_pain",
+      "content": "Leg Pain: Common causes of leg pain include muscle cramps, overuse injuries, shin splints, stress fractures, and peripheral artery disease. Treatment depends on the cause. Rest, ice, compression, and elevation (RICE) can help minor injuries. Stretching before exercise helps prevent muscle cramps. See a doctor if pain is severe, persistent, or accompanied by swelling, redness, or fever.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_headache",
+      "content": "Headache: Common types include tension headaches (band-like pressure), migraines (throbbing pain, often with nausea), and cluster headaches (severe pain around one eye). Triggers include stress, dehydration, lack of sleep, and certain foods. Treatment includes rest, hydration, over-the-counter pain relievers, and avoiding triggers. Seek immediate care for sudden severe headaches or those with fever, confusion, or stiff neck.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_back_pain",
+      "content": "Back Pain: Lower back pain is one of the most common health complaints. Causes include muscle strain, poor posture, herniated discs, and arthritis. Treatment includes rest (but not too much), gentle stretching, heat or ice therapy, and over-the-counter pain medications. Prevention includes maintaining good posture, regular exercise, proper lifting techniques, and maintaining a healthy weight.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_cold_flu",
+      "content": "Cold and Flu: The common cold causes runny nose, sneezing, sore throat, and mild fatigue. The flu causes similar symptoms but often with high fever, body aches, and severe fatigue. Treatment includes rest, fluids, and over-the-counter medications for symptoms. Flu can be prevented with annual vaccination. Seek medical care for high fever lasting more than 3 days, difficulty breathing, or severe symptoms.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_stomach_pain",
+      "content": "Stomach Pain: Causes include indigestion, gas, food poisoning, gastritis, ulcers, and appendicitis. Mild stomach pain often resolves on its own. Treatment includes rest, clear fluids, and avoiding solid food temporarily. Seek immediate medical attention for severe sudden pain, pain with fever or vomiting blood, or pain that worsens over time.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_fatigue",
+      "content": "Fatigue and Tiredness: Common causes include lack of sleep, stress, poor diet, dehydration, and sedentary lifestyle. Medical causes include anemia, thyroid disorders, diabetes, depression, and sleep apnea. Improve fatigue by getting 7-9 hours of sleep, exercising regularly, eating balanced meals, staying hydrated, and managing stress. See a doctor if fatigue persists despite lifestyle changes.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_chest_pain",
+      "content": "Chest Pain: Can be caused by heart problems, lung issues, muscle strain, or digestive issues like acid reflux. Heart-related chest pain often feels like pressure or squeezing and may spread to the arm, jaw, or back. CALL 911 IMMEDIATELY for sudden severe chest pain, especially with shortness of breath, sweating, or pain spreading to arm/jaw. Non-emergency causes include muscle strain and heartburn.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_joint_pain",
+      "content": "Joint Pain: Common causes include arthritis, bursitis, sprains, and overuse injuries. Osteoarthritis causes pain in weight-bearing joints like knees and hips. Rheumatoid arthritis causes inflammation in multiple joints. Treatment includes rest, ice/heat, gentle exercise, anti-inflammatory medications, and maintaining healthy weight. See a doctor for persistent joint pain, swelling, or reduced range of motion.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_dizziness",
+      "content": "Dizziness: Can feel like lightheadedness, vertigo (spinning sensation), or unsteadiness. Common causes include inner ear problems, low blood pressure, dehydration, anemia, and medication side effects. Treatment depends on the cause. For mild dizziness: sit or lie down, drink water, and avoid sudden movements. Seek medical care for severe or recurring dizziness, especially with fainting, chest pain, or difficulty walking.",
+      "category": "symptoms",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_sleep",
+      "content": "Better Sleep Tips: Maintain a consistent sleep schedule, even on weekends. Create a dark, quiet, cool bedroom environment. Avoid screens for 1-2 hours before bed. Limit caffeine after noon and avoid alcohol close to bedtime. Exercise regularly but not too close to bedtime. Consider relaxation techniques like deep breathing or meditation if you have trouble falling asleep.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_nutrition",
+      "content": "Healthy Eating: Eat a variety of fruits and vegetables daily (aim for 5+ servings). Choose whole grains over refined grains. Include lean proteins like fish, poultry, beans, and nuts. Limit added sugars, sodium, and saturated fats. Stay hydrated with water rather than sugary drinks. Practice portion control and eat mindfully. Consider the Mediterranean diet pattern for heart health.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_exercise",
+      "content": "Exercise Guidelines: Adults should aim for at least 150 minutes of moderate aerobic activity or 75 minutes of vigorous activity per week. Include muscle-strengthening activities at least 2 days per week. Start slowly if you're new to exercise. Walking, swimming, and cycling are good low-impact options. Exercise improves heart health, mental health, weight management, and sleep quality.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_stress",
+      "content": "Stress Management: Chronic stress can cause headaches, muscle tension, fatigue, and sleep problems. Management techniques include regular exercise, deep breathing exercises, meditation, adequate sleep, and social support. Limit caffeine and alcohol. Set realistic goals and priorities. Consider talking to a therapist if stress is overwhelming. Physical symptoms of stress should be evaluated by a doctor.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_mental_health",
+      "content": "Mental Health: Depression symptoms include persistent sadness, loss of interest, changes in sleep/appetite, and difficulty concentrating. Anxiety symptoms include excessive worry, restlessness, and physical symptoms like rapid heartbeat. Both are treatable conditions. Talk to a healthcare provider about symptoms. Treatment may include therapy, medication, lifestyle changes, and support groups. If having thoughts of self-harm, call 988 (Suicide & Crisis Lifeline).",
+      "category": "mental_health",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_diabetes",
+      "content": "Diabetes Prevention and Management: Type 2 diabetes risk can be reduced through healthy weight, regular exercise, and balanced diet. Warning signs include increased thirst, frequent urination, fatigue, and blurred vision. Management includes blood sugar monitoring, medication as prescribed, healthy eating, regular exercise, and regular checkups. Untreated diabetes can lead to serious complications including heart disease, kidney damage, and vision loss.",
+      "category": "conditions",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_heart_health",
+      "content": "Heart Health: Reduce heart disease risk by not smoking, maintaining healthy weight, exercising regularly, managing blood pressure and cholesterol, limiting alcohol, and eating a heart-healthy diet. Know your numbers: blood pressure, cholesterol, and blood sugar. Warning signs of heart attack include chest discomfort, shortness of breath, pain in arms/back/jaw, and cold sweats. Call 911 immediately if experiencing these symptoms.",
+      "category": "conditions",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_allergies",
+      "content": "Allergies: Common allergens include pollen, dust mites, pet dander, mold, and certain foods. Symptoms include sneezing, runny nose, itchy eyes, and skin rashes. Food allergies can cause more severe reactions including anaphylaxis. Treatment includes avoiding triggers, antihistamines, nasal sprays, and allergy shots for severe cases. Carry an epinephrine auto-injector if prescribed for severe allergies.",
+      "category": "conditions",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_first_aid",
+      "content": "Basic First Aid: For cuts and scrapes, clean with water, apply antibiotic ointment, and cover with bandage. For minor burns, cool with running water for 10-20 minutes, don't apply ice. For sprains, use RICE: Rest, Ice (20 min on/off), Compression, Elevation. For choking, perform Heimlich maneuver. For suspected broken bones, immobilize and seek medical care. Keep a first aid kit at home and learn CPR.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_hydration",
+      "content": "Hydration: Drink about 8 glasses (64 oz) of water daily, more if exercising or in hot weather. Signs of dehydration include dark urine, thirst, dry mouth, fatigue, and dizziness. Water is the best choice for hydration. Limit sugary drinks and excessive caffeine. Fruits and vegetables also contribute to hydration. Athletes may need electrolyte drinks for intense or prolonged exercise.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    },
+    {
+      "id": "health_preventive_care",
+      "content": "Preventive Care: Get recommended vaccinations including annual flu shot. Schedule regular checkups with your doctor. Follow cancer screening guidelines (mammograms, colonoscopies, etc.). Monitor blood pressure and cholesterol. Get regular dental checkups and eye exams. Know your family health history. Don't ignore symptoms - early detection improves outcomes for many conditions.",
+      "category": "tips",
+      "source": "Health Tips Database",
+      "url": ""
+    }
+  ]
+}
