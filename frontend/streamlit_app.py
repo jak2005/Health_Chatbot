@@ -19,6 +19,19 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# PWA Support - Add meta tags for mobile app installation
+pwa_meta = """
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HealthCare AI">
+<meta name="theme-color" content="#4CAF50">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkhlYWx0aENhcmUgQUkiLAogICJzaG9ydF9uYW1lIjogIkhlYWx0aEFJIiwKICAiZGVzY3JpcHRpb24iOiAiWW91ciBBSS1wb3dlcmVkIGhlYWx0aGNhcmUgYXNzaXN0YW50IiwKICAic3RhcnRfdXJsIjogIi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwRTExMTciLAogICJ0aGVtZV9jb2xvciI6ICIjNENBRjUwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLCUzQ3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJyUzRSUzQ3RleHQgeT0nLjllbScgZm9udC1zaXplPSc5MCclM0UlRjAlOUYlOEYlQTUlM0MvdGV4dCUzRSUzQy9zdmclM0UiLAogICAgICAic2l6ZXMiOiAiYW55IiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏥%3C/text%3E%3C/svg%3E">
+"""
+st.markdown(pwa_meta, unsafe_allow_html=True)
+
 import utils
 utils.load_css()
 
