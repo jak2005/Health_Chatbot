@@ -357,12 +357,13 @@ else:
                     for source in message["sources"]:
                         url = source.get('url', '')
                         source_name = source.get('source', 'Healthcare Resource')
-                        category = source.get('category', 'general')
                         if url:
-                            # Show clickable link with source name
-                            st.markdown(f"🔗 [{source_name} - {category.title()}]({url})")
+                            # Extract topic name from URL (e.g., /glossary/affordability-exemption/ -> Affordability Exemption)
+                            topic = url.rstrip('/').split('/')[-1].replace('-', ' ').title()
+                            st.markdown(f"🔗 [{topic}]({url}) - {source_name}")
                         else:
                             # Fallback if no URL
+                            category = source.get('category', 'general')
                             st.markdown(f"📄 {source_name} ({category.title()})")
     
     # Chat input
@@ -397,12 +398,13 @@ else:
                         for source in sources:
                             url = source.get('url', '')
                             source_name = source.get('source', 'Healthcare Resource')
-                            category = source.get('category', 'general')
                             if url:
-                                # Show clickable link with source name
-                                st.markdown(f"🔗 [{source_name} - {category.title()}]({url})")
+                                # Extract topic name from URL (e.g., /glossary/affordability-exemption/ -> Affordability Exemption)
+                                topic = url.rstrip('/').split('/')[-1].replace('-', ' ').title()
+                                st.markdown(f"🔗 [{topic}]({url}) - {source_name}")
                             else:
                                 # Fallback if no URL
+                                category = source.get('category', 'general')
                                 st.markdown(f"📄 {source_name} ({category.title()})")
             else:
                 error_msg = "I'm having trouble connecting to the server. Please try again."
