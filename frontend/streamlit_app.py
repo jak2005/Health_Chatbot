@@ -265,14 +265,20 @@ with st.sidebar:
             elif password:
                 st.error("Incorrect password")
     
-    # Appointments Section
+    # Appointments Section - Requires Login
     with st.expander("📅 Appointments"):
-        if st.button("📋 Book Appointment", use_container_width=True, key="book_apt_btn"):
-            st.session_state.view_mode = 'appointments'
-            st.rerun()
-        if st.button("📆 My Appointments", use_container_width=True, key="my_apt_btn"):
-            st.session_state.view_mode = 'my_appointments'
-            st.rerun()
+        if st.session_state.logged_in_user:
+            # User is logged in - show appointment buttons
+            if st.button("📋 Book Appointment", use_container_width=True, key="book_apt_btn"):
+                st.session_state.view_mode = 'appointments'
+                st.rerun()
+            if st.button("📆 My Appointments", use_container_width=True, key="my_apt_btn"):
+                st.session_state.view_mode = 'my_appointments'
+                st.rerun()
+        else:
+            # User not logged in - show login prompt
+            st.warning("🔒 Please login to access appointments")
+            st.caption("Create an account or login below")
     
     # User Account Section
     with st.expander("👤 Account"):
@@ -476,6 +482,15 @@ if st.session_state.view_mode == 'admin':
         st.warning(f"Could not load appointments: {e}")
 
 elif st.session_state.view_mode == 'appointments':
+    # Check if user is logged in
+    if not st.session_state.logged_in_user:
+        st.error("🔒 **Please login to book an appointment**")
+        st.info("Go to the sidebar → Account → Login or Register")
+        if st.button("⬅️ Back to Chat"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+        st.stop()
+    
     # Appointment Booking Page - Beautiful Design
     st.markdown("""
     <style>
@@ -593,6 +608,15 @@ elif st.session_state.view_mode == 'appointments':
                 st.warning("⚠️ Please fill in all required fields (*)")
 
 elif st.session_state.view_mode == 'my_appointments':
+    # Check if user is logged in
+    if not st.session_state.logged_in_user:
+        st.error("🔒 **Please login to view your appointments**")
+        st.info("Go to the sidebar → Account → Login or Register")
+        if st.button("⬅️ Back to Chat"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+        st.stop()
+    
     # My Appointments Page - Beautiful Design
     st.markdown("""
     <style>
