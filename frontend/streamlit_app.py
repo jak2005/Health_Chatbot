@@ -274,6 +274,58 @@ with st.sidebar:
             st.session_state.view_mode = 'my_appointments'
             st.rerun()
     
+    # User Account Section
+    with st.expander("👤 Account"):
+        if st.session_state.logged_in_user:
+            # Logged in state
+            st.success(f"✅ Welcome, **{st.session_state.logged_in_user}**!")
+            if st.session_state.is_admin:
+                st.caption("🔑 Admin Account")
+            
+            if st.button("🚪 Logout", use_container_width=True, key="logout_btn"):
+                logout_user()
+                st.rerun()
+        else:
+            # Login/Register tabs
+            auth_tab = st.radio("", ["🔑 Login", "📝 Register"], horizontal=True, key="auth_tab", label_visibility="collapsed")
+            
+            if auth_tab == "🔑 Login":
+                login_username = st.text_input("Username", key="login_user", placeholder="Enter username")
+                login_password = st.text_input("Password", type="password", key="login_pass", placeholder="Enter password")
+                
+                if st.button("Login", use_container_width=True, key="login_btn", type="primary"):
+                    if login_username and login_password:
+                        success, msg = login_user(login_username, login_password)
+                        if success:
+                            st.success(msg)
+                            st.rerun()
+                        else:
+                            st.error(msg)
+                    else:
+                        st.warning("Please enter username and password")
+            
+            else:  # Register
+                reg_username = st.text_input("Username", key="reg_user", placeholder="Choose username")
+                reg_email = st.text_input("Email (optional)", key="reg_email", placeholder="your@email.com")
+                reg_password = st.text_input("Password", type="password", key="reg_pass", placeholder="Choose password")
+                reg_confirm = st.text_input("Confirm Password", type="password", key="reg_confirm", placeholder="Repeat password")
+                
+                if st.button("Create Account", use_container_width=True, key="reg_btn", type="primary"):
+                    if reg_username and reg_password:
+                        if reg_password != reg_confirm:
+                            st.error("Passwords don't match!")
+                        elif len(reg_password) < 4:
+                            st.warning("Password must be at least 4 characters")
+                        else:
+                            success, msg = register_user(reg_username, reg_password, reg_email if reg_email else None)
+                            if success:
+                                st.success("🎉 Account created successfully!")
+                                st.rerun()
+                            else:
+                                st.error(msg)
+                    else:
+                        st.warning("Please enter username and password")
+    
     st.markdown("---")
     
     # Recent Chat History
