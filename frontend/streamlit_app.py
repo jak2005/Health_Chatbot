@@ -402,48 +402,98 @@ if st.session_state.view_mode == 'admin':
         st.warning(f"Could not load appointments: {e}")
 
 elif st.session_state.view_mode == 'appointments':
-    # Appointment Booking Page
-    st.title("📅 Book an Appointment")
+    # Appointment Booking Page - Beautiful Design
+    st.markdown("""
+    <style>
+    .booking-header {
+        background: linear-gradient(135deg, #4CAF50 0%, #2196F3 100%);
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+    .booking-header h2 { color: white; margin: 0; font-size: 2em; }
+    .booking-header p { color: rgba(255,255,255,0.9); margin: 8px 0 0 0; }
+    .section-card {
+        background: linear-gradient(135deg, #1a1f2e 0%, #2d3548 100%);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 16px 0;
+    }
+    .section-title { color: #4CAF50; font-weight: 600; margin-bottom: 16px; font-size: 1.1em; }
+    </style>
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns([1, 6])
     with col1:
-        if st.button("⬅️ Back"):
+        if st.button("⬅️ Back", use_container_width=True):
             st.session_state.view_mode = 'chat'
             st.rerun()
     
-    st.markdown("---")
-    st.subheader("Fill in your details")
+    st.markdown("""
+    <div class="booking-header">
+        <h2>📅 Book an Appointment</h2>
+        <p>Schedule your healthcare visit in just a few steps</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     with st.form("appointment_form"):
-        col_a, col_b = st.columns(2)
+        # Contact Information Section
+        st.markdown('<div class="section-title">👤 Contact Information</div>', unsafe_allow_html=True)
+        col_a, col_b, col_c = st.columns(3)
         
         with col_a:
             user_name = st.text_input("Full Name *", placeholder="John Doe")
-            user_email = st.text_input("Email *", placeholder="john@example.com")
-            user_phone = st.text_input("Phone Number *", placeholder="+1 234 567 8900")
-        
         with col_b:
+            user_email = st.text_input("Email *", placeholder="john@example.com")
+        with col_c:
+            user_phone = st.text_input("Phone *", placeholder="+1 234 567 8900")
+        
+        st.markdown("---")
+        
+        # Appointment Details Section  
+        st.markdown('<div class="section-title">🏥 Appointment Details</div>', unsafe_allow_html=True)
+        col_d, col_e, col_f = st.columns(3)
+        
+        with col_d:
             appointment_type = st.selectbox(
-                "Appointment Type *",
-                ["General Consultation", "Specialist Referral", "Mental Health", "Follow-up Visit", "Vaccination", "Lab Work", "Other"]
+                "Type *",
+                ["🩺 General Consultation", "👨‍⚕️ Specialist Referral", "🧠 Mental Health", 
+                 "📋 Follow-up Visit", "💉 Vaccination", "🧪 Lab Work", "📝 Other"]
             )
-            
+        
+        with col_e:
             from datetime import date, timedelta
             min_date = date.today() + timedelta(days=1)
-            preferred_date = st.date_input("Preferred Date *", min_value=min_date)
-            
+            preferred_date = st.date_input("Date *", min_value=min_date)
+        
+        with col_f:
             preferred_time = st.selectbox(
-                "Preferred Time *",
-                ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"]
+                "Time *",
+                ["🌅 09:00 AM", "🌅 10:00 AM", "🌅 11:00 AM", "☀️ 12:00 PM", 
+                 "☀️ 02:00 PM", "☀️ 03:00 PM", "🌆 04:00 PM", "🌆 05:00 PM"]
             )
         
-        notes = st.text_area("Additional Notes (optional)", placeholder="Describe your symptoms or reason for visit...")
+        st.markdown("---")
         
-        submit_btn = st.form_submit_button("📋 Book Appointment", use_container_width=True)
+        # Notes Section
+        st.markdown('<div class="section-title">📝 Additional Notes</div>', unsafe_allow_html=True)
+        notes = st.text_area(
+            "Describe your symptoms or reason for visit (optional)", 
+            placeholder="Please share any relevant health information, symptoms, or questions you'd like to discuss...",
+            height=100
+        )
+        
+        st.markdown("")
+        submit_btn = st.form_submit_button("✨ Book My Appointment", use_container_width=True, type="primary")
         
         if submit_btn:
             if user_name and user_email and user_phone:
                 try:
+                    # Clean up the appointment type and time (remove emojis for storage)
+                    clean_type = appointment_type.split(" ", 1)[1] if " " in appointment_type else appointment_type
+                    clean_time = preferred_time.split(" ", 1)[1] if " " in preferred_time else preferred_time
+                    
                     response = requests.post(
                         f"{API_URL}/appointments",
                         json={
@@ -451,35 +501,68 @@ elif st.session_state.view_mode == 'appointments':
                             "user_name": user_name,
                             "user_email": user_email,
                             "user_phone": user_phone,
-                            "appointment_type": appointment_type,
+                            "appointment_type": clean_type,
                             "preferred_date": str(preferred_date),
-                            "preferred_time": preferred_time,
+                            "preferred_time": clean_time,
                             "notes": notes
                         },
                         timeout=10
                     )
                     if response.status_code == 200:
-                        st.success("✅ Appointment booked successfully! We will contact you to confirm.")
+                        st.success("🎉 Appointment booked successfully! We will contact you shortly to confirm.")
                         st.balloons()
                     else:
                         st.error("Failed to book appointment. Please try again.")
                 except Exception as e:
                     st.error(f"Error: {e}")
             else:
-                st.warning("Please fill in all required fields (*)")
+                st.warning("⚠️ Please fill in all required fields (*)")
 
 elif st.session_state.view_mode == 'my_appointments':
-    # My Appointments Page
-    st.title("📆 My Appointments")
+    # My Appointments Page - Beautiful Design
+    st.markdown("""
+    <style>
+    .appointment-card {
+        background: linear-gradient(135deg, #1a1f2e 0%, #2d3548 100%);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 16px 0;
+        border-left: 4px solid #4CAF50;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .appointment-card.pending { border-left-color: #FFC107; }
+    .appointment-card.confirmed { border-left-color: #4CAF50; }
+    .appointment-card.cancelled { border-left-color: #f44336; }
+    .apt-type { font-size: 1.3em; font-weight: 600; color: #fff; margin-bottom: 12px; }
+    .apt-detail { color: #b0b8c8; margin: 8px 0; font-size: 1em; }
+    .apt-status { 
+        display: inline-block; 
+        padding: 4px 12px; 
+        border-radius: 20px; 
+        font-size: 0.85em; 
+        font-weight: 500;
+        margin-top: 12px;
+    }
+    .status-pending { background: rgba(255, 193, 7, 0.2); color: #FFC107; }
+    .status-confirmed { background: rgba(76, 175, 80, 0.2); color: #4CAF50; }
+    .status-cancelled { background: rgba(244, 67, 54, 0.2); color: #f44336; }
+    </style>
+    """, unsafe_allow_html=True)
     
-    col1, col2 = st.columns([1, 6])
+    st.title("📆 My Appointments")
+    st.caption("Manage your healthcare appointments")
+    
+    col1, col2, col3 = st.columns([1, 1, 5])
     with col1:
-        if st.button("⬅️ Back"):
+        if st.button("⬅️ Back", use_container_width=True):
             st.session_state.view_mode = 'chat'
             st.rerun()
-    
     with col2:
-        if st.button("🔄 Refresh"):
+        if st.button("🔄 Refresh", use_container_width=True):
+            st.rerun()
+    with col3:
+        if st.button("➕ Book New", use_container_width=True, type="primary"):
+            st.session_state.view_mode = 'appointments'
             st.rerun()
     
     st.markdown("---")
@@ -492,20 +575,61 @@ elif st.session_state.view_mode == 'my_appointments':
             appointments = response.json().get('appointments', [])
             
             if appointments:
+                # Stats row
+                total = len(appointments)
+                pending = sum(1 for a in appointments if a['status'] == 'pending')
+                confirmed = sum(1 for a in appointments if a['status'] == 'confirmed')
+                
+                stat1, stat2, stat3 = st.columns(3)
+                stat1.metric("📋 Total", total)
+                stat2.metric("🟡 Pending", pending)
+                stat3.metric("🟢 Confirmed", confirmed)
+                
+                st.markdown("---")
+                
                 for apt in appointments:
-                    status_emoji = {"pending": "🟡", "confirmed": "🟢", "cancelled": "🔴"}.get(apt['status'], "⚪")
+                    status = apt['status']
+                    status_emoji = {"pending": "🟡", "confirmed": "🟢", "cancelled": "🔴"}.get(status, "⚪")
+                    status_class = f"status-{status}"
+                    card_class = status
                     
+                    # Beautiful card using columns
                     with st.container():
-                        st.markdown(f"""
-                        **{status_emoji} {apt['appointment_type']}**  
-                        📅 {apt['preferred_date']} at {apt['preferred_time']}  
-                        📝 {apt.get('notes', 'No notes')}  
-                        *Status: {apt['status'].title()}*
-                        """)
-                        st.markdown("---")
+                        card_col1, card_col2 = st.columns([4, 1])
+                        
+                        with card_col1:
+                            st.markdown(f"""
+                            <div class="appointment-card {card_class}">
+                                <div class="apt-type">{status_emoji} {apt['appointment_type']}</div>
+                                <div class="apt-detail">📅 <strong>{apt['preferred_date']}</strong> at <strong>{apt['preferred_time']}</strong></div>
+                                <div class="apt-detail">📝 {apt.get('notes', 'No additional notes')}</div>
+                                <div class="apt-status {status_class}">{status.upper()}</div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
+                        with card_col2:
+                            if status == 'pending':
+                                if st.button("❌ Cancel", key=f"cancel_{apt['id']}", use_container_width=True):
+                                    try:
+                                        cancel_resp = requests.put(
+                                            f"{API_URL}/appointments/{apt['id']}",
+                                            json={"status": "cancelled"},
+                                            timeout=10
+                                        )
+                                        if cancel_resp.status_code == 200:
+                                            st.rerun()
+                                    except:
+                                        pass
             else:
-                st.info("You don't have any appointments yet. Book one now!")
-                if st.button("📋 Book Appointment"):
+                st.markdown("""
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div style="font-size: 4em; margin-bottom: 20px;">📭</div>
+                    <h3 style="color: #888;">No appointments yet</h3>
+                    <p style="color: #666;">Book your first appointment to get started!</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button("📋 Book Your First Appointment", use_container_width=True, type="primary"):
                     st.session_state.view_mode = 'appointments'
                     st.rerun()
         else:
