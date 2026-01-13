@@ -340,29 +340,29 @@ async def chat(request: ChatRequest):
         # Save assistant response
         _save_history(request.user_id, response_text, "assistant")
         
-        # Format sources for frontend - show sources with relevance >= 15%
+        # Format sources for frontend - show ALL sources
         sources = []
-        MIN_RELEVANCE = 15  # Show sources with at least 15% relevance
         for doc in retrieved_docs:
             metadata = doc.get("metadata", {})
             relevance = 0
             if doc.get("distance") is not None:
                 relevance = round((1 - doc["distance"]) * 100, 1)
             
-            # Only include source if relevance is high enough
-            if relevance >= MIN_RELEVANCE:
-                # Get content snippet (first 100 chars)
-                content = doc.get("content", "")
-                snippet = content[:100] + "..." if len(content) > 100 else content
-                
-                source = {
-                    "category": metadata.get("category", "general"),
-                    "url": metadata.get("url", ""),
-                    "source": metadata.get("source", "Disease Symptoms Database" if metadata.get("category") == "diseases" else "Healthcare Resource"),
-                    "relevance": relevance,
-                    "snippet": snippet
-                }
-                sources.append(source)
+            # Get content snippet (first 150 chars)
+            content = doc.get("content", "")
+            snippet = content[:150] + "..." if len(content) > 150 else content
+            
+            source = {
+                "category": metadata.get("category", "general"),
+                "url": metadata.get("url", ""),
+                "source": metadata.get("source", "") or ("Disease Symptoms Database" if metadata.get("category") == "diseases" else "Healthcare Knowledge Base"),
+                "relevance": relevance,
+                "snippet": snippet
+            }
+            sources.append(source)
+            logger.info(f"Source: {source['source']} - Relevance: {relevance}%")
+        
+        logger.info(f"Returning {len(sources)} sources")
         
         logger.info(f"Successfully generated response for user: {request.user_id}")
         
