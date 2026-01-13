@@ -453,29 +453,45 @@ if st.session_state.view_mode == 'admin':
             all_appointments = apt_response.json().get('appointments', [])
             
             if all_appointments:
-                apt_table = []
+                # Show appointments with delete buttons
                 for apt in all_appointments:
-                    apt_table.append({
-                        "Date": apt.get('preferred_date', ''),
-                        "Time": apt.get('preferred_time', ''),
-                        "Name": apt.get('user_name', ''),
-                        "Email": apt.get('user_email', ''),
-                        "Phone": apt.get('user_phone', ''),
-                        "Type": apt.get('appointment_type', ''),
-                        "Status": apt.get('status', '').title()
-                    })
-                
-                st.dataframe(
-                    apt_table,
-                    column_config={
-                        "Status": st.column_config.TextColumn(
-                            "Status",
-                            help="pending/confirmed/cancelled"
-                        ),
-                    },
-                    use_container_width=True,
-                    hide_index=True,
-                )
+                    apt_id = apt.get('id')
+                    status = apt.get('status', 'pending')
+                    status_color = {"pending": "🟡", "confirmed": "🟢", "cancelled": "🔴"}.get(status, "⚪")
+                    
+                    col1, col2, col3, col4, col5 = st.columns([2, 2, 2, 2, 1])
+                    
+                    with col1:
+                        st.caption("📅 Date/Time")
+                        st.write(f"{apt.get('preferred_date', '')} {apt.get('preferred_time', '')}")
+                    
+                    with col2:
+                        st.caption("👤 Patient")
+                        st.write(f"{apt.get('user_name', 'N/A')}")
+                        st.caption(apt.get('user_email', ''))
+                    
+                    with col3:
+                        st.caption("📞 Phone")
+                        st.write(apt.get('user_phone', 'N/A'))
+                    
+                    with col4:
+                        st.caption("📋 Type / Status")
+                        st.write(f"{apt.get('appointment_type', '')} {status_color}")
+                    
+                    with col5:
+                        st.caption("Actions")
+                        if st.button("🗑️", key=f"del_apt_{apt_id}", help="Delete"):
+                            try:
+                                del_resp = requests.delete(f"{API_URL}/appointments/{apt_id}", timeout=10)
+                                if del_resp.status_code == 200:
+                                    st.success("Deleted!")
+                                    st.rerun()
+                                else:
+                                    st.error("Failed")
+                            except Exception as e:
+                                st.error(str(e))
+                    
+                    st.markdown("---")
             else:
                 st.info("No appointments booked yet.")
     except Exception as e:

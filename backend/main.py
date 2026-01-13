@@ -512,6 +512,49 @@ async def update_appointment_status(appointment_id: int, request: AppointmentSta
         raise HTTPException(status_code=404, detail="Appointment not found")
 
 
+@app.delete("/appointments/{appointment_id}")
+async def delete_appointment(appointment_id: int):
+    """Delete an appointment (admin only)"""
+    try:
+        from persistence import SessionLocal
+        from db_manager import Appointment
+        
+        db = SessionLocal()
+        appointment = db.query(Appointment).filter(Appointment.id == appointment_id).first()
+        
+        if appointment:
+            db.delete(appointment)
+            db.commit()
+            db.close()
+            
+            log_event("APPOINTMENT_DELETED", "admin", f"Deleted appointment ID: {appointment_id}")
+            
+            return {
+                "status": "success",
+                "message": f"Appointment {appointment_id} deleted successfully"
+            }
+        else:
+            db.close()
+            raise HTTPException(status_code=404, detail="Appointment not found")
+    except Exception as e:
+        logger.error(f"Error deleting appointment: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/admin/feedback")
+async def get_admin_feedback():
+    """Get all feedback for admin dashboard"""
+    try:
+        feedback = _load_feedback()
+        return {
+            "status": "success",
+            "feedback": feedback
+        }
+    except Exception as e:
+        logger.error(f"Error loading feedback: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 # ============= Auth Endpoints =============
 
 @app.post("/auth/register")
