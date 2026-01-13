@@ -1,0 +1,248 @@
+[
+  {
+    "id": "disease_fungal_infection",
+    "content": "Fungal infection: Common symptoms include dischromic _patches, itching, nodal_skin_eruptions, skin_rash. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_allergy",
+    "content": "Allergy: Common symptoms include chills, continuous_sneezing, shivering, watering_from_eyes. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_gerd",
+    "content": "GERD: Common symptoms include acidity, chest_pain, cough, stomach_pain, ulcers_on_tongue, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_chronic_cholestasis",
+    "content": "Chronic cholestasis: Common symptoms include abdominal_pain, itching, loss_of_appetite, nausea, vomiting, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_drug_reaction",
+    "content": "Drug Reaction: Common symptoms include burning_micturition, itching, skin_rash, spotting_ urination, stomach_pain. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_peptic_ulcer_diseae",
+    "content": "Peptic ulcer diseae: Common symptoms include abdominal_pain, indigestion, internal_itching, loss_of_appetite, passage_of_gases, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_aids",
+    "content": "AIDS: Common symptoms include extra_marital_contacts, high_fever, muscle_wasting, patches_in_throat. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_diabetes_",
+    "content": "Diabetes : Common symptoms include blurred_and_distorted_vision, excessive_hunger, fatigue, increased_appetite, irregular_sugar_level, lethargy, obesity, polyuria, restlessness, weight_loss. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_gastroenteritis",
+    "content": "Gastroenteritis: Common symptoms include dehydration, diarrhoea, sunken_eyes, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_bronchial_asthma",
+    "content": "Bronchial Asthma: Common symptoms include breathlessness, cough, family_history, fatigue, high_fever, mucoid_sputum. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hypertension_",
+    "content": "Hypertension : Common symptoms include chest_pain, dizziness, headache, lack_of_concentration, loss_of_balance. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_migraine",
+    "content": "Migraine: Common symptoms include acidity, blurred_and_distorted_vision, depression, excessive_hunger, headache, indigestion, irritability, stiff_neck, visual_disturbances. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_cervical_spondylosis",
+    "content": "Cervical spondylosis: Common symptoms include back_pain, dizziness, loss_of_balance, neck_pain, weakness_in_limbs. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_paralysis_(brain_hemorrhage)",
+    "content": "Paralysis (brain hemorrhage): Common symptoms include altered_sensorium, headache, vomiting, weakness_of_one_body_side. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_jaundice",
+    "content": "Jaundice: Common symptoms include abdominal_pain, dark_urine, fatigue, high_fever, itching, vomiting, weight_loss, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_malaria",
+    "content": "Malaria: Common symptoms include chills, diarrhoea, headache, high_fever, muscle_pain, nausea, sweating, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_chicken_pox",
+    "content": "Chicken pox: Common symptoms include fatigue, headache, high_fever, itching, lethargy, loss_of_appetite, malaise, mild_fever, red_spots_over_body, skin_rash, swelled_lymph_nodes. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_dengue",
+    "content": "Dengue: Common symptoms include back_pain, chills, fatigue, headache, high_fever, joint_pain, loss_of_appetite, malaise, muscle_pain, nausea, pain_behind_the_eyes, red_spots_over_body, skin_rash, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_typhoid",
+    "content": "Typhoid: Common symptoms include abdominal_pain, belly_pain, chills, constipation, diarrhoea, fatigue, headache, high_fever, nausea, toxic_look_(typhos), vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hepatitis_a",
+    "content": "hepatitis A: Common symptoms include abdominal_pain, dark_urine, diarrhoea, joint_pain, loss_of_appetite, mild_fever, muscle_pain, nausea, vomiting, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hepatitis_b",
+    "content": "Hepatitis B: Common symptoms include abdominal_pain, dark_urine, fatigue, itching, lethargy, loss_of_appetite, malaise, receiving_blood_transfusion, receiving_unsterile_injections, yellow_urine, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hepatitis_c",
+    "content": "Hepatitis C: Common symptoms include family_history, fatigue, loss_of_appetite, nausea, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hepatitis_d",
+    "content": "Hepatitis D: Common symptoms include abdominal_pain, dark_urine, fatigue, joint_pain, loss_of_appetite, nausea, vomiting, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hepatitis_e",
+    "content": "Hepatitis E: Common symptoms include abdominal_pain, acute_liver_failure, coma, dark_urine, fatigue, high_fever, joint_pain, loss_of_appetite, nausea, stomach_bleeding, vomiting, yellowing_of_eyes, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_alcoholic_hepatitis",
+    "content": "Alcoholic hepatitis: Common symptoms include abdominal_pain, distention_of_abdomen, fluid_overload, history_of_alcohol_consumption, swelling_of_stomach, vomiting, yellowish_skin. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_tuberculosis",
+    "content": "Tuberculosis: Common symptoms include blood_in_sputum, breathlessness, chest_pain, chills, cough, fatigue, high_fever, loss_of_appetite, malaise, mild_fever, phlegm, sweating, swelled_lymph_nodes, vomiting, weight_loss, yellowing_of_eyes. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_common_cold",
+    "content": "Common Cold: Common symptoms include chest_pain, chills, congestion, continuous_sneezing, cough, fatigue, headache, high_fever, loss_of_smell, malaise, muscle_pain, phlegm, redness_of_eyes, runny_nose, sinus_pressure, swelled_lymph_nodes, throat_irritation. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_pneumonia",
+    "content": "Pneumonia: Common symptoms include breathlessness, chest_pain, chills, cough, fast_heart_rate, fatigue, high_fever, malaise, phlegm, rusty_sputum, sweating. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_dimorphic_hemmorhoids(piles)",
+    "content": "Dimorphic hemmorhoids(piles): Common symptoms include bloody_stool, constipation, irritation_in_anus, pain_during_bowel_movements, pain_in_anal_region. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_heart_attack",
+    "content": "Heart attack: Common symptoms include breathlessness, chest_pain, sweating, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_varicose_veins",
+    "content": "Varicose veins: Common symptoms include bruising, cramps, fatigue, obesity, prominent_veins_on_calf, swollen_blood_vessels, swollen_legs. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hypothyroidism",
+    "content": "Hypothyroidism: Common symptoms include abnormal_menstruation, brittle_nails, cold_hands_and_feets, depression, dizziness, enlarged_thyroid, fatigue, irritability, lethargy, mood_swings, puffy_face_and_eyes, swollen_extremeties, weight_gain. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hyperthyroidism",
+    "content": "Hyperthyroidism: Common symptoms include abnormal_menstruation, diarrhoea, excessive_hunger, fast_heart_rate, fatigue, irritability, mood_swings, muscle_weakness, restlessness, sweating, weight_loss. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_hypoglycemia",
+    "content": "Hypoglycemia: Common symptoms include anxiety, blurred_and_distorted_vision, drying_and_tingling_lips, excessive_hunger, fatigue, headache, irritability, nausea, palpitations, slurred_speech, sweating, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_osteoarthristis",
+    "content": "Osteoarthristis: Common symptoms include hip_joint_pain, joint_pain, knee_pain, neck_pain, painful_walking, swelling_joints. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_arthritis",
+    "content": "Arthritis: Common symptoms include movement_stiffness, muscle_weakness, painful_walking, stiff_neck, swelling_joints. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_(vertigo)_paroymsal__positional_vertigo",
+    "content": "(vertigo) Paroymsal  Positional Vertigo: Common symptoms include headache, loss_of_balance, nausea, spinning_movements, unsteadiness, vomiting. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_acne",
+    "content": "Acne: Common symptoms include blackheads, pus_filled_pimples, scurring, skin_rash. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_urinary_tract_infection",
+    "content": "Urinary tract infection: Common symptoms include bladder_discomfort, burning_micturition, continuous_feel_of_urine, foul_smell_of urine. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_psoriasis",
+    "content": "Psoriasis: Common symptoms include inflammatory_nails, joint_pain, silver_like_dusting, skin_peeling, skin_rash, small_dents_in_nails. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  },
+  {
+    "id": "disease_impetigo",
+    "content": "Impetigo: Common symptoms include blister, high_fever, red_sore_around_nose, skin_rash, yellow_crust_ooze. If you experience these symptoms, consult a healthcare professional for proper diagnosis and treatment.",
+    "category": "diseases",
+    "source": "Disease Symptoms Database"
+  }
+]
