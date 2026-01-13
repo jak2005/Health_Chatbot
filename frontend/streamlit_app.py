@@ -326,6 +326,28 @@ with st.sidebar:
                     else:
                         st.warning("Please enter username and password")
     
+    # Data Protection Section
+    with st.expander("🔒 Data Protection"):
+        st.markdown("""
+        **Your data is protected by:**
+        
+        ✅ **AES-256 Encryption**  
+        _Emails, phones & notes are encrypted_
+        
+        ✅ **Rate Limiting**  
+        _60 requests/minute max_
+        
+        ✅ **Brute Force Protection**  
+        _Account locks after 5 failed logins_
+        
+        ✅ **Input Validation**  
+        _XSS & injection prevention_
+        
+        ✅ **Audit Logging**  
+        _All access is logged_
+        """)
+        st.caption("🔐 HIPAA-inspired security")
+    
     st.markdown("---")
     
     # Recent Chat History

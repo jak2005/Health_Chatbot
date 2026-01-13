@@ -291,6 +291,12 @@ def validate_email(email: str) -> Tuple[bool, str]:
 def validate_phone(phone: str) -> Tuple[bool, str]:
     return security_manager.validate_phone(phone)
 
+def validate_username(username: str) -> Tuple[bool, str]:
+    return security_manager.validate_username(username)
+
+def validate_password(password: str) -> Tuple[bool, str]:
+    return security_manager.validate_password(password)
+
 def sanitize(text: str, max_length: int = 1000) -> str:
     return security_manager.sanitize_input(text, max_length)
 
