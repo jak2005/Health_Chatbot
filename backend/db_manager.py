@@ -60,6 +60,19 @@ class Appointment(Base):
     notes = Column(Text, nullable=True)
     status = Column(String, default="pending")  # pending, confirmed, cancelled
     created_at = Column(DateTime, default=datetime.utcnow)
+    is_encrypted = Column(Integer, default=1)  # 1 = sensitive data is encrypted
+
+class SecurityLog(Base):
+    """Audit log for security events"""
+    __tablename__ = "security_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    event_type = Column(String, index=True)  # LOGIN, LOGOUT, DATA_ACCESS, etc.
+    user_id = Column(String, index=True)
+    ip_address = Column(String, nullable=True)
+    details = Column(Text, nullable=True)
+    severity = Column(String, default="INFO")  # INFO, WARNING, ERROR, CRITICAL
+    created_at = Column(DateTime, default=datetime.utcnow)
 
 # Create tables
 def init_db():

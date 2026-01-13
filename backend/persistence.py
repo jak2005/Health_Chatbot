@@ -8,9 +8,11 @@ from typing import Dict, List
 from datetime import datetime
 from sqlalchemy.orm import Session
 try:
-    from .db_manager import SessionLocal, ChatHistory, Feedback, Appointment, init_db
+    from .db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, init_db
+    from .security import encrypt, decrypt, sanitize, validate_email, validate_phone, log_event
 except ImportError:
-    from db_manager import SessionLocal, ChatHistory, Feedback, Appointment, init_db
+    from db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, init_db
+    from security import encrypt, decrypt, sanitize, validate_email, validate_phone, log_event
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -96,24 +98,50 @@ def _get_history(user_id: str) -> List[Dict]:
 # ============= Appointment Persistence =============
 
 def _save_appointment(appointment_data: Dict) -> int:
-    """Save a new appointment to SQLite, returns appointment ID"""
+    """Save a new appointment to SQLite with encrypted sensitive data, returns appointment ID"""
     try:
+        # Validate inputs
+        email = appointment_data.get("user_email", "")
+        phone = appointment_data.get("user_phone", "")
+        
+        email_valid, email_err = validate_email(email)
+        if not email_valid:
+            logger.warning(f"Invalid email format: {email_err}")
+        
+        phone_valid, phone_err = validate_phone(phone)
+        if not phone_valid:
+            logger.warning(f"Invalid phone format: {phone_err}")
+        
+        # Sanitize text inputs
+        user_name = sanitize(appointment_data.get("user_name", ""), max_length=100)
+        notes = sanitize(appointment_data.get("notes", ""), max_length=1000)
+        
+        # Encrypt sensitive data
+        encrypted_email = encrypt(email)
+        encrypted_phone = encrypt(phone)
+        encrypted_notes = encrypt(notes) if notes else ""
+        
         db = SessionLocal()
         new_appointment = Appointment(
             user_id=appointment_data.get("user_id", "default_user"),
-            user_name=appointment_data.get("user_name", ""),
-            user_email=appointment_data.get("user_email", ""),
-            user_phone=appointment_data.get("user_phone", ""),
+            user_name=user_name,
+            user_email=encrypted_email,
+            user_phone=encrypted_phone,
             appointment_type=appointment_data.get("appointment_type", "General"),
             preferred_date=appointment_data.get("preferred_date", ""),
             preferred_time=appointment_data.get("preferred_time", ""),
-            notes=appointment_data.get("notes", ""),
+            notes=encrypted_notes,
             status="pending",
-            created_at=datetime.utcnow()
+            created_at=datetime.utcnow(),
+            is_encrypted=1
         )
         db.add(new_appointment)
         db.commit()
         appointment_id = new_appointment.id
+        
+        # Log the data access event
+        log_event("APPOINTMENT_CREATED", appointment_data.get("user_id"), f"Appointment ID: {appointment_id}")
+        
         db.close()
         return appointment_id
     except Exception as e:
@@ -121,7 +149,7 @@ def _save_appointment(appointment_data: Dict) -> int:
         return -1
 
 def _get_user_appointments(user_id: str) -> List[Dict]:
-    """Get all appointments for a specific user"""
+    """Get all appointments for a specific user, decrypting sensitive data"""
     try:
         db = SessionLocal()
         appointments = db.query(Appointment).filter(
@@ -129,58 +157,98 @@ def _get_user_appointments(user_id: str) -> List[Dict]:
         ).order_by(Appointment.created_at.desc()).all()
         db.close()
         
-        return [
-            {
+        # Log data access
+        log_event("DATA_ACCESS", user_id, f"Accessed {len(appointments)} appointments")
+        
+        result = []
+        for a in appointments:
+            # Decrypt sensitive fields if encrypted
+            is_encrypted = getattr(a, 'is_encrypted', 0)
+            
+            if is_encrypted:
+                user_email = decrypt(a.user_email) if a.user_email else ""
+                user_phone = decrypt(a.user_phone) if a.user_phone else ""
+                notes = decrypt(a.notes) if a.notes else ""
+            else:
+                user_email = a.user_email
+                user_phone = a.user_phone
+                notes = a.notes
+            
+            result.append({
                 "id": a.id,
                 "user_name": a.user_name,
-                "user_email": a.user_email,
-                "user_phone": a.user_phone,
+                "user_email": user_email,
+                "user_phone": user_phone,
                 "appointment_type": a.appointment_type,
                 "preferred_date": a.preferred_date,
                 "preferred_time": a.preferred_time,
-                "notes": a.notes,
+                "notes": notes,
                 "status": a.status,
                 "created_at": a.created_at.isoformat()
-            } for a in appointments
-        ]
+            })
+        
+        return result
     except Exception as e:
         logger.error(f"Error loading user appointments from SQL: {e}")
         return []
 
 def _get_all_appointments() -> List[Dict]:
-    """Get all appointments (admin function)"""
+    """Get all appointments (admin function) with decrypted sensitive data"""
     try:
         db = SessionLocal()
         appointments = db.query(Appointment).order_by(Appointment.created_at.desc()).all()
         db.close()
         
-        return [
-            {
+        # Log admin data access
+        log_event("ADMIN_DATA_ACCESS", "admin", f"Accessed all appointments ({len(appointments)} records)")
+        
+        result = []
+        for a in appointments:
+            # Decrypt sensitive fields if encrypted
+            is_encrypted = getattr(a, 'is_encrypted', 0)
+            
+            if is_encrypted:
+                user_email = decrypt(a.user_email) if a.user_email else ""
+                user_phone = decrypt(a.user_phone) if a.user_phone else ""
+                notes = decrypt(a.notes) if a.notes else ""
+            else:
+                user_email = a.user_email
+                user_phone = a.user_phone
+                notes = a.notes
+            
+            result.append({
                 "id": a.id,
                 "user_id": a.user_id,
                 "user_name": a.user_name,
-                "user_email": a.user_email,
-                "user_phone": a.user_phone,
+                "user_email": user_email,
+                "user_phone": user_phone,
                 "appointment_type": a.appointment_type,
                 "preferred_date": a.preferred_date,
                 "preferred_time": a.preferred_time,
-                "notes": a.notes,
+                "notes": notes,
                 "status": a.status,
                 "created_at": a.created_at.isoformat()
-            } for a in appointments
-        ]
+            })
+        
+        return result
     except Exception as e:
         logger.error(f"Error loading all appointments from SQL: {e}")
         return []
 
 def _update_appointment_status(appointment_id: int, new_status: str) -> bool:
-    """Update the status of an appointment"""
+    """Update the status of an appointment with audit logging"""
     try:
         db = SessionLocal()
         appointment = db.query(Appointment).filter(Appointment.id == appointment_id).first()
         if appointment:
+            old_status = appointment.status
             appointment.status = new_status
             db.commit()
+            
+            # Log status change
+            log_event("APPOINTMENT_STATUS_CHANGE", appointment.user_id, 
+                     f"Appointment {appointment_id}: {old_status} -> {new_status}")
+            
             db.close()
             return True
         db.close()

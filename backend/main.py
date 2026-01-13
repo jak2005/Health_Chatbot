@@ -25,6 +25,12 @@ from auth import (
     decode_token, get_user_by_username, get_user_by_id
 )
 
+# Import security helpers
+from security import (
+    security_manager, sanitize, validate_email, validate_phone,
+    validate_username, validate_password, log_event
+)
+
 # Pydantic v1 compatible imports
 try:
     from pydantic import BaseModel, Field
@@ -266,6 +272,37 @@ app.add_middleware(
 )
 
 
+# ============= Security Middleware =============
+
+@app.middleware("http")
+async def security_middleware(request: Request, call_next):
+    """Add security headers and rate limiting"""
+    # Get client IP
+    client_ip = request.client.host if request.client else "unknown"
+    
+    # Rate limiting (60 requests per minute)
+    allowed, message = security_manager.check_rate_limit(client_ip, limit=60, window=60)
+    if not allowed:
+        log_event("RATE_LIMIT_EXCEEDED", client_ip, f"Path: {request.url.path}")
+        return JSONResponse(
+            status_code=429,
+            content={"error": message, "status_code": 429}
+        )
+    
+    # Process request
+    response = await call_next(request)
+    
+    # Add security headers
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    
+    return response
+
+
 # ============= Error Handlers =============
 
 @app.exception_handler(HTTPException)
@@ -478,13 +515,36 @@ async def update_appointment_status(appointment_id: int, request: AppointmentSta
 # ============= Auth Endpoints =============
 
 @app.post("/auth/register")
-async def register(request: RegisterRequest):
-    """Register a new user"""
-    user = create_user(request.username, request.password, request.email)
+async def register(request: RegisterRequest, req: Request):
+    """Register a new user with input validation"""
+    # Validate username
+    username_valid, username_err = validate_username(request.username)
+    if not username_valid:
+        raise HTTPException(status_code=400, detail=username_err)
+    
+    # Validate password
+    password_valid, password_err = validate_password(request.password)
+    if not password_valid:
+        raise HTTPException(status_code=400, detail=password_err)
+    
+    # Validate email if provided
+    if request.email:
+        email_valid, email_err = validate_email(request.email)
+        if not email_valid:
+            raise HTTPException(status_code=400, detail=email_err)
+    
+    # Sanitize inputs
+    clean_username = sanitize(request.username, max_length=50)
+    clean_email = sanitize(request.email, max_length=100) if request.email else None
+    
+    user = create_user(clean_username, request.password, clean_email)
     if not user:
         raise HTTPException(status_code=400, detail="Username already exists")
     
-    logger.info(f"New user registered: {request.username}")
+    # Log successful registration
+    client_ip = req.client.host if req.client else "unknown"
+    log_event("USER_REGISTERED", clean_username, f"IP: {client_ip}")
+    logger.info(f"New user registered: {clean_username}")
     
     # Create token for auto-login after registration
     token = create_access_token({"sub": str(user.id), "username": user.username})
@@ -500,11 +560,24 @@ async def register(request: RegisterRequest):
 
 
 @app.post("/auth/login")
-async def login(request: LoginRequest):
-    """Login and get access token"""
+async def login(request: LoginRequest, req: Request):
+    """Login with brute force protection"""
+    client_ip = req.client.host if req.client else "unknown"
+    
+    # Check for brute force attempts
+    allowed, message = security_manager.track_failed_login(request.username)
+    if not allowed:
+        log_event("ACCOUNT_LOCKED", request.username, f"IP: {client_ip}")
+        raise HTTPException(status_code=429, detail=message)
+    
     user = authenticate_user(request.username, request.password)
     if not user:
+        security_manager.log_authentication(request.username, False, client_ip)
         raise HTTPException(status_code=401, detail="Invalid username or password")
+    
+    # Clear failed attempts on successful login
+    security_manager.clear_failed_attempts(request.username)
+    security_manager.log_authentication(request.username, True, client_ip)
     
     token = create_access_token({"sub": str(user.id), "username": user.username})
     logger.info(f"User logged in: {request.username}")
