@@ -340,9 +340,9 @@ async def chat(request: ChatRequest):
         # Save assistant response
         _save_history(request.user_id, response_text, "assistant")
         
-        # Format sources for frontend - only include relevant ones (>30% relevance)
+        # Format sources for frontend - show sources with relevance >= 15%
         sources = []
-        MIN_RELEVANCE = 30  # Only show sources with at least 30% relevance
+        MIN_RELEVANCE = 15  # Show sources with at least 15% relevance
         for doc in retrieved_docs:
             metadata = doc.get("metadata", {})
             relevance = 0
@@ -351,11 +351,16 @@ async def chat(request: ChatRequest):
             
             # Only include source if relevance is high enough
             if relevance >= MIN_RELEVANCE:
+                # Get content snippet (first 100 chars)
+                content = doc.get("content", "")
+                snippet = content[:100] + "..." if len(content) > 100 else content
+                
                 source = {
                     "category": metadata.get("category", "general"),
                     "url": metadata.get("url", ""),
-                    "source": metadata.get("source", ""),
-                    "relevance": relevance
+                    "source": metadata.get("source", "Disease Symptoms Database" if metadata.get("category") == "diseases" else "Healthcare Resource"),
+                    "relevance": relevance,
+                    "snippet": snippet
                 }
                 sources.append(source)
         

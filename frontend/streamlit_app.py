@@ -701,18 +701,23 @@ else:
             
             # Show sources if available
             if message.get("sources"):
-                with st.expander("📚 Sources"):
+                with st.expander("📚 Sources & References"):
                     for source in message["sources"]:
                         url = source.get('url', '')
                         source_name = source.get('source', 'Healthcare Resource')
+                        relevance = source.get('relevance', 0)
+                        snippet = source.get('snippet', '')
+                        category = source.get('category', 'general')
+                        
                         if url:
-                            # Extract topic name from URL (e.g., /glossary/affordability-exemption/ -> Affordability Exemption)
                             topic = url.rstrip('/').split('/')[-1].replace('-', ' ').title()
-                            st.markdown(f"🔗 [{topic}]({url}) - {source_name}")
+                            st.markdown(f"**🔗 [{topic}]({url})** - {source_name} ({relevance}% match)")
                         else:
-                            # Fallback if no URL
-                            category = source.get('category', 'general')
-                            st.markdown(f"📄 {source_name} ({category.title()})")
+                            st.markdown(f"**📄 {source_name}** ({category.title()}, {relevance}% match)")
+                        
+                        if snippet:
+                            st.caption(f"_{snippet}_")
+                        st.markdown("---")
     
     # Chat input
     if prompt := st.chat_input("How can I help you today?"):
@@ -742,18 +747,25 @@ else:
                 
                 # Show sources
                 if sources:
-                    with st.expander("📚 Sources"):
+                    with st.expander("📚 Sources & References", expanded=True):
                         for source in sources:
                             url = source.get('url', '')
                             source_name = source.get('source', 'Healthcare Resource')
+                            relevance = source.get('relevance', 0)
+                            snippet = source.get('snippet', '')
+                            category = source.get('category', 'general')
+                            
+                            # Show source with relevance
                             if url:
-                                # Extract topic name from URL (e.g., /glossary/affordability-exemption/ -> Affordability Exemption)
                                 topic = url.rstrip('/').split('/')[-1].replace('-', ' ').title()
-                                st.markdown(f"🔗 [{topic}]({url}) - {source_name}")
+                                st.markdown(f"**🔗 [{topic}]({url})** - {source_name} ({relevance}% match)")
                             else:
-                                # Fallback if no URL
-                                category = source.get('category', 'general')
-                                st.markdown(f"📄 {source_name} ({category.title()})")
+                                st.markdown(f"**📄 {source_name}** ({category.title()}, {relevance}% match)")
+                            
+                            # Show snippet if available
+                            if snippet:
+                                st.caption(f"_{snippet}_")
+                            st.markdown("---")
             else:
                 error_msg = "I'm having trouble connecting to the server. Please try again."
                 st.session_state.messages.append({"role": "assistant", "content": error_msg})
