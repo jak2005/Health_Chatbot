@@ -265,6 +265,15 @@ with st.sidebar:
             elif password:
                 st.error("Incorrect password")
     
+    # Appointments Section
+    with st.expander("📅 Appointments"):
+        if st.button("📋 Book Appointment", use_container_width=True, key="book_apt_btn"):
+            st.session_state.view_mode = 'appointments'
+            st.rerun()
+        if st.button("📆 My Appointments", use_container_width=True, key="my_apt_btn"):
+            st.session_state.view_mode = 'my_appointments'
+            st.rerun()
+    
     st.markdown("---")
     
     # Recent Chat History
@@ -353,6 +362,156 @@ if st.session_state.view_mode == 'admin':
         )
     else:
         st.info("No feedback received yet.")
+    
+    # Admin Appointments Section
+    st.markdown("---")
+    st.subheader("📅 All Appointments")
+    
+    try:
+        apt_response = requests.get(f"{API_URL}/admin/appointments", timeout=10)
+        if apt_response.status_code == 200:
+            all_appointments = apt_response.json().get('appointments', [])
+            
+            if all_appointments:
+                apt_table = []
+                for apt in all_appointments:
+                    apt_table.append({
+                        "Date": apt.get('preferred_date', ''),
+                        "Time": apt.get('preferred_time', ''),
+                        "Name": apt.get('user_name', ''),
+                        "Email": apt.get('user_email', ''),
+                        "Phone": apt.get('user_phone', ''),
+                        "Type": apt.get('appointment_type', ''),
+                        "Status": apt.get('status', '').title()
+                    })
+                
+                st.dataframe(
+                    apt_table,
+                    column_config={
+                        "Status": st.column_config.TextColumn(
+                            "Status",
+                            help="pending/confirmed/cancelled"
+                        ),
+                    },
+                    use_container_width=True,
+                    hide_index=True,
+                )
+            else:
+                st.info("No appointments booked yet.")
+    except Exception as e:
+        st.warning(f"Could not load appointments: {e}")
+
+elif st.session_state.view_mode == 'appointments':
+    # Appointment Booking Page
+    st.title("📅 Book an Appointment")
+    
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        if st.button("⬅️ Back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+    
+    st.markdown("---")
+    st.subheader("Fill in your details")
+    
+    with st.form("appointment_form"):
+        col_a, col_b = st.columns(2)
+        
+        with col_a:
+            user_name = st.text_input("Full Name *", placeholder="John Doe")
+            user_email = st.text_input("Email *", placeholder="john@example.com")
+            user_phone = st.text_input("Phone Number *", placeholder="+1 234 567 8900")
+        
+        with col_b:
+            appointment_type = st.selectbox(
+                "Appointment Type *",
+                ["General Consultation", "Specialist Referral", "Mental Health", "Follow-up Visit", "Vaccination", "Lab Work", "Other"]
+            )
+            
+            from datetime import date, timedelta
+            min_date = date.today() + timedelta(days=1)
+            preferred_date = st.date_input("Preferred Date *", min_value=min_date)
+            
+            preferred_time = st.selectbox(
+                "Preferred Time *",
+                ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"]
+            )
+        
+        notes = st.text_area("Additional Notes (optional)", placeholder="Describe your symptoms or reason for visit...")
+        
+        submit_btn = st.form_submit_button("📋 Book Appointment", use_container_width=True)
+        
+        if submit_btn:
+            if user_name and user_email and user_phone:
+                try:
+                    response = requests.post(
+                        f"{API_URL}/appointments",
+                        json={
+                            "user_id": st.session_state.get('user_id', 'default_user'),
+                            "user_name": user_name,
+                            "user_email": user_email,
+                            "user_phone": user_phone,
+                            "appointment_type": appointment_type,
+                            "preferred_date": str(preferred_date),
+                            "preferred_time": preferred_time,
+                            "notes": notes
+                        },
+                        timeout=10
+                    )
+                    if response.status_code == 200:
+                        st.success("✅ Appointment booked successfully! We will contact you to confirm.")
+                        st.balloons()
+                    else:
+                        st.error("Failed to book appointment. Please try again.")
+                except Exception as e:
+                    st.error(f"Error: {e}")
+            else:
+                st.warning("Please fill in all required fields (*)")
+
+elif st.session_state.view_mode == 'my_appointments':
+    # My Appointments Page
+    st.title("📆 My Appointments")
+    
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        if st.button("⬅️ Back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+    
+    with col2:
+        if st.button("🔄 Refresh"):
+            st.rerun()
+    
+    st.markdown("---")
+    
+    try:
+        user_id = st.session_state.get('user_id', 'default_user')
+        response = requests.get(f"{API_URL}/appointments/{user_id}", timeout=10)
+        
+        if response.status_code == 200:
+            appointments = response.json().get('appointments', [])
+            
+            if appointments:
+                for apt in appointments:
+                    status_emoji = {"pending": "🟡", "confirmed": "🟢", "cancelled": "🔴"}.get(apt['status'], "⚪")
+                    
+                    with st.container():
+                        st.markdown(f"""
+                        **{status_emoji} {apt['appointment_type']}**  
+                        📅 {apt['preferred_date']} at {apt['preferred_time']}  
+                        📝 {apt.get('notes', 'No notes')}  
+                        *Status: {apt['status'].title()}*
+                        """)
+                        st.markdown("---")
+            else:
+                st.info("You don't have any appointments yet. Book one now!")
+                if st.button("📋 Book Appointment"):
+                    st.session_state.view_mode = 'appointments'
+                    st.rerun()
+        else:
+            st.error("Could not load appointments")
+    except Exception as e:
+        st.error(f"Error loading appointments: {e}")
 
 else:
     # Main chat interface

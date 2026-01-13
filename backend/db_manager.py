@@ -46,6 +46,21 @@ class User(Base):
     is_admin = Column(Integer, default=0)  # 0 = regular user, 1 = admin
     created_at = Column(DateTime, default=datetime.utcnow)
 
+class Appointment(Base):
+    __tablename__ = "appointments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(String, index=True)
+    user_name = Column(String)
+    user_email = Column(String)
+    user_phone = Column(String)
+    appointment_type = Column(String)  # General, Specialist, Mental Health, etc.
+    preferred_date = Column(String)  # Store as string for simplicity
+    preferred_time = Column(String)
+    notes = Column(Text, nullable=True)
+    status = Column(String, default="pending")  # pending, confirmed, cancelled
+    created_at = Column(DateTime, default=datetime.utcnow)
+
 # Create tables
 def init_db():
     Base.metadata.create_all(bind=engine)

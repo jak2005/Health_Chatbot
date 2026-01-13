@@ -8,9 +8,9 @@ from typing import Dict, List
 from datetime import datetime
 from sqlalchemy.orm import Session
 try:
-    from .db_manager import SessionLocal, ChatHistory, Feedback, init_db
+    from .db_manager import SessionLocal, ChatHistory, Feedback, Appointment, init_db
 except ImportError:
-    from db_manager import SessionLocal, ChatHistory, Feedback, init_db
+    from db_manager import SessionLocal, ChatHistory, Feedback, Appointment, init_db
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -92,6 +92,102 @@ def _get_history(user_id: str) -> List[Dict]:
     except Exception as e:
         logger.error(f"Error loading history from SQL: {e}")
         return []
+
+# ============= Appointment Persistence =============
+
+def _save_appointment(appointment_data: Dict) -> int:
+    """Save a new appointment to SQLite, returns appointment ID"""
+    try:
+        db = SessionLocal()
+        new_appointment = Appointment(
+            user_id=appointment_data.get("user_id", "default_user"),
+            user_name=appointment_data.get("user_name", ""),
+            user_email=appointment_data.get("user_email", ""),
+            user_phone=appointment_data.get("user_phone", ""),
+            appointment_type=appointment_data.get("appointment_type", "General"),
+            preferred_date=appointment_data.get("preferred_date", ""),
+            preferred_time=appointment_data.get("preferred_time", ""),
+            notes=appointment_data.get("notes", ""),
+            status="pending",
+            created_at=datetime.utcnow()
+        )
+        db.add(new_appointment)
+        db.commit()
+        appointment_id = new_appointment.id
+        db.close()
+        return appointment_id
+    except Exception as e:
+        logger.error(f"Error saving appointment to SQL: {e}")
+        return -1
+
+def _get_user_appointments(user_id: str) -> List[Dict]:
+    """Get all appointments for a specific user"""
+    try:
+        db = SessionLocal()
+        appointments = db.query(Appointment).filter(
+            Appointment.user_id == user_id
+        ).order_by(Appointment.created_at.desc()).all()
+        db.close()
+        
+        return [
+            {
+                "id": a.id,
+                "user_name": a.user_name,
+                "user_email": a.user_email,
+                "user_phone": a.user_phone,
+                "appointment_type": a.appointment_type,
+                "preferred_date": a.preferred_date,
+                "preferred_time": a.preferred_time,
+                "notes": a.notes,
+                "status": a.status,
+                "created_at": a.created_at.isoformat()
+            } for a in appointments
+        ]
+    except Exception as e:
+        logger.error(f"Error loading user appointments from SQL: {e}")
+        return []
+
+def _get_all_appointments() -> List[Dict]:
+    """Get all appointments (admin function)"""
+    try:
+        db = SessionLocal()
+        appointments = db.query(Appointment).order_by(Appointment.created_at.desc()).all()
+        db.close()
+        
+        return [
+            {
+                "id": a.id,
+                "user_id": a.user_id,
+                "user_name": a.user_name,
+                "user_email": a.user_email,
+                "user_phone": a.user_phone,
+                "appointment_type": a.appointment_type,
+                "preferred_date": a.preferred_date,
+                "preferred_time": a.preferred_time,
+                "notes": a.notes,
+                "status": a.status,
+                "created_at": a.created_at.isoformat()
+            } for a in appointments
+        ]
+    except Exception as e:
+        logger.error(f"Error loading all appointments from SQL: {e}")
+        return []
+
+def _update_appointment_status(appointment_id: int, new_status: str) -> bool:
+    """Update the status of an appointment"""
+    try:
+        db = SessionLocal()
+        appointment = db.query(Appointment).filter(Appointment.id == appointment_id).first()
+        if appointment:
+            appointment.status = new_status
+            db.commit()
+            db.close()
+            return True
+        db.close()
+        return False
+    except Exception as e:
+        logger.error(f"Error updating appointment status: {e}")
+        return False
 
 # ============= Data Migration Logic =============
 

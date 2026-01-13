@@ -17,7 +17,7 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
 # Import persistence helpers
-from persistence import _save_feedback, _load_feedback, _save_history, _get_history
+from persistence import _save_feedback, _load_feedback, _save_history, _get_history, _save_appointment, _get_user_appointments, _get_all_appointments, _update_appointment_status
 
 # Import auth helpers
 from auth import (
@@ -137,6 +137,19 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     username: str
     is_admin: bool = False
+
+class AppointmentRequest(BaseModel):
+    user_id: str = "default_user"
+    user_name: str
+    user_email: str
+    user_phone: str
+    appointment_type: str = "General Consultation"
+    preferred_date: str
+    preferred_time: str
+    notes: Optional[str] = ""
+
+class AppointmentStatusUpdate(BaseModel):
+    status: str  # pending, confirmed, cancelled
 
 class HealthResponse(BaseModel):
     status: str
@@ -402,6 +415,59 @@ async def submit_feedback(request: FeedbackRequest):
 async def get_admin_feedback():
     """Get all feedback (Admin)"""
     return {"feedback": _load_feedback()}
+
+
+# ============= Appointment Endpoints =============
+
+@app.post("/appointments")
+async def create_appointment(request: AppointmentRequest):
+    """Book a new appointment"""
+    appointment_data = {
+        "user_id": request.user_id,
+        "user_name": request.user_name,
+        "user_email": request.user_email,
+        "user_phone": request.user_phone,
+        "appointment_type": request.appointment_type,
+        "preferred_date": request.preferred_date,
+        "preferred_time": request.preferred_time,
+        "notes": request.notes
+    }
+    
+    appointment_id = _save_appointment(appointment_data)
+    
+    if appointment_id > 0:
+        return {
+            "status": "success",
+            "message": "Appointment booked successfully!",
+            "appointment_id": appointment_id
+        }
+    else:
+        raise HTTPException(status_code=500, detail="Failed to book appointment")
+
+@app.get("/appointments/{user_id}")
+async def get_user_appointments(user_id: str):
+    """Get all appointments for a specific user"""
+    appointments = _get_user_appointments(user_id)
+    return {"appointments": appointments}
+
+@app.get("/admin/appointments")
+async def get_all_appointments():
+    """Get all appointments (Admin)"""
+    appointments = _get_all_appointments()
+    return {"appointments": appointments}
+
+@app.put("/appointments/{appointment_id}")
+async def update_appointment_status(appointment_id: int, request: AppointmentStatusUpdate):
+    """Update the status of an appointment"""
+    success = _update_appointment_status(appointment_id, request.status)
+    
+    if success:
+        return {
+            "status": "success",
+            "message": f"Appointment status updated to {request.status}"
+        }
+    else:
+        raise HTTPException(status_code=404, detail="Appointment not found")
 
 
 # ============= Auth Endpoints =============
