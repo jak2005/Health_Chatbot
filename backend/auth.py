@@ -4,9 +4,10 @@ Handles password hashing and JWT token management
 """
 
 import os
+import hashlib
+import secrets
 from datetime import datetime, timedelta
 from typing import Optional
-from passlib.context import CryptContext
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
@@ -19,19 +20,19 @@ except ImportError:
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "healthlink-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
-
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+PASSWORD_SALT = "healthlink-salt-2024"  # In production, use per-user salt
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Verify a password against its hash"""
-    return pwd_context.verify(plain_password, hashed_password)
+    # Hash the plain password and compare
+    expected_hash = hashlib.sha256((plain_password + PASSWORD_SALT).encode()).hexdigest()
+    return expected_hash == hashed_password
 
 
 def get_password_hash(password: str) -> str:
-    """Hash a password"""
-    return pwd_context.hash(password)
+    """Hash a password using SHA256"""
+    return hashlib.sha256((password + PASSWORD_SALT).encode()).hexdigest()
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
@@ -76,6 +77,7 @@ def create_user(username: str, password: str, email: Optional[str] = None, is_ad
         # Check if username already exists
         existing = db.query(User).filter(User.username == username).first()
         if existing:
+            print(f"Username {username} already exists")
             return None
         
         new_user = User(
@@ -87,8 +89,10 @@ def create_user(username: str, password: str, email: Optional[str] = None, is_ad
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
+        print(f"User {username} created successfully")
         return new_user
-    except Exception:
+    except Exception as e:
+        print(f"Error creating user: {e}")
         db.rollback()
         return None
     finally:
