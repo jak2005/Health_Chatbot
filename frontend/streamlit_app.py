@@ -435,13 +435,25 @@ with st.sidebar:
     # User Account Section - Only show when logged in
     if st.session_state.logged_in_user:
         with st.expander("👤 Account", expanded=True):
+            # Determine role display
+            if st.session_state.is_admin:
+                role_display = "🔑 Admin"
+                role_icon = "👑"
+            elif st.session_state.user_role == "doctor":
+                specialty = st.session_state.user_specialty or "General"
+                role_display = f"👨‍⚕️ Doctor • {specialty}"
+                role_icon = "🩺"
+            else:
+                role_display = "🏥 Patient"
+                role_icon = "👤"
+            
             # Logged in state - Show profile info
             st.markdown(f"""
             <div style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); 
                         padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: center;">
-                <div style="font-size: 2.5em;">👤</div>
+                <div style="font-size: 2.5em;">{role_icon}</div>
                 <div style="color: #4CAF50; font-weight: bold; font-size: 1.2em;">{st.session_state.logged_in_user}</div>
-                <div style="color: #888; font-size: 0.9em;">{"🔑 Admin" if st.session_state.is_admin else "🏥 Patient"}</div>
+                <div style="color: #888; font-size: 0.9em;">{role_display}</div>
             </div>
             """, unsafe_allow_html=True)
             
