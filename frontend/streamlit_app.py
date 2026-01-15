@@ -186,12 +186,18 @@ def clear_chat_context():
     return False
 
 
-def register_user(username, password, email=None):
-    """Register a new user"""
+def register_user(username, password, email=None, role="patient", specialty=None):
+    """Register a new user with role (patient/doctor)"""
     try:
         response = requests.post(
             f"{API_URL}/auth/register",
-            json={"username": username, "password": password, "email": email},
+            json={
+                "username": username, 
+                "password": password, 
+                "email": email,
+                "role": role,
+                "specialty": specialty
+            },
             timeout=10
         )
         if response.status_code == 200:
@@ -200,6 +206,8 @@ def register_user(username, password, email=None):
             st.session_state.logged_in_user = data.get('username')
             st.session_state.is_admin = data.get('is_admin', False)
             st.session_state.user_id = data.get('username')
+            st.session_state.user_role = data.get('role', 'patient')
+            st.session_state.user_specialty = data.get('specialty')
             return True, "Registration successful!"
         else:
             error = response.json().get('detail', 'Registration failed')
@@ -222,6 +230,8 @@ def login_user(username, password):
             st.session_state.logged_in_user = data.get('username')
             st.session_state.is_admin = data.get('is_admin', False)
             st.session_state.user_id = data.get('username')
+            st.session_state.user_role = data.get('role', 'patient')
+            st.session_state.user_specialty = data.get('specialty')
             return True, "Login successful!"
         else:
             error = response.json().get('detail', 'Login failed')
@@ -236,6 +246,8 @@ def logout_user():
     st.session_state.logged_in_user = None
     st.session_state.is_admin = False
     st.session_state.user_id = "local_user"
+    st.session_state.user_role = "patient"
+    st.session_state.user_specialty = None
     st.session_state.messages = []
     st.session_state.view_mode = 'chat'
 
