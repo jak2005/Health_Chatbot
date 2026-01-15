@@ -432,9 +432,9 @@ with st.sidebar:
             st.warning("🔒 Please login to access appointments")
             st.caption("Create an account or login below")
     
-    # User Account Section
-    with st.expander("👤 Account", expanded=st.session_state.logged_in_user is not None):
-        if st.session_state.logged_in_user:
+    # User Account Section - Only show when logged in
+    if st.session_state.logged_in_user:
+        with st.expander("👤 Account", expanded=True):
             # Logged in state - Show profile info
             st.markdown(f"""
             <div style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); 
@@ -454,9 +454,6 @@ with st.sidebar:
                 if st.button("🚪 Logout", use_container_width=True, key="logout_btn"):
                     logout_user()
                     st.rerun()
-        else:
-            # Not logged in - point to header buttons
-            st.info("Use Sign Up / Log In buttons above")
     
     # Data Protection Section
     with st.expander("🔒 Data Protection"):
