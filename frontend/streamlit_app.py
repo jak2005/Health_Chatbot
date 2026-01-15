@@ -342,6 +342,10 @@ if st.session_state.view_mode == 'signup' and not st.session_state.logged_in_use
         if st.button("Already have an account? Log In", use_container_width=True, key="su_switch"):
             st.session_state.view_mode = 'login'
             st.rerun()
+        
+        if st.button("⬅️ Back to Chat", use_container_width=True, key="su_back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
     
     st.stop()
 
@@ -375,6 +379,10 @@ elif st.session_state.view_mode == 'login' and not st.session_state.logged_in_us
         
         if st.button("Don't have an account? Sign Up", use_container_width=True, key="li_switch"):
             st.session_state.view_mode = 'signup'
+            st.rerun()
+        
+        if st.button("⬅️ Back to Chat", use_container_width=True, key="li_back"):
+            st.session_state.view_mode = 'chat'
             st.rerun()
     
     st.stop()
