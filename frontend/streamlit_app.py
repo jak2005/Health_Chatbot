@@ -55,7 +55,7 @@ if 'session_start' not in st.session_state:
 if 'chat_history' not in st.session_state:
     st.session_state.chat_history = []
 if 'view_mode' not in st.session_state:
-    st.session_state.view_mode = 'chat'
+    st.session_state.view_mode = 'landing'  # Start with landing page
 
 # Auth session state
 if 'auth_token' not in st.session_state:
@@ -249,10 +249,226 @@ def logout_user():
     st.session_state.user_role = "patient"
     st.session_state.user_specialty = None
     st.session_state.messages = []
-    st.session_state.view_mode = 'chat'
+    st.session_state.view_mode = 'landing'  # Go to landing on logout
 
 
-# Sidebar
+# Landing Page - Show when not logged in
+if not st.session_state.logged_in_user and st.session_state.view_mode == 'landing':
+    # Hide sidebar on landing page
+    st.markdown("""
+    <style>
+    section[data-testid="stSidebar"] { display: none; }
+    .block-container { max-width: 100%; padding: 0; }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Header with navigation
+    col_logo, col_space, col_signin, col_login = st.columns([3, 5, 1, 1])
+    
+    with col_logo:
+        st.markdown("<h2 style='color:#4CAF50; margin:0;'>🏥 HealthCare AI</h2>", unsafe_allow_html=True)
+    
+    with col_signin:
+        if st.button("Sign Up", key="landing_signup", type="secondary"):
+            st.session_state.view_mode = 'signup'
+            st.rerun()
+    
+    with col_login:
+        if st.button("Log In", key="landing_login", type="primary"):
+            st.session_state.view_mode = 'login'
+            st.rerun()
+    
+    st.markdown("---")
+    
+    # Hero Section
+    st.markdown("""
+    <style>
+    .hero-section {
+        text-align: center;
+        padding: 80px 20px;
+        background: linear-gradient(135deg, #1a1f2e 0%, #2d3548 100%);
+        border-radius: 20px;
+        margin: 40px 0;
+    }
+    .hero-title {
+        font-size: 3.5em;
+        font-weight: 300;
+        color: #ffffff;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+    .hero-subtitle {
+        font-size: 3em;
+        font-weight: 600;
+        background: linear-gradient(90deg, #4CAF50, #2196F3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 30px;
+    }
+    .hero-desc {
+        font-size: 1.3em;
+        color: #888;
+        margin-bottom: 40px;
+    }
+    .join-btn {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        padding: 18px 50px;
+        font-size: 1.2em;
+        border-radius: 50px;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    .join-btn:hover { transform: scale(1.05); }
+    </style>
+    
+    <div class="hero-section">
+        <div class="hero-title">Join Our Global</div>
+        <div class="hero-subtitle">Network of Healthcare</div>
+        <p class="hero-desc">AI-Powered Health Assistance • Secure Appointments • Expert Care</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Join Now Button
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("🚀 Join Now", key="join_now_btn", use_container_width=True, type="primary"):
+            st.session_state.view_mode = 'signup'
+            st.rerun()
+    
+    # Features
+    st.markdown("---")
+    feat_col1, feat_col2, feat_col3 = st.columns(3)
+    
+    with feat_col1:
+        st.markdown("""
+        <div style="text-align:center; padding:20px;">
+            <div style="font-size:3em;">🤖</div>
+            <h3>AI Health Assistant</h3>
+            <p style="color:#888;">Get instant health guidance powered by advanced AI</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feat_col2:
+        st.markdown("""
+        <div style="text-align:center; padding:20px;">
+            <div style="font-size:3em;">📅</div>
+            <h3>Easy Appointments</h3>
+            <p style="color:#888;">Book appointments with doctors in seconds</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feat_col3:
+        st.markdown("""
+        <div style="text-align:center; padding:20px;">
+            <div style="font-size:3em;">🔒</div>
+            <h3>Secure & Private</h3>
+            <p style="color:#888;">Your health data is encrypted and protected</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.stop()  # Don't show anything else on landing page
+
+
+# Sign Up Page
+elif st.session_state.view_mode == 'signup':
+    st.markdown("""
+    <style>
+    section[data-testid="stSidebar"] { display: none; }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown("<h1 style='text-align:center;'>🏥 Create Account</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align:center; color:#888;'>Join HealthCare AI today</p>", unsafe_allow_html=True)
+        
+        reg_username = st.text_input("Username", placeholder="Choose a username")
+        reg_email = st.text_input("Email", placeholder="your@email.com")
+        
+        role_type = st.radio("I am a:", ["🏥 Patient", "👨‍⚕️ Doctor"], horizontal=True)
+        selected_role = "patient" if "Patient" in role_type else "doctor"
+        
+        specialty = None
+        if selected_role == "doctor":
+            specialty = st.selectbox("Medical Specialty", 
+                ["General Medicine", "Cardiology", "Dermatology", "Orthopedics", 
+                 "Pediatrics", "Neurology", "Psychiatry", "Gynecology", "ENT", "Ophthalmology"])
+        
+        reg_password = st.text_input("Password", type="password", placeholder="Min 6 characters")
+        reg_confirm = st.text_input("Confirm Password", type="password")
+        
+        if st.button("Create Account", use_container_width=True, type="primary"):
+            if reg_username and reg_password:
+                if reg_password != reg_confirm:
+                    st.error("Passwords don't match!")
+                elif len(reg_password) < 6:
+                    st.warning("Password must be at least 6 characters")
+                else:
+                    success, msg = register_user(reg_username, reg_password, reg_email, role=selected_role, specialty=specialty)
+                    if success:
+                        st.success(f"🎉 {selected_role.title()} account created!")
+                        st.session_state.view_mode = 'chat'
+                        st.rerun()
+                    else:
+                        st.error(msg)
+            else:
+                st.warning("Please fill in all required fields")
+        
+        st.markdown("---")
+        if st.button("Already have an account? Log In", use_container_width=True):
+            st.session_state.view_mode = 'login'
+            st.rerun()
+        
+        if st.button("⬅️ Back to Home", use_container_width=True):
+            st.session_state.view_mode = 'landing'
+            st.rerun()
+    
+    st.stop()
+
+
+# Login Page
+elif st.session_state.view_mode == 'login':
+    st.markdown("""
+    <style>
+    section[data-testid="stSidebar"] { display: none; }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.markdown("<h1 style='text-align:center;'>🏥 Welcome Back</h1>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align:center; color:#888;'>Log in to your account</p>", unsafe_allow_html=True)
+        
+        login_username = st.text_input("Username", placeholder="Enter username", key="login_user_page")
+        login_password = st.text_input("Password", type="password", placeholder="Enter password", key="login_pass_page")
+        
+        if st.button("Log In", use_container_width=True, type="primary"):
+            if login_username and login_password:
+                success, msg = login_user(login_username, login_password)
+                if success:
+                    st.success("Welcome back!")
+                    st.session_state.view_mode = 'chat'
+                    st.rerun()
+                else:
+                    st.error(msg)
+            else:
+                st.warning("Please enter username and password")
+        
+        st.markdown("---")
+        if st.button("Don't have an account? Sign Up", use_container_width=True):
+            st.session_state.view_mode = 'signup'
+            st.rerun()
+        
+        if st.button("⬅️ Back to Home", use_container_width=True):
+            st.session_state.view_mode = 'landing'
+            st.rerun()
+    
+    st.stop()
+
+
+# Sidebar (shows after login)
 with st.sidebar:
     st.title("🏥 HealthCare AI")
     
