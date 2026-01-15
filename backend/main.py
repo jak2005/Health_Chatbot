@@ -141,6 +141,8 @@ class RegisterRequest(BaseModel):
     username: str
     password: str
     email: Optional[str] = None
+    role: str = "patient"  # patient or doctor
+    specialty: Optional[str] = None  # For doctors
 
 class LoginRequest(BaseModel):
     username: str
@@ -151,6 +153,8 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
     username: str
     is_admin: bool = False
+    role: str = "patient"
+    specialty: Optional[str] = None
 
 class AppointmentRequest(BaseModel):
     user_id: str = "default_user"
@@ -588,14 +592,15 @@ async def register(request: RegisterRequest, req: Request):
     clean_username = sanitize(request.username, max_length=50)
     clean_email = sanitize(request.email, max_length=100) if request.email else None
     
-    user = create_user(clean_username, request.password, clean_email)
+    user = create_user(clean_username, request.password, clean_email, 
+                        role=request.role, specialty=request.specialty)
     if not user:
         raise HTTPException(status_code=400, detail="Username already exists")
     
     # Log successful registration
     client_ip = req.client.host if req.client else "unknown"
-    log_event("USER_REGISTERED", clean_username, f"IP: {client_ip}")
-    logger.info(f"New user registered: {clean_username}")
+    log_event("USER_REGISTERED", clean_username, f"IP: {client_ip}, Role: {request.role}")
+    logger.info(f"New {request.role} registered: {clean_username}")
     
     # Create token for auto-login after registration
     token = create_access_token({"sub": str(user.id), "username": user.username})
@@ -606,7 +611,9 @@ async def register(request: RegisterRequest, req: Request):
         "access_token": token,
         "token_type": "bearer",
         "username": user.username,
-        "is_admin": bool(user.is_admin)
+        "is_admin": bool(user.is_admin),
+        "role": request.role,
+        "specialty": request.specialty
     }
 
 
@@ -633,11 +640,17 @@ async def login(request: LoginRequest, req: Request):
     token = create_access_token({"sub": str(user.id), "username": user.username})
     logger.info(f"User logged in: {request.username}")
     
+    # Get role and specialty from user record
+    user_role = getattr(user, 'role', 'patient')
+    user_specialty = getattr(user, 'specialty', None)
+    
     return {
         "access_token": token,
         "token_type": "bearer",
         "username": user.username,
-        "is_admin": bool(user.is_admin)
+        "is_admin": bool(user.is_admin),
+        "role": user_role,
+        "specialty": user_specialty
     }
 
 

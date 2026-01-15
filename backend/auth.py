@@ -70,8 +70,9 @@ def get_user_by_id(user_id: int) -> Optional[User]:
         db.close()
 
 
-def create_user(username: str, password: str, email: Optional[str] = None, is_admin: bool = False) -> Optional[User]:
-    """Create a new user"""
+def create_user(username: str, password: str, email: Optional[str] = None, 
+                is_admin: bool = False, role: str = "patient", specialty: str = None) -> Optional[User]:
+    """Create a new user with role (patient/doctor/admin)"""
     db = SessionLocal()
     try:
         # Check if username already exists
@@ -84,12 +85,14 @@ def create_user(username: str, password: str, email: Optional[str] = None, is_ad
             username=username,
             email=email,
             hashed_password=get_password_hash(password),
-            is_admin=1 if is_admin else 0
+            is_admin=1 if is_admin or role == "admin" else 0,
+            role=role,
+            specialty=specialty
         )
         db.add(new_user)
         db.commit()
         db.refresh(new_user)
-        print(f"User {username} created successfully")
+        print(f"User {username} created successfully as {role}")
         return new_user
     except Exception as e:
         print(f"Error creating user: {e}")

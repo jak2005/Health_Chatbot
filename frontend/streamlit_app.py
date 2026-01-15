@@ -64,6 +64,10 @@ if 'logged_in_user' not in st.session_state:
     st.session_state.logged_in_user = None
 if 'is_admin' not in st.session_state:
     st.session_state.is_admin = False
+if 'user_role' not in st.session_state:
+    st.session_state.user_role = "patient"  # patient or doctor
+if 'user_specialty' not in st.session_state:
+    st.session_state.user_specialty = None
 if 'auth_mode' not in st.session_state:
     st.session_state.auth_mode = 'login'  # 'login' or 'register'
 
@@ -324,6 +328,19 @@ with st.sidebar:
             else:  # Register
                 reg_username = st.text_input("Username", key="reg_user", placeholder="Choose username")
                 reg_email = st.text_input("Email (optional)", key="reg_email", placeholder="your@email.com")
+                
+                # Role selection
+                role_type = st.radio("Account Type", ["🏥 Patient", "👨‍⚕️ Doctor"], horizontal=True, key="role_type")
+                selected_role = "patient" if "Patient" in role_type else "doctor"
+                
+                # Show specialty dropdown for doctors
+                specialty = None
+                if selected_role == "doctor":
+                    specialty = st.selectbox("Medical Specialty", 
+                        ["General Medicine", "Cardiology", "Dermatology", "Orthopedics", 
+                         "Pediatrics", "Neurology", "Psychiatry", "Gynecology", "ENT", "Ophthalmology"],
+                        key="doc_specialty")
+                
                 reg_password = st.text_input("Password", type="password", key="reg_pass", placeholder="Choose password")
                 reg_confirm = st.text_input("Confirm Password", type="password", key="reg_confirm", placeholder="Repeat password")
                 
@@ -331,12 +348,13 @@ with st.sidebar:
                     if reg_username and reg_password:
                         if reg_password != reg_confirm:
                             st.error("Passwords don't match!")
-                        elif len(reg_password) < 4:
-                            st.warning("Password must be at least 4 characters")
+                        elif len(reg_password) < 6:
+                            st.warning("Password must be at least 6 characters")
                         else:
-                            success, msg = register_user(reg_username, reg_password, reg_email if reg_email else None)
+                            success, msg = register_user(reg_username, reg_password, reg_email if reg_email else None, 
+                                                        role=selected_role, specialty=specialty)
                             if success:
-                                st.success("🎉 Account created successfully!")
+                                st.success(f"🎉 {selected_role.title()} account created!")
                                 st.rerun()
                             else:
                                 st.error(msg)
