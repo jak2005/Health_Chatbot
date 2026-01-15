@@ -281,16 +281,27 @@ with st.sidebar:
             st.caption("Create an account or login below")
     
     # User Account Section
-    with st.expander("👤 Account"):
+    with st.expander("👤 Account", expanded=st.session_state.logged_in_user is not None):
         if st.session_state.logged_in_user:
-            # Logged in state
-            st.success(f"✅ Welcome, **{st.session_state.logged_in_user}**!")
-            if st.session_state.is_admin:
-                st.caption("🔑 Admin Account")
+            # Logged in state - Show profile info
+            st.markdown(f"""
+            <div style="background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); 
+                        padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: center;">
+                <div style="font-size: 2.5em;">👤</div>
+                <div style="color: #4CAF50; font-weight: bold; font-size: 1.2em;">{st.session_state.logged_in_user}</div>
+                <div style="color: #888; font-size: 0.9em;">{"🔑 Admin" if st.session_state.is_admin else "🏥 Patient"}</div>
+            </div>
+            """, unsafe_allow_html=True)
             
-            if st.button("🚪 Logout", use_container_width=True, key="logout_btn"):
-                logout_user()
-                st.rerun()
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("👤 My Profile", use_container_width=True, key="profile_btn"):
+                    st.session_state.view_mode = 'profile'
+                    st.rerun()
+            with col2:
+                if st.button("🚪 Logout", use_container_width=True, key="logout_btn"):
+                    logout_user()
+                    st.rerun()
         else:
             # Login/Register tabs
             auth_tab = st.radio("", ["🔑 Login", "📝 Register"], horizontal=True, key="auth_tab", label_visibility="collapsed")
@@ -577,6 +588,33 @@ elif st.session_state.view_mode == 'appointments':
                 "Time *",
                 ["🌅 09:00 AM", "🌅 10:00 AM", "🌅 11:00 AM", "☀️ 12:00 PM", 
                  "☀️ 02:00 PM", "☀️ 03:00 PM", "🌆 04:00 PM", "🌆 05:00 PM"]
+            )
+        
+        # Department and Doctor Selection
+        col_dept, col_doc = st.columns(2)
+        with col_dept:
+            department = st.selectbox(
+                "🏥 Department *",
+                ["General Medicine", "Cardiology", "Dermatology", "Orthopedics", 
+                 "Pediatrics", "Neurology", "Psychiatry", "Gynecology", "ENT", "Ophthalmology"]
+            )
+        with col_doc:
+            # Doctors based on department
+            doctors = {
+                "General Medicine": ["Dr. Ahmed Hassan", "Dr. Sarah Johnson", "Dr. Michael Chen"],
+                "Cardiology": ["Dr. James Wilson", "Dr. Emily Brown", "Dr. Robert Lee"],
+                "Dermatology": ["Dr. Lisa Park", "Dr. David Kim", "Dr. Anna White"],
+                "Orthopedics": ["Dr. John Smith", "Dr. Maria Garcia", "Dr. Thomas Anderson"],
+                "Pediatrics": ["Dr. Jennifer Taylor", "Dr. William Davis", "Dr. Susan Miller"],
+                "Neurology": ["Dr. Christopher Moore", "Dr. Elizabeth Clark", "Dr. Daniel Martinez"],
+                "Psychiatry": ["Dr. Michelle Robinson", "Dr. Andrew Thompson", "Dr. Rachel Green"],
+                "Gynecology": ["Dr. Laura Adams", "Dr. Karen Wright", "Dr. Patricia Hill"],
+                "ENT": ["Dr. Kevin Scott", "Dr. Nancy Young", "Dr. Steven King"],
+                "Ophthalmology": ["Dr. Mark Turner", "Dr. Sandra Lewis", "Dr. Brian Walker"]
+            }
+            selected_doctor = st.selectbox(
+                "👨‍⚕️ Preferred Doctor",
+                doctors.get(department, ["Any Available Doctor"])
             )
         
         st.markdown("---")
