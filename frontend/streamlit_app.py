@@ -455,59 +455,8 @@ with st.sidebar:
                     logout_user()
                     st.rerun()
         else:
-            # Login/Register tabs
-            auth_tab = st.radio("", ["🔑 Login", "📝 Register"], horizontal=True, key="auth_tab", label_visibility="collapsed")
-            
-            if auth_tab == "🔑 Login":
-                login_username = st.text_input("Username", key="login_user", placeholder="Enter username")
-                login_password = st.text_input("Password", type="password", key="login_pass", placeholder="Enter password")
-                
-                if st.button("Login", use_container_width=True, key="login_btn", type="primary"):
-                    if login_username and login_password:
-                        success, msg = login_user(login_username, login_password)
-                        if success:
-                            st.success(msg)
-                            st.rerun()
-                        else:
-                            st.error(msg)
-                    else:
-                        st.warning("Please enter username and password")
-            
-            else:  # Register
-                reg_username = st.text_input("Username", key="reg_user", placeholder="Choose username")
-                reg_email = st.text_input("Email (optional)", key="reg_email", placeholder="your@email.com")
-                
-                # Role selection
-                role_type = st.radio("Account Type", ["🏥 Patient", "👨‍⚕️ Doctor"], horizontal=True, key="role_type")
-                selected_role = "patient" if "Patient" in role_type else "doctor"
-                
-                # Show specialty dropdown for doctors
-                specialty = None
-                if selected_role == "doctor":
-                    specialty = st.selectbox("Medical Specialty", 
-                        ["General Medicine", "Cardiology", "Dermatology", "Orthopedics", 
-                         "Pediatrics", "Neurology", "Psychiatry", "Gynecology", "ENT", "Ophthalmology"],
-                        key="doc_specialty")
-                
-                reg_password = st.text_input("Password", type="password", key="reg_pass", placeholder="Choose password")
-                reg_confirm = st.text_input("Confirm Password", type="password", key="reg_confirm", placeholder="Repeat password")
-                
-                if st.button("Create Account", use_container_width=True, key="reg_btn", type="primary"):
-                    if reg_username and reg_password:
-                        if reg_password != reg_confirm:
-                            st.error("Passwords don't match!")
-                        elif len(reg_password) < 6:
-                            st.warning("Password must be at least 6 characters")
-                        else:
-                            success, msg = register_user(reg_username, reg_password, reg_email if reg_email else None, 
-                                                        role=selected_role, specialty=specialty)
-                            if success:
-                                st.success(f"🎉 {selected_role.title()} account created!")
-                                st.rerun()
-                            else:
-                                st.error(msg)
-                    else:
-                        st.warning("Please enter username and password")
+            # Not logged in - point to header buttons
+            st.info("Use Sign Up / Log In buttons above")
     
     # Data Protection Section
     with st.expander("🔒 Data Protection"):
