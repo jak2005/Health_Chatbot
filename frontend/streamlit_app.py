@@ -186,8 +186,30 @@ def clear_chat_context():
     return False
 
 
+def load_local_users():
+    """Load users from local JSON (Prototype Mode)"""
+    try:
+        if os.path.exists('local_users.json'):
+            with open('local_users.json', 'r') as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {}
+
+def save_local_user(username, data):
+    """Save user to local JSON (Prototype Mode)"""
+    users = load_local_users()
+    users[username] = data
+    try:
+        with open('local_users.json', 'w') as f:
+            json.dump(users, f)
+        return True
+    except Exception:
+        return False
+
 def register_user(username, password, email=None, role="patient", specialty=None):
-    """Register a new user with role (patient/doctor)"""
+    """Register a new user (Try API -> Fallback to Local Prototype)"""
+    # 1. Try API
     try:
         response = requests.post(
             f"{API_URL}/auth/register",
@@ -198,46 +220,78 @@ def register_user(username, password, email=None, role="patient", specialty=None
                 "role": role,
                 "specialty": specialty
             },
-            timeout=10
+            timeout=5
         )
         if response.status_code == 200:
             data = response.json()
             st.session_state.auth_token = data.get('access_token')
             st.session_state.logged_in_user = data.get('username')
             st.session_state.is_admin = data.get('is_admin', False)
-            st.session_state.user_id = data.get('username')
             st.session_state.user_role = data.get('role', 'patient')
-            st.session_state.user_specialty = data.get('specialty')
             return True, "Registration successful!"
-        else:
-            error = response.json().get('detail', 'Registration failed')
-            return False, error
-    except Exception as e:
-        return False, str(e)
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        # API Offline - Use Prototype Mode
+        st.warning("⚠️ Backend unavailable. Using Offline Prototype Mode. Data may not persist.")
+    
+    # 2. Local Fallback (Prototype Mode)
+    users = load_local_users()
+    if username in users:
+        return False, "Username already exists (Offline Mode)"
+    
+    # Create local user
+    user_data = {
+        "password": password, # In a real app, hash this!
+        "email": email,
+        "role": role,
+        "specialty": specialty,
+        "id": len(users) + 1,
+        "is_admin": False
+    }
+    if save_local_user(username, user_data):
+        st.session_state.auth_token = "mock_token"
+        st.session_state.logged_in_user = username
+        st.session_state.is_admin = False
+        st.session_state.user_role = role
+        st.session_state.user_specialty = specialty
+        return True, "Registered in Prototype Mode"
+    
+    return False, "Registration failed"
 
 
 def login_user(username, password):
-    """Login user"""
+    """Login user (Try API -> Fallback to Local Prototype)"""
+    # 1. Try API
     try:
         response = requests.post(
             f"{API_URL}/auth/login",
             json={"username": username, "password": password},
-            timeout=10
+            timeout=5
         )
         if response.status_code == 200:
             data = response.json()
             st.session_state.auth_token = data.get('access_token')
             st.session_state.logged_in_user = data.get('username')
             st.session_state.is_admin = data.get('is_admin', False)
-            st.session_state.user_id = data.get('username')
             st.session_state.user_role = data.get('role', 'patient')
-            st.session_state.user_specialty = data.get('specialty')
             return True, "Login successful!"
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        st.warning("⚠️ Backend unavailable. Using Offline Prototype Mode.")
+
+    # 2. Local Fallback (Prototype Mode)
+    users = load_local_users()
+    if username in users:
+        if users[username]['password'] == password:
+            user = users[username]
+            st.session_state.auth_token = "mock_token"
+            st.session_state.logged_in_user = username
+            st.session_state.is_admin = user.get('is_admin', False)
+            st.session_state.user_role = user.get('role', 'patient')
+            st.session_state.user_specialty = user.get('specialty')
+            return True, "Login successful (Offline)"
         else:
-            error = response.json().get('detail', 'Login failed')
-            return False, error
-    except Exception as e:
-        return False, str(e)
+            return False, "Invalid password"
+    
+    return False, "User not found (Offline Mode)"
 
 
 def logout_user():
@@ -250,6 +304,25 @@ def logout_user():
     st.session_state.user_specialty = None
     st.session_state.messages = []
     st.session_state.view_mode = 'chat'
+
+
+def get_unread_message_count():
+    """Get count of unread messages for current user"""
+    if not st.session_state.auth_token or not st.session_state.user_id_num:
+        return 0
+    try:
+        response = requests.get(
+            f"{API_URL}/messages/conversations",
+            params={"token": st.session_state.auth_token},
+            timeout=3
+        )
+        if response.status_code == 200:
+            conversations = response.json().get('conversations', [])
+            total_unread = sum(c.get('unread', 0) for c in conversations)
+            return total_unread
+    except Exception:
+        pass
+    return 0
 
 
 # Header Bar with Sign Up / Log In (shows when not logged in)
@@ -431,6 +504,35 @@ with st.sidebar:
             # User not logged in - show login prompt
             st.warning("🔒 Please login to access appointments")
             st.caption("Create an account or login below")
+    
+    # Doctor Section - Only show for doctors
+    if st.session_state.logged_in_user and st.session_state.user_role == "doctor":
+        # Get unread count for doctors too
+        unread_count = get_unread_message_count()
+        dashboard_label = f"🩺 Doctor Dashboard ({unread_count} msgs)" if unread_count > 0 else "🩺 Doctor Dashboard"
+        with st.expander(dashboard_label, expanded=True):
+            if st.button("📋 Appointment Requests", use_container_width=True, key="doc_apt_btn"):
+                st.session_state.view_mode = 'doctor_appointments'
+                st.rerun()
+            if st.button("👥 My Patients", use_container_width=True, key="doc_patients_btn"):
+                st.session_state.view_mode = 'doctor_patients'
+                st.rerun()
+            # Messages button for doctors
+            msg_btn_label = f"💬 Messages ({unread_count} new)" if unread_count > 0 else "💬 Messages"
+            if st.button(msg_btn_label, use_container_width=True, key="doc_msg_btn"):
+                st.session_state.view_mode = 'messages'
+                st.rerun()
+    
+    # Messages Section - For patients too
+    if st.session_state.logged_in_user and st.session_state.user_role == "patient":
+        # Get unread count
+        unread_count = get_unread_message_count()
+        msg_label = f"💬 Messages ({unread_count})" if unread_count > 0 else "💬 Messages"
+        with st.expander(msg_label, expanded=unread_count > 0):
+            btn_label = f"📬 My Messages ({unread_count} new)" if unread_count > 0 else "📬 My Messages"
+            if st.button(btn_label, use_container_width=True, key="patient_msg_btn"):
+                st.session_state.view_mode = 'messages'
+                st.rerun()
     
     # User Account Section - Only show when logged in
     if st.session_state.logged_in_user:
@@ -723,23 +825,34 @@ elif st.session_state.view_mode == 'appointments':
                  "Pediatrics", "Neurology", "Psychiatry", "Gynecology", "ENT", "Ophthalmology"]
             )
         with col_doc:
-            # Doctors based on department
-            doctors = {
-                "General Medicine": ["Dr. Ahmed Hassan", "Dr. Sarah Johnson", "Dr. Michael Chen"],
-                "Cardiology": ["Dr. James Wilson", "Dr. Emily Brown", "Dr. Robert Lee"],
-                "Dermatology": ["Dr. Lisa Park", "Dr. David Kim", "Dr. Anna White"],
-                "Orthopedics": ["Dr. John Smith", "Dr. Maria Garcia", "Dr. Thomas Anderson"],
-                "Pediatrics": ["Dr. Jennifer Taylor", "Dr. William Davis", "Dr. Susan Miller"],
-                "Neurology": ["Dr. Christopher Moore", "Dr. Elizabeth Clark", "Dr. Daniel Martinez"],
-                "Psychiatry": ["Dr. Michelle Robinson", "Dr. Andrew Thompson", "Dr. Rachel Green"],
-                "Gynecology": ["Dr. Laura Adams", "Dr. Karen Wright", "Dr. Patricia Hill"],
-                "ENT": ["Dr. Kevin Scott", "Dr. Nancy Young", "Dr. Steven King"],
-                "Ophthalmology": ["Dr. Mark Turner", "Dr. Sandra Lewis", "Dr. Brian Walker"]
-            }
-            selected_doctor = st.selectbox(
+            # Doctors based on department - use session state to persist across reruns
+            if 'doctor_options' not in st.session_state or st.session_state.get('last_department') != department:
+                doctor_options = {"Any Available Doctor": None}
+                try:
+                    doc_resp = requests.get(f"{API_URL}/doctors", timeout=5)
+                    if doc_resp.status_code == 200:
+                        all_doctors = doc_resp.json().get('doctors', [])
+                        # Filter by department (case-insensitive match)
+                        dept_doctors = [d for d in all_doctors if d.get('specialty', '').lower() == department.lower()]
+                        if dept_doctors:
+                            doctor_options = {f"Dr. {d['username']} ({d['specialty']})": d['id'] for d in dept_doctors}
+                        elif all_doctors:
+                            # If no exact match, show all doctors with specialty info
+                            doctor_options = {f"Dr. {d['username']} ({d['specialty']})": d['id'] for d in all_doctors}
+                except Exception as e:
+                    st.warning(f"Could not load doctors: {e}")
+                # Store in session state
+                st.session_state.doctor_options = doctor_options
+                st.session_state.last_department = department
+            else:
+                doctor_options = st.session_state.doctor_options
+            
+            selected_doc_name = st.selectbox(
                 "👨‍⚕️ Preferred Doctor",
-                doctors.get(department, ["Any Available Doctor"])
+                list(doctor_options.keys()),
+                key="preferred_doctor"
             )
+            selected_doc_id = doctor_options.get(selected_doc_name)
         
         st.markdown("---")
         
@@ -765,6 +878,9 @@ elif st.session_state.view_mode == 'appointments':
                         f"{API_URL}/appointments",
                         json={
                             "user_id": st.session_state.get('user_id', 'default_user'),
+                            "doctor_id": selected_doc_id,
+                            "doctor_name": selected_doc_name,
+                            "department": department,
                             "user_name": user_name,
                             "user_email": user_email,
                             "user_phone": user_phone,
@@ -913,6 +1029,230 @@ elif st.session_state.view_mode == 'my_appointments':
     except Exception as e:
         st.error(f"Error loading appointments: {e}")
 
+
+# Doctor Appointments View
+elif st.session_state.view_mode == 'doctor_appointments':
+    st.title("📋 Appointment Requests")
+    
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        if st.button("⬅️ Back", key="doc_apt_back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+    
+    try:
+        # Use params for token, headers for Authorization
+        response = requests.get(f"{API_URL}/doctor/appointments", params={"token": st.session_state.auth_token})
+        if response.status_code == 200:
+            appointments = response.json().get('appointments', [])
+            
+            if not appointments:
+                st.info("No appointment requests yet.")
+            else:
+                # Group by status
+                pending = [a for a in appointments if a['status'] == 'pending']
+                upcoming = [a for a in appointments if a['status'] == 'accepted']
+                past = [a for a in appointments if a['status'] in ['completed', 'rejected', 'cancelled']]
+                
+                tab1, tab2, tab3 = st.tabs([f"🟡 Requests ({len(pending)})", f"🟢 Upcoming ({len(upcoming)})", "History"])
+                
+                with tab1:
+                    for apt in pending:
+                        with st.container():
+                            st.markdown(f"""
+                            <div style="background:#2d3548; padding:15px; border-radius:10px; margin-bottom:10px; border-left: 4px solid #FFC107;">
+                                <h4>{apt['user_name']}</h4>
+                                <p>📅 {apt['preferred_date']} at {apt['preferred_time']}</p>
+                                <p>📝 {apt.get('notes', 'No notes')}</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            
+                            c1, c2, c3 = st.columns([1, 1, 1])
+                            with c1:
+                                if st.button("✅ Accept", key=f"acc_{apt['id']}"):
+                                    requests.put(f"{API_URL}/appointments/{apt['id']}", json={"status": "accepted"})
+                                    st.success("Accepted!")
+                                    st.rerun()
+                            with c2:
+                                if st.button("❌ Reject", key=f"rej_{apt['id']}"):
+                                    requests.put(f"{API_URL}/appointments/{apt['id']}", json={"status": "rejected"})
+                                    st.warning("Rejected")
+                                    st.rerun()
+                            with c3:
+                                if st.button("💬 Message", key=f"msg_req_{apt['id']}"):
+                                    st.session_state.active_chat_partner = apt.get('patient_id')  # Use numerical ID
+                                    st.session_state.active_chat_name = apt.get('user_name')
+                                    st.session_state.view_mode = 'messages'
+                                    st.rerun()
+                
+                with tab2:
+                    for apt in upcoming:
+                        st.markdown(f"""
+                        <div style="background:#2d3548; padding:15px; border-radius:10px; margin-bottom:10px; border-left: 4px solid #4CAF50;">
+                            <h4>{apt['user_name']}</h4>
+                            <p>📅 {apt['preferred_date']} at {apt['preferred_time']}</p>
+                            <p>📞 {apt['user_phone']} | 📧 {apt['user_email']}</p>
+                            <p>📝 {apt.get('notes', 'No notes')}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        btn_col1, btn_col2, btn_col3 = st.columns([1, 1, 3])
+                        with btn_col1:
+                            if st.button("✅ Mark Completed", key=f"comp_{apt['id']}"):
+                                requests.put(f"{API_URL}/appointments/{apt['id']}", json={"status": "completed"})
+                                st.rerun()
+                        with btn_col2:
+                            if st.button("💬 Message", key=f"msg_{apt['id']}"):
+                                st.session_state.active_chat_partner = apt.get('patient_id')  # Use numerical ID
+                                st.session_state.active_chat_name = apt.get('user_name')
+                                st.session_state.view_mode = 'messages'
+                                st.rerun()
+                            
+                with tab3:
+                    for apt in past:
+                        color = "#f44336" if apt['status'] == 'rejected' else "#888"
+                        st.markdown(f"""
+                        <div style="background:#2d3548; padding:15px; border-radius:10px; margin-bottom:10px; border-left: 4px solid {color}; opacity: 0.7;">
+                            <h4>{apt['user_name']} ({apt['status']})</h4>
+                            <p>📅 {apt['preferred_date']}</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+        else:
+            st.error("Could not load appointments")
+    except Exception as e:
+        st.error(f"Error: {e}")
+    st.stop()
+
+
+# Doctor Patients View
+elif st.session_state.view_mode == 'doctor_patients':
+    st.title("👥 My Patients")
+    
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        if st.button("⬅️ Back", key="doc_pat_back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+            
+    try:
+        response = requests.get(f"{API_URL}/doctor/patients", params={"token": st.session_state.auth_token})
+        if response.status_code == 200:
+            patients = response.json().get('patients', [])
+            
+            if not patients:
+                st.info("No patients yet. Accept appointments to build your patient list.")
+            else:
+                for pat in patients:
+                    with st.container():
+                        c1, c2 = st.columns([3, 1])
+                        with c1:
+                            st.markdown(f"### 👤 {pat['user_name']}")
+                            st.caption(f"Last visited: {pat['last_appointment']}")
+                        with c2:
+                            if st.button("💬 Chat", key=f"chat_{pat['user_id']}"):
+                                st.session_state.active_chat_partner = pat.get('patient_id')  # Use numerical ID
+                                st.session_state.active_chat_name = pat['user_name']
+                                st.session_state.view_mode = 'messages'
+                                st.rerun()
+                        st.markdown("---")
+        else:
+            st.error("Could not load patients")
+    except Exception as e:
+        st.error(f"Error: {e}")
+    st.stop()
+
+
+# Messages View
+elif st.session_state.view_mode == 'messages':
+    st.title("💬 Messages")
+    
+    col1, col2 = st.columns([1, 6])
+    with col1:
+        if st.button("⬅️ Back", key="msg_back"):
+            st.session_state.view_mode = 'chat'
+            st.rerun()
+    
+    # Check if we have an active chat partner selected
+    if 'active_chat_partner' in st.session_state and st.session_state.active_chat_partner:
+        # Chat Interface
+        partner_id = st.session_state.active_chat_partner
+        partner_name = st.session_state.get('active_chat_name', f"User {partner_id}")
+        
+        st.subheader(f"Chat with {partner_name}")
+        if st.button("🔙 All Conversations", key="back_conversations"):
+             st.session_state.active_chat_partner = None
+             st.rerun()
+             
+        # Load messages
+        try:
+            resp = requests.get(f"{API_URL}/messages/conversation/{partner_id}", params={"token": st.session_state.auth_token})
+            if resp.status_code == 200:
+                messages = resp.json().get('messages', [])
+                
+                # Message container
+                chat_container = st.container()
+                with chat_container:
+                    if not messages:
+                        st.info("No messages yet. Say hello!")
+                    
+                    current_user_id = st.session_state.get('user_id_num', 0)
+                    for msg in messages:
+                        is_me = msg['sender_id'] == int(current_user_id)
+                        align = "right" if is_me else "left"
+                        color = "#007bff" if is_me else "#444"
+                        
+                        st.markdown(f"""
+                        <div style="display:flex; justify-content:{'flex-end' if is_me else 'flex-start'}; margin-bottom:10px;">
+                            <div style="background:{color}; padding:10px 15px; border-radius:15px; max-width:70%;">
+                                <div>{msg['content']}</div>
+                                <div style="font-size:0.7em; opacity:0.7; margin-top:5px;">{msg['timestamp'].split('T')[1][:5]}</div>
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                
+                # Input
+                with st.form("msg_form", clear_on_submit=True):
+                    new_msg = st.text_input("Type a message...", key="msg_input")
+                    if st.form_submit_button("Send"):
+                         if new_msg:
+                             requests.post(f"{API_URL}/messages/send", 
+                                json={"receiver_id": partner_id, "content": new_msg},
+                                params={"token": st.session_state.auth_token})
+                             st.rerun()
+            else:
+                st.error("Failed to load conversation")
+        except Exception as e:
+            st.error(f"Error: {e}")
+            
+    else:
+        # Conversations List
+        try:
+            resp = requests.get(f"{API_URL}/messages/conversations", params={"token": st.session_state.auth_token})
+            if resp.status_code == 200:
+                convos = resp.json().get('conversations', [])
+                
+                if not convos:
+                    st.info("No conversations yet.")
+                else:
+                    for c in convos:
+                        with st.container():
+                            col1, col2 = st.columns([4, 1])
+                            with col1:
+                                unread = f"🔴 {c['unread']}" if c['unread'] > 0 else ""
+                                st.markdown(f"**{c['partner_name']}** {unread}")
+                                st.caption(f"{c['last_message']} • {c['last_timestamp'].split('T')[0]}")
+                            with col2:
+                                if st.button("Open", key=f"open_{c['partner_id']}"):
+                                    st.session_state.active_chat_partner = c['partner_id']
+                                    st.session_state.active_chat_name = c['partner_name']
+                                    st.rerun()
+                            st.markdown("---")
+            else:
+                st.error("Failed to load conversations")
+        except Exception as e:
+            st.error(f"Error: {e}")
+    
+    st.stop()
+    
 else:
     # Main chat interface
     st.title("💬 Chat with HealthCare AI")

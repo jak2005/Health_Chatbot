@@ -198,7 +198,7 @@ class SecurityManager:
         return True, ""
     
     def track_failed_login(self, username: str) -> Tuple[bool, str]:
-        """Track failed login attempts to prevent brute force"""
+        """Check if user is locked out due to failed login attempts (does NOT record attempt)"""
         now = datetime.now().timestamp()
         
         if username not in self.failed_login_attempts:
@@ -210,8 +210,6 @@ class SecurityManager:
             if now - ts < 900  # 15 minutes
         ]
         
-        self.failed_login_attempts[username].append(now)
-        
         attempts = len(self.failed_login_attempts[username])
         
         if attempts >= 5:
@@ -219,6 +217,13 @@ class SecurityManager:
             return False, "Account temporarily locked. Try again in 15 minutes."
         
         return True, f"{5 - attempts} attempts remaining"
+    
+    def record_failed_login(self, username: str):
+        """Record a failed login attempt after authentication fails"""
+        now = datetime.now().timestamp()
+        if username not in self.failed_login_attempts:
+            self.failed_login_attempts[username] = []
+        self.failed_login_attempts[username].append(now)
     
     def clear_failed_attempts(self, username: str):
         """Clear failed login attempts after successful login"""

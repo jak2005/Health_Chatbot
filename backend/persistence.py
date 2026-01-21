@@ -8,10 +8,10 @@ from typing import Dict, List
 from datetime import datetime
 from sqlalchemy.orm import Session
 try:
-    from .db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, init_db
+    from .db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, Message, User, init_db
     from .security import encrypt, decrypt, sanitize, validate_email, validate_phone, log_event
 except ImportError:
-    from db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, init_db
+    from db_manager import SessionLocal, ChatHistory, Feedback, Appointment, SecurityLog, Message, User, init_db
     from security import encrypt, decrypt, sanitize, validate_email, validate_phone, log_event
 
 # Configure logging
@@ -124,6 +124,9 @@ def _save_appointment(appointment_data: Dict) -> int:
         db = SessionLocal()
         new_appointment = Appointment(
             user_id=appointment_data.get("user_id", "default_user"),
+            doctor_id=appointment_data.get("doctor_id"),
+            doctor_name=appointment_data.get("doctor_name"),
+            department=appointment_data.get("department"),
             user_name=user_name,
             user_email=encrypted_email,
             user_phone=encrypted_phone,
@@ -299,6 +302,171 @@ def migrate_json_to_sql():
             logger.info("Chat history migration complete.")
         except Exception as e:
             logger.error(f"History migration failed: {e}")
+
+
+# ============= Message Functions =============
+
+def _send_message(sender_id: int, receiver_id: int, sender_name: str, content: str) -> int:
+    """Send a message from one user to another"""
+    try:
+        db = SessionLocal()
+        new_msg = Message(
+            sender_id=sender_id,
+            receiver_id=receiver_id,
+            sender_name=sender_name,
+            content=encrypt(content),  # Encrypt message content
+            timestamp=datetime.utcnow(),
+            read=0
+        )
+        db.add(new_msg)
+        db.commit()
+        msg_id = new_msg.id
+        db.close()
+        log_event("MESSAGE_SENT", str(sender_id), f"To user {receiver_id}")
+        return msg_id
+    except Exception as e:
+        logger.error(f"Error sending message: {e}")
+        return -1
+
+def _get_conversation(user1_id: int, user2_id: int) -> List[Dict]:
+    """Get conversation between two users"""
+    try:
+        db = SessionLocal()
+        messages = db.query(Message).filter(
+            ((Message.sender_id == user1_id) & (Message.receiver_id == user2_id)) |
+            ((Message.sender_id == user2_id) & (Message.receiver_id == user1_id))
+        ).order_by(Message.timestamp.asc()).all()
+        db.close()
+        
+        return [
+            {
+                "id": m.id,
+                "sender_id": m.sender_id,
+                "receiver_id": m.receiver_id,
+                "sender_name": m.sender_name,
+                "content": decrypt(m.content) if m.content else "",
+                "timestamp": m.timestamp.isoformat(),
+                "read": bool(m.read)
+            } for m in messages
+        ]
+    except Exception as e:
+        logger.error(f"Error getting conversation: {e}")
+        return []
+
+def _get_user_conversations(user_id: int) -> List[Dict]:
+    """Get all conversations for a user (unique chat partners)"""
+    try:
+        db = SessionLocal()
+        # Get all messages involving this user
+        messages = db.query(Message).filter(
+            (Message.sender_id == user_id) | (Message.receiver_id == user_id)
+        ).order_by(Message.timestamp.desc()).all()
+        db.close()
+        
+        # Extract unique conversation partners
+        conversations = {}
+        for m in messages:
+            partner_id = m.receiver_id if m.sender_id == user_id else m.sender_id
+            if partner_id not in conversations:
+                conversations[partner_id] = {
+                    "partner_id": partner_id,
+                    "partner_name": m.sender_name if m.sender_id == partner_id else "You",
+                    "last_message": decrypt(m.content)[:50] if m.content else "",
+                    "last_timestamp": m.timestamp.isoformat(),
+                    "unread": 0
+                }
+            # Count unread messages from this partner
+            if m.sender_id == partner_id and not m.read:
+                conversations[partner_id]["unread"] += 1
+        
+        return list(conversations.values())
+    except Exception as e:
+        logger.error(f"Error getting conversations: {e}")
+        return []
+
+def _mark_messages_read(reader_id: int, sender_id: int):
+    """Mark all messages from sender to reader as read"""
+    try:
+        db = SessionLocal()
+        db.query(Message).filter(
+            (Message.sender_id == sender_id) & (Message.receiver_id == reader_id)
+        ).update({Message.read: 1})
+        db.commit()
+        db.close()
+    except Exception as e:
+        logger.error(f"Error marking messages read: {e}")
+
+
+# ============= Doctor-Specific Functions =============
+
+def _get_doctor_appointments(doctor_id: int) -> List[Dict]:
+    """Get all appointments for a specific doctor"""
+    try:
+        db = SessionLocal()
+        appointments = db.query(Appointment).filter(
+            Appointment.doctor_id == doctor_id
+        ).order_by(Appointment.created_at.desc()).all()
+        
+        result = []
+        for a in appointments:
+            # Look up numerical patient ID by username
+            patient = db.query(User).filter(User.username == a.user_id).first()
+            patient_id = patient.id if patient else None
+            
+            result.append({
+                "id": a.id,
+                "user_id": a.user_id,
+                "patient_id": patient_id,  # Numerical ID for messaging
+                "user_name": a.user_name,
+                "user_email": decrypt(a.user_email) if a.is_encrypted and a.user_email else a.user_email,
+                "user_phone": decrypt(a.user_phone) if a.is_encrypted and a.user_phone else a.user_phone,
+                "department": a.department,
+                "appointment_type": a.appointment_type,
+                "preferred_date": a.preferred_date,
+                "preferred_time": a.preferred_time,
+                "notes": decrypt(a.notes) if a.is_encrypted and a.notes else a.notes,
+                "status": a.status,
+                "created_at": a.created_at.isoformat()
+            })
+        db.close()
+        return result
+    except Exception as e:
+        logger.error(f"Error getting doctor appointments: {e}")
+        return []
+
+def _get_doctor_patients(doctor_id: int) -> List[Dict]:
+    """Get all patients who have accepted appointments with this doctor"""
+    try:
+        db = SessionLocal()
+        # Get unique patients with accepted appointments
+        appointments = db.query(Appointment).filter(
+            (Appointment.doctor_id == doctor_id) & 
+            (Appointment.status == "accepted")
+        ).all()
+        
+        # Extract unique patients
+        patients = {}
+        for a in appointments:
+            if a.user_id not in patients:
+                # Look up numerical patient ID
+                patient = db.query(User).filter(User.username == a.user_id).first()
+                patient_id = patient.id if patient else None
+                
+                patients[a.user_id] = {
+                    "user_id": a.user_id,
+                    "patient_id": patient_id,  # Numerical ID for messaging
+                    "user_name": a.user_name,
+                    "last_appointment": a.preferred_date,
+                    "appointment_count": 0
+                }
+            patients[a.user_id]["appointment_count"] += 1
+        
+        db.close()
+        return list(patients.values())
+    except Exception as e:
+        logger.error(f"Error getting doctor patients: {e}")
+        return []
+
 
 # Run migration on import
 migrate_json_to_sql()

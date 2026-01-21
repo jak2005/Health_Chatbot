@@ -52,7 +52,10 @@ class Appointment(Base):
     __tablename__ = "appointments"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String, index=True)
+    user_id = Column(String, index=True)  # Patient username
+    doctor_id = Column(Integer, index=True, nullable=True)  # Doctor's user ID
+    doctor_name = Column(String, nullable=True)  # Doctor's name for display
+    department = Column(String, nullable=True)  # Department name
     user_name = Column(String)
     user_email = Column(String)
     user_phone = Column(String)
@@ -60,9 +63,21 @@ class Appointment(Base):
     preferred_date = Column(String)  # Store as string for simplicity
     preferred_time = Column(String)
     notes = Column(Text, nullable=True)
-    status = Column(String, default="pending")  # pending, confirmed, cancelled
+    status = Column(String, default="pending")  # pending, accepted, rejected, completed
     created_at = Column(DateTime, default=datetime.utcnow)
     is_encrypted = Column(Integer, default=1)  # 1 = sensitive data is encrypted
+
+class Message(Base):
+    """Messages between doctors and patients"""
+    __tablename__ = "messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    sender_id = Column(Integer, index=True)  # User ID of sender
+    receiver_id = Column(Integer, index=True)  # User ID of receiver
+    sender_name = Column(String)  # For display
+    content = Column(Text, nullable=False)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    read = Column(Integer, default=0)  # 0 = unread, 1 = read
 
 class SecurityLog(Base):
     """Audit log for security events"""

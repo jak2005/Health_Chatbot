@@ -17,7 +17,12 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
 # Import persistence helpers
-from persistence import _save_feedback, _load_feedback, _save_history, _get_history, _save_appointment, _get_user_appointments, _get_all_appointments, _update_appointment_status
+from persistence import (
+    _save_feedback, _load_feedback, _save_history, _get_history, 
+    _save_appointment, _get_user_appointments, _get_all_appointments, _update_appointment_status,
+    _send_message, _get_conversation, _get_user_conversations, _mark_messages_read,
+    _get_doctor_appointments, _get_doctor_patients
+)
 
 # Import auth helpers
 from auth import (
@@ -161,13 +166,20 @@ class AppointmentRequest(BaseModel):
     user_name: str
     user_email: str
     user_phone: str
+    doctor_id: Optional[int] = None
+    doctor_name: Optional[str] = None
+    department: Optional[str] = None
     appointment_type: str = "General Consultation"
     preferred_date: str
     preferred_time: str
     notes: Optional[str] = ""
 
 class AppointmentStatusUpdate(BaseModel):
-    status: str  # pending, confirmed, cancelled
+    status: str  # pending, accepted, rejected, completed
+
+class MessageRequest(BaseModel):
+    receiver_id: int
+    content: str
 
 class HealthResponse(BaseModel):
     status: str
@@ -481,6 +493,9 @@ async def create_appointment(request: AppointmentRequest):
         "user_name": request.user_name,
         "user_email": request.user_email,
         "user_phone": request.user_phone,
+        "doctor_id": request.doctor_id,
+        "doctor_name": request.doctor_name,
+        "department": request.department,
         "appointment_type": request.appointment_type,
         "preferred_date": request.preferred_date,
         "preferred_time": request.preferred_time,
@@ -610,6 +625,7 @@ async def register(request: RegisterRequest, req: Request):
         "message": "Registration successful",
         "access_token": token,
         "token_type": "bearer",
+        "id": user.id,
         "username": user.username,
         "is_admin": bool(user.is_admin),
         "role": request.role,
@@ -630,6 +646,7 @@ async def login(request: LoginRequest, req: Request):
     
     user = authenticate_user(request.username, request.password)
     if not user:
+        security_manager.record_failed_login(request.username)  # Record the failed attempt
         security_manager.log_authentication(request.username, False, client_ip)
         raise HTTPException(status_code=401, detail="Invalid username or password")
     
@@ -647,6 +664,7 @@ async def login(request: LoginRequest, req: Request):
     return {
         "access_token": token,
         "token_type": "bearer",
+        "id": user.id,
         "username": user.username,
         "is_admin": bool(user.is_admin),
         "role": user_role,
@@ -724,6 +742,106 @@ async def get_recent_history(user_id: str = "default_user"):
         "history": formatted_history,
         "messages": history
     }
+
+
+# ============= Message Endpoints =============
+
+@app.post("/messages/send")
+async def send_message(request: MessageRequest, token: str):
+    """Send a message to another user"""
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    sender_id = int(payload.get("sub"))
+    sender_name = payload.get("username")
+    
+    msg_id = _send_message(sender_id, request.receiver_id, sender_name, request.content)
+    if msg_id < 0:
+        raise HTTPException(status_code=500, detail="Failed to send message")
+    
+    return {"status": "success", "message_id": msg_id}
+
+
+@app.get("/messages/conversation/{partner_id}")
+async def get_conversation(partner_id: int, token: str = None):
+    """Get conversation with a specific user"""
+    if not token:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    user_id = int(payload.get("sub"))
+    _mark_messages_read(user_id, partner_id)  # Mark as read
+    messages = _get_conversation(user_id, partner_id)
+    
+    return {"status": "success", "messages": messages}
+
+
+@app.get("/messages/conversations")
+async def get_conversations(token: str):
+    """Get all conversations for current user"""
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    user_id = int(payload.get("sub"))
+    conversations = _get_user_conversations(user_id)
+    
+    return {"status": "success", "conversations": conversations}
+
+
+# ============= Doctor Endpoints =============
+
+@app.get("/doctor/appointments")
+async def get_doctor_appointments(token: str):
+    """Get all appointments for the logged-in doctor"""
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    doctor_id = int(payload.get("sub"))
+    appointments = _get_doctor_appointments(doctor_id)
+    
+    return {"status": "success", "appointments": appointments}
+
+
+@app.get("/doctor/patients")
+async def get_doctor_patients(token: str):
+    """Get all patients for the logged-in doctor"""
+    payload = decode_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    
+    doctor_id = int(payload.get("sub"))
+    patients = _get_doctor_patients(doctor_id)
+    
+    return {"status": "success", "patients": patients}
+
+
+@app.get("/doctors")
+async def get_all_doctors():
+    """Get list of all doctors for patient to select"""
+    try:
+        from db_manager import SessionLocal, User
+        db = SessionLocal()
+        doctors = db.query(User).filter(User.role == "doctor").all()
+        db.close()
+        
+        return {
+            "status": "success",
+            "doctors": [
+                {
+                    "id": d.id,
+                    "username": d.username,
+                    "specialty": d.specialty or "General Medicine"
+                } for d in doctors
+            ]
+        }
+    except Exception as e:
+        logger.error(f"Error getting doctors: {e}")
+        return {"status": "success", "doctors": []}
 
 
 # ============= Main Entry Point =============
