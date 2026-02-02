@@ -39,7 +39,8 @@ utils.load_css()
 try:
     API_URL = st.secrets["API_URL"]
 except (KeyError, FileNotFoundError):
-    API_URL = os.environ.get('API_URL', 'http://localhost:8080')
+    # Fallback to Render URL if secrets are missing (fixes 'Offline Mode' on cloud)
+    API_URL = os.environ.get('API_URL', 'https://health-chatbot-backend.onrender.com')
 
 # Ensure API_URL has proper protocol
 if API_URL and not API_URL.startswith('http'):
