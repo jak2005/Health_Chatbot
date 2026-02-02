@@ -308,7 +308,7 @@ def logout_user():
 
 def get_unread_message_count():
     """Get count of unread messages for current user"""
-    if not st.session_state.auth_token or not st.session_state.user_id_num:
+    if not st.session_state.get('auth_token') or not st.session_state.get('user_id_num'):
         return 0
     try:
         response = requests.get(
