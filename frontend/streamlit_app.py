@@ -292,7 +292,7 @@ def login_user(username, password):
         else:
             return False, "Invalid password"
     
-    return False, "User not found (Offline Mode)"
+    return False, "User not found. (Note: On Free Tier compliance, data resets on server restart. Please Sign Up again.)"
 
 
 def logout_user():
