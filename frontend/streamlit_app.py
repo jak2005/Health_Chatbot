@@ -1142,6 +1142,14 @@ elif st.session_state.view_mode == 'doctor_patients':
         response = requests.get(f"{API_URL}/doctor/patients", params={"token": st.session_state.auth_token})
         if response.status_code == 200:
             patients = response.json().get('patients', [])
+        elif response.status_code == 401:
+            st.error("Session expired. Logging out...")
+            time.sleep(1)
+            st.session_state.auth_token = None
+            st.rerun()
+        else:
+            st.error(f"Could not load patients (Status: {response.status_code})")
+            patients = []
             
             if not patients:
                 st.info("No patients yet. Accept appointments to build your patient list.")
@@ -1165,8 +1173,7 @@ elif st.session_state.view_mode == 'doctor_patients':
                                 st.session_state.view_mode = 'messages'
                                 st.rerun()
                         st.markdown("---")
-        else:
-            st.error("Could not load patients")
+
     except Exception as e:
         st.error(f"Error: {e}")
     st.stop()
