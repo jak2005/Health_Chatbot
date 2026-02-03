@@ -39,8 +39,8 @@ utils.load_css()
 try:
     API_URL = st.secrets["API_URL"]
 except (KeyError, FileNotFoundError):
-    # Fallback to Render URL if secrets are missing (fixes 'Offline Mode' on cloud)
-    API_URL = os.environ.get('API_URL', 'https://health-chatbot-backend.onrender.com')
+    # Fallback to Railway URL (New Production)
+    API_URL = os.environ.get('API_URL', 'https://web-production-32cff.up.railway.app')
 
 # Ensure API_URL has proper protocol
 if API_URL and not API_URL.startswith('http'):
@@ -385,6 +385,10 @@ if st.session_state.view_mode == 'signup' and not st.session_state.logged_in_use
         reg_email = st.text_input("Email", placeholder="your@email.com", key="su_email")
         
         role_type = st.radio("I am a:", ["🏥 Patient", "👨‍⚕️ Doctor"], horizontal=True, key="su_role")
+    
+        # DEBUG: Show connection status
+        st.caption(f"🔌 Connected to: {API_URL}")
+    
         selected_role = "patient" if "Patient" in role_type else "doctor"
         
         specialty = None
@@ -1184,7 +1188,7 @@ elif st.session_state.view_mode == 'messages':
         partner_id = st.session_state.active_chat_partner
         partner_name = st.session_state.get('active_chat_name', f"User {partner_id}")
         
-        st.subheader(f"Chat with {partner_name}")
+        st.subheader(f"Chat with {partner_name} (ID: {partner_id})")
         if st.button("🔙 All Conversations", key="back_conversations"):
              st.session_state.active_chat_partner = None
              st.rerun()
