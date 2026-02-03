@@ -1153,7 +1153,8 @@ elif st.session_state.view_mode == 'doctor_patients':
                         with c2:
                             # Disable chat if patient_id is missing (orphaned record)
                             if not pat.get('patient_id'):
-                                st.button("🚫 Chat", key=f"chat_{pat['user_id']}", disabled=True, help="User account not found")
+                                st.button("🚫 Chat", key=f"chat_{pat['user_id']}", disabled=True, 
+                                          help=f"User account '{pat['user_id']}' deleted from database. Re-register this patient username to fix.")
                             elif st.button("💬 Chat", key=f"chat_{pat['user_id']}"):
                                 st.session_state.active_chat_partner = pat.get('patient_id')  # Use numerical ID
                                 st.session_state.active_chat_name = pat['user_name']
