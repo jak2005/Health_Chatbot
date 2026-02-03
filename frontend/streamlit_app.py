@@ -1148,8 +1148,13 @@ elif st.session_state.view_mode == 'doctor_patients':
                         with c1:
                             st.markdown(f"### 👤 {pat['user_name']}")
                             st.caption(f"Last visited: {pat['last_appointment']}")
+                            # DEBUG: Show internal IDs to help troubleshoot
+                            # st.caption(f"Debug: UID={pat.get('user_id')} PID={pat.get('patient_id')}")
                         with c2:
-                            if st.button("💬 Chat", key=f"chat_{pat['user_id']}"):
+                            # Disable chat if patient_id is missing (orphaned record)
+                            if not pat.get('patient_id'):
+                                st.button("🚫 Chat", key=f"chat_{pat['user_id']}", disabled=True, help="User account not found")
+                            elif st.button("💬 Chat", key=f"chat_{pat['user_id']}"):
                                 st.session_state.active_chat_partner = pat.get('patient_id')  # Use numerical ID
                                 st.session_state.active_chat_name = pat['user_name']
                                 st.session_state.view_mode = 'messages'
