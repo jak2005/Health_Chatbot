@@ -208,6 +208,3 @@ This project is developed as a Final Year Project for academic purposes.
 
 ---
 
-## 📧 Contact
-
-For questions or support, please contact the project maintainer.
